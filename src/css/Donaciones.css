@@ -1,0 +1,97 @@
+/* Estilo general */
+.donaciones {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  background-color: #f0f0f0; /* Fondo general */
+  padding: 20px;
+}
+
+.donaciones-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #54736b; /* Color de fondo del encabezado */
+  padding: 10px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+}
+
+.donaciones-header h2 {
+  color: white; /* Color del texto principal */
+  margin: 0;
+}
+
+.donaciones-main-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 10px;
+}
+
+.donaciones-subtitle {
+  color: #54736b; /* Color del subtítulo */
+  margin-top: 20px;
+  font-size: 1.2em;
+}
+
+/* Estilos para los productos */
+.donaciones-products {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.donaciones-product-card {
+  background-color: #54736b; /* Fondo de las tarjetas */
+  border-radius: 8px;
+  padding: 10px;
+  width: 300px; /* Ancho de cada tarjeta */
+  text-align: center;
+  color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
+  transition: transform 0.3s, box-shadow 0.3s; /* Transición suave para el hover */
+}
+
+.donaciones-product-card:hover {
+  transform: scale(1.05); /* Agranda ligeramente la tarjeta */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra más intensa */
+}
+
+.donaciones-product-image {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: transform 0.3s; /* Animación para la imagen */
+}
+
+.donaciones-product-card:hover .donaciones-product-image {
+  transform: scale(1.1); /* Agranda la imagen al pasar el mouse */
+}
+
+/* Nombre del producto */
+.product-name {
+  color: white;
+  font-weight: bold;
+  margin-bottom: 10px;
+  font-size: 1.1em;
+}
+
+/* Botón de donación */
+.donar-button {
+  background-color: #fca311; /* Color del botón */
+  color: white;
+  border: none;
+  padding: 10px 15px; /* Espaciado interno */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.3s ease; /* Transición para el hover */
+}
+
+.donar-button:hover {
+  background-color: #e39400; /* Color del botón al pasar el mouse */
+}
