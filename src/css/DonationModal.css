@@ -1,0 +1,103 @@
+.donation-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+/* Contenedor del contenido del modal */
+.modal-content {
+    background-color: #4B8E8D;
+    border-radius: 20px;
+    padding: 20px;
+    width: 80%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    color: white; /* Texto blanco */
+}
+
+/* Encabezado */
+.modal-header h2 {
+    margin: 0;
+    text-align: center;
+    font-size: 2rem; /* Incrementar tamaño del texto */
+    font-weight: bold; /* Hacerlo más grueso */
+    color: white; /* Texto blanco */
+    text-transform: uppercase; /* Convertir texto a mayúsculas */
+}
+
+/* Cuerpo del modal */
+.modal-body {
+    display: flex;
+    gap: 20px;
+}
+
+/* Imagen del producto */
+.product-image img {
+    max-width: 150px;
+    max-height: 200px;
+    border-radius: 10px;
+}
+
+/* Detalles del producto */
+.product-details {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.product-details h3 {
+    margin: 0;
+    margin-bottom: 10px;
+    font-size: 1.5rem; /* Tamaño un poco menor que el encabezado */
+    font-weight: bold;
+    color: white; /* Texto blanco */
+}
+
+.product-details p {
+    margin: 5px 0;
+    color: white; /* Texto blanco */
+}
+
+/* Pie del modal */
+.modal-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Botones */
+.btn {
+    padding: 10px 20px;
+    font-size: 1rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-back {
+    background-color: #FFA629;
+    color: white;
+}
+
+.btn-back:hover {
+    background-color: #E89025;
+}
+
+.btn-donate {
+    background-color: #f32d09fd;
+    color: white;
+}
+
+.btn-donate:hover {
+    background-color: #d82307;
+}

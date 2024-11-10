@@ -48,8 +48,8 @@
 .donaciones-product-card {
   background-color: #54736b; /* Fondo de las tarjetas */
   border-radius: 8px;
-  padding: 10px;
-  width: 300px; /* Ancho de cada tarjeta */
+  padding: 15px;
+  width: 400px; /* Ancho de cada tarjeta */
   text-align: center;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
@@ -62,14 +62,14 @@
 }
 
 .donaciones-product-image {
-  width: 100%;
+  width: 350px;
   border-radius: 8px;
   margin-bottom: 10px;
   transition: transform 0.3s; /* Animación para la imagen */
 }
 
 .donaciones-product-card:hover .donaciones-product-image {
-  transform: scale(1.1); /* Agranda la imagen al pasar el mouse */
+  transform: scale(1.05); /* Agranda la imagen al pasar el mouse */
 }
 
 /* Nombre del producto */

@@ -1,15 +1,36 @@
-import { useState } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import '../css/Slidebar.css'; // Importar el archivo CSS con los estilos
 
 const Slidebar = () => {
   const [isOpen, setIsOpen] = useState(false); // Controla si el slidebar está abierto
+  const slidebarRef = useRef(null); // Referencia al contenedor del Slidebar
 
   const toggleSlidebar = () => {
     setIsOpen(!isOpen); // Cambia el estado del slidebar
   };
 
+  // Cerrar el menú al hacer clic fuera de él
+  const handleClickOutside = (event) => {
+    if (slidebarRef.current && !slidebarRef.current.contains(event.target)) {
+      setIsOpen(false); // Cierra el Slidebar si el clic no es dentro de él
+    }
+  };
+
+  useEffect(() => {
+    if (isOpen) {
+      document.addEventListener('mousedown', handleClickOutside); // Escucha clics fuera del menú
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside); // Remueve el evento si está cerrado
+    }
+
+    // Limpieza del evento
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen]);
+
   return (
-    <div className={`de-todo ${isOpen ? 'open' : ''}`}>
+    <div className="de-todo" ref={slidebarRef}>
       <input
         className="input_unico"
         type="checkbox"

@@ -1,159 +1,99 @@
-/* Estilos para el botón del usuario */
-.profile-icon {
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap');
+
+/* Estilos generales para el UserMenu */
+.user-menu {
+  position: fixed; /* Fija el menú en una posición fija */
+  top: 0;
+  right: 0;
+  height: 100vh; /* Ocupa toda la altura de la ventana */
+  width: 250px; /* Ancho del menú */
+  background-color: #4B8E8D; /* Color de fondo */
+  color: #fff; /* Color del texto */
+  padding: 20px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra del menú */
+  transform: translateX(100%); /* Posición inicial fuera de la vista */
+  opacity: 0; /* Comienza invisible */
+  z-index: 1000; /* Asegura que esté por encima del contenido */
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Transiciones suaves */
+}
+
+/* Muestra el menú cuando está abierto */
+.user-menu.open {
+  transform: translateX(0); /* Mueve el menú a la vista */
+  opacity: 1; /* Lo hace visible */
+}
+
+/* Título del UserMenu */
+.user-menu h2 {
+  font-family: 'Kanit', sans-serif; /* Fuente personalizada */
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #fff;
+}
+
+/* Lista del UserMenu */
+.user-menu ul {
+  list-style: none; /* Eliminar viñetas */
+  padding: 0;
+  margin: 0;
+}
+
+.user-menu ul li {
+  margin-bottom: 15px;
+}
+
+/* Enlaces del menú */
+.user-menu ul li a {
+  display: block;
+  color: #fff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 18px;
+  padding: 10px;
+  border-radius: 5px; /* Bordes redondeados */
+  transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
+}
+
+/* Efecto hover en los enlaces */
+.user-menu ul li a:hover {
+  background-color: #FFA629; /* Color de fondo en hover */
+  color: #fff; /* Asegura que el texto sea visible */
+}
+
+/* Botón de cierre (si se añade uno en el futuro) */
+.user-menu-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #fff;
   cursor: pointer;
-  width: 40px;
-  height: 40px;
-  position: relative;
-  transition: opacity 0.3s ease; /* Transición suave para opacidad */
+  transition: color 0.3s ease;
 }
 
-/* Cuando el menú está abierto, disminuye la opacidad del botón */
-.user-menu.open ~ .profile-icon {
-  opacity: 0.2; /* Ajusta el valor según el nivel de desvanecimiento que prefieras */
-  pointer-events: all; /* Permite que el botón siga siendo funcional */
+.user-menu-close:hover {
+  color: #FFA629; /* Cambia el color del botón al pasar el mouse */
 }
-  /* Estilos para el UserMenu */
-  .user-menu {
-    position: fixed;
-    right: 0;
-    top: 0; /* Ajusta según la altura del navbar */
-    background-color: #4B8E8D;
-    color: #fff;
-    width: 200px;
-    height: 100%;
-    padding: 20px;
-    box-shadow: 0 0 10px #4B8E8D;
-    transition: transform 0.3s ease;
-  }
-  
-  .user-menu.open {
-    transform: translateX(0);
-  }
-  
-  .user-menu ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .user-menu li {
-    margin-bottom: 10px;
-  }
-  
-  .user-menu li a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .user-menu li a:hover {
-    text-decoration: none;
-    color: #fff;
-    background-color: #FFA629;
-  }  
 
-  .user-menu ul li a {
-    display: block;
-    padding: 10px 20px; /* Ajusta los valores de padding para hacerlo más ancho */
-    text-decoration: none;
-    color: #ffffff; /* Color del texto normal */
-    transition: background-color 0.3s ease;
-  }
-  
-  .user-menu ul li a:hover {
-    background-color: #FFA629; /* El color hover */
-    color: #ffffff; /* Cambia el color del texto en hover */
-    width: 100%; /* Asegúrate de que cubra todo el ancho */
-  }
-  
+/* Fondo semitransparente detrás del menú */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
+  z-index: 999;
+  opacity: 0;
+  display: none; /* Inicialmente oculto */
+  transition: opacity 0.5s ease; /* Transición suave */
+}
 
-.user-menu-container {
-    position: relative;
-  }
-  
-  .toggle_button {
-    cursor: pointer;
-    position: fixed;
-    top: 15px;
-    right: 20px;
-    z-index: 1111;
-    height: 40px;
-    width: 40px;
-    background-color: #4B8E8D;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 5px;
-  }
-  
-  .toggle_button:hover {
-    background-color: #FFA629;
-  }
-  
-  .top_bar, .middle_bar, .bottom_bar {
-    position: absolute;
-    height: 2px;
-    width: 20px;
-    background-color: #fff;
-    border-radius: 50px;
-    transition: 0.3s ease;
-  }
-  
-  .top_bar {
-    top: 30%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .middle_bar {
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  .bottom_bar {
-    top: 70%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  
-  /* Ocultar la barra del medio cuando está abierta */
-  .input_toggle:checked ~ .toggle_button .middle_bar {
-    opacity: 0;
-  }
-  
-  /* Rotar las barras superior e inferior cuando está abierta */
-  .input_toggle:checked ~ .toggle_button .top_bar {
-    transform: translate(-50%, -50%) rotate(45deg);
-    width: 25px;
-  }
-  
-  .input_toggle:checked ~ .toggle_button .bottom_bar {
-    transform: translate(-50%, -50%) rotate(-45deg);
-    width: 25px;
-  }
-  
-  .user-menu-title {
-    color: white;
-    padding: 20px;
-    font-size: 24px;
-  }
-  
-  .user-menu-list {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .user-menu-item {
-    margin: 15px 0;
-  }
-  
-  .user-menu-item a {
-    color: white;
-    text-decoration: none;
-    font-size: 18px;
-  }
-  
-  .user-menu-item a:hover {
-    color: #FFA629;
-  }
-  
+.menu-overlay.open {
+  display: block; /* Muestra el fondo cuando el menú está abierto */
+  opacity: 1;
+}
