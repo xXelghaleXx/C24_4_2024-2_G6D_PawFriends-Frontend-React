@@ -7,6 +7,8 @@ import Welcome from './components/Welcome';
 import Perfil from './components/Perfil';
 import QuienesSomos from './components/QuienesSomos'; // Importamos el componente QuienesSomos
 import Donaciones from './components/Donaciones'; // Importamos el componente Donaciones
+import TerminosLegales from './components/TerminosLegales';
+import Albergues from './components/Albergues'; // Importamos el componente Albergues
 
 function App() {
   return (
@@ -21,6 +23,8 @@ function App() {
           <Route path="/perfil" element={<Perfil />} />
           <Route path="/quienes-somos" element={<QuienesSomos />} /> {/* Ruta añadida para QuienesSomos */}
           <Route path="/donaciones" element={<Donaciones />} /> {/* Ruta añadida para Donaciones */}
+          <Route path="/terminos-legales" element={<TerminosLegales />} />
+          <Route path="/albergues" element={<Albergues />} /> {/* Ruta añadida para Albergues */}
         </Routes>
       </div>
       <Footer />
@@ -29,3 +33,4 @@ function App() {
 }
 
 export default App;
+

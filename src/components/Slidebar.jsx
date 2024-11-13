@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom'; // Importar Link desde react-router-dom
 import '../css/Slidebar.css'; // Importar el archivo CSS con los estilos
 
 const Slidebar = () => {
@@ -9,7 +10,6 @@ const Slidebar = () => {
     setIsOpen(!isOpen); // Cambia el estado del slidebar
   };
 
-  // Cerrar el menú al hacer clic fuera de él
   const handleClickOutside = (event) => {
     if (slidebarRef.current && !slidebarRef.current.contains(event.target)) {
       setIsOpen(false); // Cierra el Slidebar si el clic no es dentro de él
@@ -18,12 +18,11 @@ const Slidebar = () => {
 
   useEffect(() => {
     if (isOpen) {
-      document.addEventListener('mousedown', handleClickOutside); // Escucha clics fuera del menú
+      document.addEventListener('mousedown', handleClickOutside);
     } else {
-      document.removeEventListener('mousedown', handleClickOutside); // Remueve el evento si está cerrado
+      document.removeEventListener('mousedown', handleClickOutside);
     }
 
-    // Limpieza del evento
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
@@ -45,13 +44,41 @@ const Slidebar = () => {
       <div className={`slide_unico ${isOpen ? 'open' : ''}`}>
         <h1 className="titulo_unico">Menu Principal</h1>
         <ul className="ul_unico">
-          <li className="li_unico"><a className="a_unico" href="/Welcome"><i className="icono_unico fa-solid fa-house"></i>Inicio</a></li>
-          <li className="li_unico"><a className="a_unico" href="/Encuentro"><i className="icono_unico fa-sharp fa-solid  fa-paw-simple"></i>Encuentro</a></li>
-          <li className="li_unico"><a className="a_unico" href="/Mascota"><i className="icono_unico fa-sharp fa-solid  fa-paw-simple"></i>Mascotas</a></li>
-          <li className="li_unico"><a className="a_unico" href="/Donaciones"><i className="icono_unico fa-solid fa-box-heart"></i>Donaciones</a></li>
-          <li className="li_unico"><a className="a_unico" href="/Albergues"><i className="icono_unico fa-duotone fa-solid fa-house-heart"></i>Albergues</a></li>
-          <li className="li_unico"><a className="a_unico" href="/TerminosLegales"><i className="icono_unico fa-sharp fa-solid fa-books"></i>Quienes Somos</a></li>
-          <li className="li_unico"><a className="a_unico" href="/TerminosLegales"><i className="icono_unico fa-sharp fa-solid fa-books"></i>Terminos Legales</a></li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/welcome" onClick={toggleSlidebar}>
+              Inicio
+            </Link>
+          </li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/encuentro" onClick={toggleSlidebar}>
+              Encuentro
+            </Link>
+          </li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/mascota" onClick={toggleSlidebar}>
+              Mascotas
+            </Link>
+          </li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/donaciones" onClick={toggleSlidebar}>
+              Donaciones
+            </Link>
+          </li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/albergues" onClick={toggleSlidebar}>
+              Albergues
+            </Link>
+          </li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/quienes-somos" onClick={toggleSlidebar}>
+              Quienes Somos
+            </Link>
+          </li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/terminos-legales" onClick={toggleSlidebar}>
+              Términos Legales
+            </Link>
+          </li>
         </ul>
       </div>
     </div>

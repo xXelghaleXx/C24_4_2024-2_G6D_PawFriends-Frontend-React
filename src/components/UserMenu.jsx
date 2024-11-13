@@ -42,7 +42,7 @@ const UserMenu = ({ isOpen, toggleMenu }) => {
           </Link>
         </li>
         <li>
-          <Link to="/cerrar-sesion" onClick={toggleMenu}>
+          <Link to="/login" onClick={toggleMenu}>
             Cerrar Sesión
           </Link>
         </li>

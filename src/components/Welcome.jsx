@@ -28,7 +28,10 @@ const Welcome = () => {
         </div>
         <div className="grid-item">
           <img src={Albergue} alt="Albergues" className="grid-image" />
-          <button className="grid-button">Albergues</button>
+          {/* Wrap the Albergues button with Link */}
+          <Link to="/albergues">
+            <button className="grid-button">Albergues</button>
+          </Link>
         </div>
         <div className="grid-item">
           <img src={Quienes_Somos} alt="Quiénes somos" className="grid-image" />
@@ -43,4 +46,3 @@ const Welcome = () => {
 };
 
 export default Welcome;
-
