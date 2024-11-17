@@ -9,6 +9,7 @@ import QuienesSomos from './components/QuienesSomos'; // Importamos el component
 import Donaciones from './components/Donaciones'; // Importamos el componente Donaciones
 import TerminosLegales from './components/TerminosLegales';
 import Albergues from './components/Albergues'; // Importamos el componente Albergues
+import Encuentros from './components/Encuentros'; // Importamos el componente Encuentros
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
           <Route path="/donaciones" element={<Donaciones />} /> {/* Ruta añadida para Donaciones */}
           <Route path="/terminos-legales" element={<TerminosLegales />} />
           <Route path="/albergues" element={<Albergues />} /> {/* Ruta añadida para Albergues */}
+          <Route path="/encuentros" element={<Encuentros />} /> {/* Nueva ruta añadida para Encuentros */}
         </Routes>
       </div>
       <Footer />
@@ -33,4 +35,3 @@ function App() {
 }
 
 export default App;
-

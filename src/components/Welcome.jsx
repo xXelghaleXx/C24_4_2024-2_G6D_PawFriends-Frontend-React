@@ -23,8 +23,10 @@ const Welcome = () => {
           </Link>
         </div>
         <div className="grid-item">
-          <img src={Adopcion} alt="Encuentro" className="grid-image" />
+          <img src={Adopcion} alt="Encuentros" className="grid-image" />
+          <Link to="/encuentros">
           <button className="grid-button">Encuentro</button>
+          </Link>
         </div>
         <div className="grid-item">
           <img src={Albergue} alt="Albergues" className="grid-image" />

@@ -1,0 +1,120 @@
+.encuentros-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .perfil-card {
+    display: flex;
+    flex-direction: row;
+    background: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    width: 800px; /* Tamaño fijo */
+    height: 400px; /* Tamaño fijo */
+    padding: 20px;
+    transition: transform 0.5s ease; /* Transición suave */
+  }
+  
+  .imagen-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+    height: 100%; /* Se ajusta al tamaño de la tarjeta */
+  }
+  
+  .imagen-container img {
+    width: 100%; /* Ocupa todo el espacio disponible */
+    height: 100%; /* Ocupa todo el espacio disponible */
+    object-fit: cover; /* Mantiene proporción dentro del contenedor */
+    border-radius: 10px;
+  }
+  
+  .datos-container {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 50%;
+    height: 100%; /* Ajusta la altura al tamaño fijo de la tarjeta */
+    opacity: 1;
+    transition: opacity 0.5s ease, transform 0.5s ease; /* Suaviza la transición */
+  }
+  
+  .datos-container h2 {
+    margin: 0;
+    color: #333;
+  }
+  
+  .datos-container p {
+    margin: 5px 0;
+    font-size: 14px;
+    color: #555;
+  }
+  
+  .acciones {
+    display: flex;
+    gap: 20px; /* Espaciado entre los botones */
+    justify-content: center; /* Centra los botones horizontalmente */
+    align-items: center; /* Centra los botones verticalmente */
+    margin-top: 20px; /* Añade espacio entre las características y los botones */
+  }
+  
+  .boton-verde {
+    background: green;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    width: 50px;
+    height: 50px; /* Botón circular */
+  }
+  
+  .boton-rojo {
+    background: red;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    width: 50px;
+    height: 50px; /* Botón circular */
+  }
+  
+  .flecha {
+    background: teal;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 18px;
+    border-radius: 5px;
+  }
+  
+  
+  /* Responsiveness */
+  @media (max-width: 768px) {
+    .perfil-card {
+      flex-direction: column; /* Cambia a una sola columna en pantallas pequeñas */
+      width: 100%; /* Ocupa el ancho completo */
+      height: auto; /* Ajusta la altura automáticamente */
+    }
+  
+    .imagen-container {
+      width: 100%; /* Ocupa todo el ancho en pantallas pequeñas */
+      height: 200px; /* Fija un tamaño reducido para la imagen */
+    }
+  
+    .datos-container {
+      width: 100%; /* Ocupa todo el ancho */
+      height: auto; /* Ajusta la altura automáticamente */
+    }
+  }
+  
