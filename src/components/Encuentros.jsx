@@ -1,3 +1,4 @@
+import { useParams } from "react-router-dom";
 import { useState } from "react";
 import "../css/Encuentros.css";
 import Carlos01 from "../assets/Carlos.jpg";
@@ -29,7 +30,10 @@ const mascotas = [
 ];
 
 const Encuentros = () => {
-  const [perfilActual, setPerfilActual] = useState(0);
+  const { id } = useParams(); // Obtiene el id de la URL
+  const [perfilActual, setPerfilActual] = useState(
+    mascotas.findIndex((m) => m.id === parseInt(id)) || 0
+  );
   const [imagenActual, setImagenActual] = useState(0);
 
   const siguientePerfil = () => {
@@ -45,8 +49,9 @@ const Encuentros = () => {
   const siguienteImagen = () => {
     setImagenActual(
       (prev) =>
-        mascota.imagenes && mascota.imagenes.length > 0
-          ? (prev + 1) % mascota.imagenes.length
+        mascotas[perfilActual].imagenes &&
+        mascotas[perfilActual].imagenes.length > 0
+          ? (prev + 1) % mascotas[perfilActual].imagenes.length
           : 0
     );
   };
@@ -54,8 +59,10 @@ const Encuentros = () => {
   const anteriorImagen = () => {
     setImagenActual(
       (prev) =>
-        mascota.imagenes && mascota.imagenes.length > 0
-          ? (prev - 1 + mascota.imagenes.length) % mascota.imagenes.length
+        mascotas[perfilActual].imagenes &&
+        mascotas[perfilActual].imagenes.length > 0
+          ? (prev - 1 + mascotas[perfilActual].imagenes.length) %
+            mascotas[perfilActual].imagenes.length
           : 0
     );
   };
@@ -74,7 +81,11 @@ const Encuentros = () => {
             {"<"}
           </button>
           <img
-            src={mascota.imagenes && mascota.imagenes.length > 0 ? mascota.imagenes[imagenActual] : "/assets/default.jpg"}
+            src={
+              mascota.imagenes && mascota.imagenes.length > 0
+                ? mascota.imagenes[imagenActual]
+                : "/assets/default.jpg"
+            }
             alt={`Imagen de ${mascota.nombre}`}
           />
           <button className="imagen-flecha" onClick={siguienteImagen}>

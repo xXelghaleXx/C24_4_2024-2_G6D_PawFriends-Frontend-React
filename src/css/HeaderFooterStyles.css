@@ -1,17 +1,20 @@
-/* HeaderFooterStyles.css */
-
 /* Estilos generales */
 body, html {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     height: 100%;
+    background-image: url('/src/assets/background_pf.webp'); /* Fondo general */
+    background-size: cover; /* Asegura que el fondo cubra todo */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed; /* Fondo extendido en páginas largas */
 }
 
-body {
+.app-container {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh; /* Altura mínima igual a la ventana */
 }
 
 /* Estilos para el Navbar */
@@ -19,40 +22,26 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #335353; /* Ajuste de color a un tono más oscuro */
+    background-color: #335353;
     padding: 10px 20px;
 }
 
-.navbar-left,
-.navbar-center,
-.navbar-right {
+.navbar-left, .navbar-center, .navbar-right {
     display: flex;
     align-items: center;
 }
 
-/* Ajuste de los íconos en la izquierda */
 .navbar-left img.menu-icon {
-    width: 30px; /* Ajusta el tamaño del ícono */
+    width: 30px;
     height: auto;
     margin-right: 10px;
     cursor: pointer;
 }
 
-.navbar-left ul {
-    display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.navbar-left li {
-    margin-right: 15px; /* Reduce el margen entre los ítems */
-}
-
 .navbar-left a {
     text-decoration: none;
     color: white;
-    font-size: 16px; /* Ajuste del tamaño del texto */
+    font-size: 16px;
     font-weight: bold;
 }
 
@@ -60,27 +49,74 @@ body {
     color: #d1d1d1;
 }
 
-/* Logo centrado en el Navbar */
 .navbar-center img {
-    width: 100px; /* Tamaño ajustado del logo */
+    width: 100px;
     height: auto;
-    margin: 0 auto;
 }
 
-/* Ajuste del ícono de perfil */
 .navbar-right img.profile-icon {
-    width: 30px; /* Tamaño más pequeño para el perfil */
+    width: 30px;
     height: auto;
     border-radius: 50%;
     cursor: pointer;
+}
+
+/* Contenido principal */
+.main-content {
+    flex: 1; /* Ocupa el espacio disponible */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.grid-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.grid-item {
+    text-align: center;
+}
+
+.grid-image {
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}
+
+.grid-button {
+    background-color: #fca311;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+}
+
+.grid-button:hover {
+    background-color: #e39400;
 }
 
 /* Estilos para el Footer */
 .footer {
     background-color: #335353;
     padding: 20px 0;
+    text-align: center;
     display: flex;
     justify-content: center;
+    flex-shrink: 0; /* Evita que se comprima */
 }
 
 .footer ul {
@@ -102,97 +138,4 @@ body {
 
 .footer a:hover {
     color: #d1d1d1;
-}
-
-/* Estilos para el contenido principal */
-.main-content {
-    flex: 1;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 100px 20px 50px 20px;
-    background-image: url('/src/assets/background_pf.webp');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
-.form-title {
-    font-size: 24px;
-    margin-bottom: 20px;
-    font-weight: bold;
-    color: #fdf3f3;
-}
-
-.form-group {
-    margin-bottom: 20px;
-}
-
-.form-group input,
-.form-group select {
-    width: 100%;
-    max-width: 350px;
-    padding: 12px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    font-size: 14px;
-    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
-    color: #ffffff;
-}
-
-.form-group input.register-input,
-.form-group select.register-input {
-    background-color: #4B8E8D;
-    border: 2px solid white;
-    border-radius: 15px;
-    padding: 15px;
-    font-size: 18px;
-    margin-bottom: 20px;
-    color: #ffffff;
-}
-
-.form-group input::placeholder {
-    color: #f0f0f0;
-}
-
-/* Botón específico para Google */
-.form-button-google {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #DB4437;
-    color: white;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-    margin-top: 10px;
-    margin-bottom: 15px;
-    text-decoration: none;
-}
-
-.form-button-google:hover {
-    background-color: #c33c2e;
-}
-
-.google-icon {
-    width: 20px;
-    margin-right: 10px;
-}
-
-/* Enlaces adicionales */
-.extra-options {
-    margin-top: 10px;
-    font-size: 14px;
-    color: white;
-}
-
-.extra-options a {
-    color: white;
-    text-decoration: underline;
-}
-
-.extra-options a:hover {
-    color: #cccccc;
 }

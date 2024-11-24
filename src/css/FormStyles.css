@@ -9,7 +9,7 @@ body, html {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Fondo personalizado */
+     /* Fondo personalizado */
     background-size: cover; /* Cubre toda la pantalla */
     background-position: center;
     background-repeat: no-repeat;
@@ -122,4 +122,3 @@ body, html {
 .extra-options a:hover {
     color: #cccccc;
 }
-

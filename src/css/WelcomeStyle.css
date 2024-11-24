@@ -82,9 +82,44 @@ footer {
     width: 100%;
 }
 
+/* Carrusel */
+.carousel-container {
+    width: 80%;
+    margin: 20px auto;
+}
+
+.carousel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.carousel-image {
+    width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+
+.carousel-button {
+    margin-top: 10px;
+    padding: 10px 15px;
+    background-color: #ffb84d;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+    background-color: #f32d09fd ;
+}
+
 /* --- Responsividad --- */
 
-/* Para pantallas más pequeñas como tablets */
+/* Para tablets */
 @media (max-width: 768px) {
     .grid-container {
         grid-template-columns: repeat(1, 1fr); /* Una columna en lugar de dos */
@@ -103,9 +138,13 @@ footer {
         font-size: 1rem;
         padding: 8px 16px;
     }
+
+    .carousel-image {
+        height: 250px; /* Ajusta la altura del carrusel en pantallas más pequeñas */
+    }
 }
 
-/* Para pantallas pequeñas como móviles */
+/* Para móviles */
 @media (max-width: 480px) {
     .welcome-header h2 {
         font-size: 1.5rem;
@@ -131,5 +170,9 @@ footer {
     .grid-button {
         font-size: 0.9rem;
         padding: 8px;
+    }
+
+    .carousel-image {
+        height: 200px; /* Reduce aún más el tamaño del carrusel en móviles */
     }
 }

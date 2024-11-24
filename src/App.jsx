@@ -1,15 +1,15 @@
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import Navbar from './components/Navbar';
-import Footer from './components/Footer';
-import Login from './components/Login';
-import Register from './components/Register';
-import Welcome from './components/Welcome';
-import Perfil from './components/Perfil';
-import QuienesSomos from './components/QuienesSomos'; // Importamos el componente QuienesSomos
-import Donaciones from './components/Donaciones'; // Importamos el componente Donaciones
-import TerminosLegales from './components/TerminosLegales';
-import Albergues from './components/Albergues'; // Importamos el componente Albergues
-import Encuentros from './components/Encuentros'; // Importamos el componente Encuentros
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import Welcome from "./components/Welcome";
+import QuienesSomos from "./components/QuienesSomos";
+import Donaciones from "./components/Donaciones";
+import TerminosLegales from "./components/TerminosLegales";
+import Albergues from "./components/Albergues";
+import Encuentros from "./components/Encuentros"; // Importamos el componente Encuentros
+import Mascotas from "./components/Mascotas"; // Importamos el componente Mascotas
 
 function App() {
   return (
@@ -17,16 +17,25 @@ function App() {
       <Navbar />
       <div className="main-content">
         <Routes>
+          {/* Ruta principal */}
           <Route path="/" element={<Login />} />
+
+          {/* Rutas de autenticación */}
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+
+          {/* Ruta de bienvenida */}
           <Route path="/welcome" element={<Welcome />} />
-          <Route path="/perfil" element={<Perfil />} />
-          <Route path="/quienes-somos" element={<QuienesSomos />} /> {/* Ruta añadida para QuienesSomos */}
-          <Route path="/donaciones" element={<Donaciones />} /> {/* Ruta añadida para Donaciones */}
+
+          {/* Rutas adicionales */}
+          <Route path="/quienes-somos" element={<QuienesSomos />} />
+          <Route path="/donaciones" element={<Donaciones />} />
           <Route path="/terminos-legales" element={<TerminosLegales />} />
-          <Route path="/albergues" element={<Albergues />} /> {/* Ruta añadida para Albergues */}
-          <Route path="/encuentros" element={<Encuentros />} /> {/* Nueva ruta añadida para Encuentros */}
+          <Route path="/albergues" element={<Albergues />} />
+
+          {/* Rutas para Mascotas y Encuentros */}
+          <Route path="/mascotas" element={<Mascotas />} />
+          <Route path="/encuentros/:id" element={<Encuentros />} />
         </Routes>
       </div>
       <Footer />
