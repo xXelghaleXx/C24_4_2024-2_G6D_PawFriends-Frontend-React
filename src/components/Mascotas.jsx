@@ -6,6 +6,22 @@ import Luna01 from "../assets/Luna.jpg";
 const Mascotas = () => {
   const navigate = useNavigate();
 
+  // Array de datos de mascotas
+  const mascotas = [
+    {
+      id: 1,
+      name: "Carlos",
+      age: "2 años",
+      image: Carlos01,
+    },
+    {
+      id: 2,
+      name: "Luna",
+      age: "3 años",
+      image: Luna01,
+    },
+  ];
+
   const handleNavigation = (id) => {
     navigate(`/encuentros/${id}`); // Redirige a Encuentros con el id de la mascota
   };
@@ -14,31 +30,25 @@ const Mascotas = () => {
     <div className="mascotas-container">
       <h1 className="mascotas-title">Mascotas</h1>
       <div className="mascotas-grid">
-        {/* Tarjeta de Carlos */}
-        <div className="mascota-card" onClick={() => handleNavigation(1)}>
-          <img
-            src={Carlos01} // Utiliza la variable importada
-            alt="Carlos"
-            className="mascota-image"
-          />
-          <div className="mascota-info">
-            <h3 className="mascota-name">Carlos, 2 años</h3>
-            <button className="mascota-button">Ver Perfil</button>
+        {mascotas.map((mascota) => (
+          <div
+            key={mascota.id}
+            className="mascota-card"
+            onClick={() => handleNavigation(mascota.id)}
+          >
+            <img
+              src={mascota.image} // Llama a la imagen del array
+              alt={mascota.name}
+              className="mascota-image"
+            />
+            <div className="mascota-info">
+              <h3 className="mascota-name">
+                {mascota.name}, {mascota.age}
+              </h3>
+              <button className="mascota-button">Ver Perfil</button>
+            </div>
           </div>
-        </div>
-
-        {/* Tarjeta de Luna */}
-        <div className="mascota-card" onClick={() => handleNavigation(2)}>
-          <img
-            src={Luna01} // Utiliza la variable importada
-            alt="Luna"
-            className="mascota-image"
-          />
-          <div className="mascota-info">
-            <h3 className="mascota-name">Luna, 3 años</h3>
-            <button className="mascota-button">Ver Perfil</button>
-          </div>
-        </div>
+        ))}
       </div>
     </div>
   );

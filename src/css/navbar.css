@@ -1,18 +1,28 @@
-/* Estilos para el Navbar */
 .navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #335353;
-    padding: 10px 20px;
+    background-color: #335353; /* Color de fondo del navbar */
+    padding: 10px 20px; /* Espaciado interno */
+    width: 100%; /* Ocupa todo el ancho */
+    box-sizing: border-box; /* Incluye el padding dentro del ancho */
+    position: relative; /* No será fijo */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
 }
 
-.navbar-left, .navbar-center, .navbar-right {
-    display: flex;
-    align-items: center;
+.navbar-center img {
+    width: 100px;
+    height: auto;
 }
 
-.navbar-left img.menu-icon {
+.navbar-right img {
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+}
+
+.navbar-left img {
     width: 30px;
     height: auto;
     margin-right: 10px;
@@ -30,14 +40,8 @@
     color: #d1d1d1;
 }
 
-.navbar-center img {
-    width: 100px;
-    height: auto;
-}
-
-.navbar-right img.profile-icon {
-    width: 30px;
-    height: auto;
-    border-radius: 50%;
-    cursor: pointer;
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ajusta el box-sizing para todos los elementos */
 }

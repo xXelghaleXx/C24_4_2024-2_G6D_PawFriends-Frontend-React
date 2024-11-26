@@ -1,6 +1,6 @@
-import { useParams, useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useParams } from "react-router-dom";
+import "../css/EncuentroConfirmacion.css";
 import { useState } from "react";
-import "../css/Encuentros.css";
 import Carlos01 from "../assets/Carlos.jpg";
 import Carlos02 from "../assets/Carlos_02.jpg";
 import Carlos03 from "../assets/Carlos_03.jpg";
@@ -29,61 +29,41 @@ const mascotas = [
   },
 ];
 
-const Encuentros = () => {
+const EncuentroConfirmacion = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Crear instancia de useNavigate
-  const [perfilActual, setPerfilActual] = useState(
-    mascotas.findIndex((m) => m.id === parseInt(id)) || 0
-  );
+  const mascota = mascotas.find((m) => m.id === parseInt(id)) || mascotas[0];
   const [imagenActual, setImagenActual] = useState(0);
 
-  const siguientePerfil = () => {
-    setPerfilActual((prev) => (prev + 1) % mascotas.length);
-    setImagenActual(0);
-  };
-
-  const anteriorPerfil = () => {
-    setPerfilActual((prev) => (prev - 1 + mascotas.length) % mascotas.length);
-    setImagenActual(0);
-  };
-
+  // Función para avanzar en el carrusel
   const siguienteImagen = () => {
-    setImagenActual(
-      (prev) =>
-        (prev + 1) % mascotas[perfilActual].imagenes.length
-    );
+    setImagenActual((prev) => (prev + 1) % mascota.imagenes.length);
   };
 
+  // Función para retroceder en el carrusel
   const anteriorImagen = () => {
-    setImagenActual(
-      (prev) =>
-        (prev - 1 + mascotas[perfilActual].imagenes.length) %
-        mascotas[perfilActual].imagenes.length
+    setImagenActual((prev) => (prev - 1 + mascota.imagenes.length) % mascota.imagenes.length);
+  };
+
+  // Función para manejar la redirección al formulario
+  const redirigirFormulario = () => {
+    window.open(
+      "https://docs.google.com/forms/d/1ErTV4zcvOwffaKaExHVnVK9nlkjmWQzDcl3qLWavTOE/edit",
+      "_blank"
     );
   };
-
-  const redirigirConfirmacion = () => {
-    navigate(`/confirmacion/${mascotas[perfilActual].id}`); // Redirige a EncuentroConfirmacion con el ID actual
-  };
-
-  const mascota = mascotas[perfilActual];
 
   return (
-    <div className="encuentros-container">
-      {/* Botón para cambiar al perfil anterior */}
-      <button className="flecha" onClick={anteriorPerfil}>
-        {"<"}
-      </button>
-
+    <div className="confirmacion-container">
       <div className="perfil-card">
+        {/* Carrusel de imágenes */}
         <div className="imagen-container">
-          {/* Botones para cambiar de imagen */}
           <button className="imagen-flecha" onClick={anteriorImagen}>
             {"<"}
           </button>
           <img
             src={mascota.imagenes[imagenActual]}
             alt={`Imagen de ${mascota.nombre}`}
+            className="imagen-principal"
           />
           <button className="imagen-flecha" onClick={siguienteImagen}>
             {">"}
@@ -95,31 +75,39 @@ const Encuentros = () => {
             {mascota.nombre}, {mascota.edad}
           </h2>
           <p>
-            <strong>Descripción:</strong> {mascota.descripcion}
-          </p>
-          <p>
-            <strong>Albergue:</strong> {mascota.albergue}
+            <strong>Descripción de la Mascota:</strong>
           </p>
           <ul>
             {mascota.texto.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
+          <p>
+            <strong>Albergue:</strong> {mascota.albergue}
+          </p>
+
+          {/* Casilla de verificación */}
+          <div className="checkbox-container">
+            <input
+              type="checkbox"
+              id="terminos"
+              onChange={redirigirFormulario} // Redirige al formulario cuando se selecciona
+            />
+            <label htmlFor="terminos">
+              Acepto los términos de adopción y el proceso legal
+            </label>
+          </div>
+
+          {/* Botones */}
           <div className="acciones">
-            <button className="boton-verde" onClick={redirigirConfirmacion}>
-              ✔
-            </button>
-            <button className="boton-rojo">✖</button>
+            <button className="boton-amarillo">Adoptar</button>
+            <button className="boton-naranja">Hablar con el albergue</button>
+            <button className="boton-gris">Regresar</button>
           </div>
         </div>
       </div>
-
-      {/* Botón para cambiar al siguiente perfil */}
-      <button className="flecha" onClick={siguientePerfil}>
-        {">"}
-      </button>
     </div>
   );
 };
 
-export default Encuentros;
+export default EncuentroConfirmacion;

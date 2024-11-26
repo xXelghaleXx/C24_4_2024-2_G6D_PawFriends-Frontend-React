@@ -1,31 +1,37 @@
-.footer {
-    background-color: #335353;
-    padding: 20px 0;
+/* Footer */
+.unique-footer {
+    background-color: #335353; /* Fondo igual al navbar */
+    color: white; /* Texto blanco */
     text-align: center;
-    position: relative; /* Elimina el comportamiento fijo */
-    width: 100%;
+    padding: 20px 0; /* Más espacio alrededor */
+    width: 100%; /* Ocupa todo el ancho */
+    position: relative;
     bottom: 0;
-    margin-top: auto; /* Esto asegura que el footer se mantenga al final */
+    box-sizing: border-box;
+    margin-top: auto; /* Siempre al final */
+    font-family: 'Arial', sans-serif; /* Fuente consistente con el resto */
 }
 
-.footer ul {
-    display: flex;
+.unique-footer-list {
     list-style: none;
+    display: flex;
+    justify-content: center;
     margin: 0;
     padding: 0;
-    justify-content: center;
+    gap: 20px; /* Espacio entre los enlaces */
 }
 
-.footer li {
-    margin: 0 15px;
+.unique-footer-item {
+    margin: 0;
 }
 
-.footer a {
+.unique-footer-link {
     text-decoration: none;
-    color: white;
+    color: white; /* Texto blanco */
     font-size: 16px;
+    font-weight: bold;
 }
 
-.footer a:hover {
-    color: #d1d1d1;
+.unique-footer-link:hover {
+    color: #d1d1d1; /* Cambia a gris claro al pasar el mouse */
 }

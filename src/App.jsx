@@ -10,7 +10,8 @@ import TerminosLegales from "./components/TerminosLegales";
 import Albergues from "./components/Albergues";
 import Encuentros from "./components/Encuentros";
 import Mascotas from "./components/Mascotas";
-import Perfil from "./components/Perfil"; // Importamos la nueva página
+import Perfil from "./components/Perfil"; // Importamos la página Perfil
+import EncuentroConfirmacion from "./components/EncuentroConfirmacion"; // Importamos la nueva página
 
 function App() {
   return (
@@ -38,7 +39,10 @@ function App() {
           <Route path="/mascotas" element={<Mascotas />} />
           <Route path="/encuentros/:id" element={<Encuentros />} />
 
-          {/* Ruta para la nueva página Perfil */}
+          {/* Ruta para la nueva funcionalidad EncuentroConfirmacion */}
+          <Route path="/confirmacion/:id" element={<EncuentroConfirmacion />} />
+
+          {/* Ruta para la página Perfil */}
           <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </div>

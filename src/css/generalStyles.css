@@ -1,16 +1,17 @@
-/* Estilos generales */
+/* Estilos globales */
 body, html {
     margin: 0;
     padding: 0;
     font-family: 'Arial', sans-serif;
     height: 100%;
     background-image: url('/src/assets/background_pf.webp'); /* Fondo general */
-    background-size: cover; /* Asegura que el fondo cubra todo */
+    background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    background-attachment: fixed; /* Fondo extendido en páginas largas */
+    background-attachment: fixed;
 }
 
+/* Contenedor principal */
 .app-container {
     display: flex;
     flex-direction: column;
@@ -19,17 +20,15 @@ body, html {
 
 /* Contenido principal */
 .main-content {
-    flex: 1; /* Ocupa el espacio disponible */
+    flex: 1; /* Ocupa el espacio restante */
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: center; /* Centra el contenido si es necesario */
     align-items: center;
-    padding: 40px;
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    padding: 20px;
 }
 
+/* Grid para tarjetas o elementos */
 .grid-container {
     display: flex;
     gap: 20px;
@@ -63,21 +62,4 @@ body, html {
 
 .grid-button:hover {
     background-color: #e39400;
-}
-
-/* Contenedor principal */
-.app-container {
-    display: flex;
-    flex-direction: column; /* Orientación vertical */
-    min-height: 100vh; /* Altura mínima igual a la ventana */
-}
-
-/* Contenido principal */
-.main-content {
-    flex: 1; /* Ocupa todo el espacio restante */
-    display: flex;
-    flex-direction: column;
-    justify-content: center; /* Centra el contenido si es necesario */
-    align-items: center;
-    padding: 20px;
 }

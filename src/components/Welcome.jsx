@@ -1,71 +1,57 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import Slider from "react-slick"; // Importar React Slick
 import "../css/WelcomeStyle.css";
+import Mascota1 from "../assets/Carlos.jpg";
+import Mascota2 from "../assets/Luna.jpg";
+import Mascota3 from "../assets/Carlos_02.jpg";
 import Donation from "../assets/donacion.png";
 import Adopcion from "../assets/Adopcion.png";
 import Albergue from "../assets/Albergues.png";
 import Quienes_Somos from "../assets/Quienes_somos.png";
-import Mascota1 from "../assets/Carlos.jpg"; // Imágenes de las mascotas
-import Mascota2 from "../assets/Luna.jpg";
-import Mascota3 from "../assets/Carlos_02.jpg";
 
 const Welcome = () => {
-  const sliderSettings = {
-    dots: true, // Mostrar indicadores
-    infinite: true, // Ciclar imágenes infinitamente
-    speed: 500, // Velocidad de transición
-    slidesToShow: 1, // Cuántas imágenes mostrar
-    slidesToScroll: 1, // Cuántas imágenes avanzar
-    autoplay: true, // Avanzar automáticamente
-    autoplaySpeed: 3000, // Velocidad del autoplay
+  const mascotas = [
+    { id: 1, src: Mascota1, name: "Max", link: "/encuentros/1" },
+    { id: 2, src: Mascota2, name: "Luna", link: "/encuentros/2" },
+    { id: 3, src: Mascota3, name: "Charlie", link: "/encuentros/3" },
+  ];
+
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const handlePrev = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === 0 ? mascotas.length - 1 : prevIndex - 1));
+  };
+
+  const handleNext = () => {
+    setCurrentIndex((prevIndex) => (prevIndex === mascotas.length - 1 ? 0 : prevIndex + 1));
   };
 
   return (
     <div className="welcome-container">
       <div className="welcome-header">
-        <h2>Hola, Usuario</h2>
+        <h2>Hola, Adrian</h2>
         <p>Bienvenido a PawFriends</p>
       </div>
 
-      {/* Carrusel de imágenes */}
-      <div className="carousel-container">
-        <Slider {...sliderSettings}>
-          {/* Tarjeta 1 */}
-          <div className="carousel-item">
-            <img
-              src={Mascota1}
-              alt="Mascota 1"
-              className="carousel-image"
-            />
-            <Link to="/encuentros/1">
-              <button className="carousel-button">Ver Perfil de Max</button>
+      {/* Carrusel Personalizado */}
+      <div className="custom-carousel">
+        <button className="carousel-control prev" onClick={handlePrev}>
+          &#10094;
+        </button>
+        <div className="carousel-slide">
+          <img src={mascotas[currentIndex].src} alt={`Mascota ${mascotas[currentIndex].name}`} className="carousel-image" />
+          <div className="carousel-caption">
+            <h5>{mascotas[currentIndex].name}</h5>
+            <Link to={mascotas[currentIndex].link}>
+              <button className="btn btn-primary">Ver Perfil de {mascotas[currentIndex].name}</button>
             </Link>
           </div>
-          {/* Tarjeta 2 */}
-          <div className="carousel-item">
-            <img
-              src={Mascota2}
-              alt="Mascota 2"
-              className="carousel-image"
-            />
-            <Link to="/encuentros/2">
-              <button className="carousel-button">Ver Perfil de Luna</button>
-            </Link>
-          </div>
-          {/* Tarjeta 3 */}
-          <div className="carousel-item">
-            <img
-              src={Mascota3}
-              alt="Mascota 3"
-              className="carousel-image"
-            />
-            <Link to="/encuentros/3">
-              <button className="carousel-button">Ver Perfil de Charlie</button>
-            </Link>
-          </div>
-        </Slider>
+        </div>
+        <button className="carousel-control next" onClick={handleNext}>
+          &#10095;
+        </button>
       </div>
-      <br/>
+
       {/* Cuadrícula principal */}
       <div className="grid-container">
         <div className="grid-item">
@@ -98,3 +84,4 @@ const Welcome = () => {
 };
 
 export default Welcome;
+
