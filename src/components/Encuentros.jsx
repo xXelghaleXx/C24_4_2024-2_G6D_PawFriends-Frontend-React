@@ -30,7 +30,7 @@ const mascotas = [
 ];
 
 const Encuentros = () => {
-  const { id } = useParams(); // Obtiene el id de la URL
+  const { id } = useParams();
   const [perfilActual, setPerfilActual] = useState(
     mascotas.findIndex((m) => m.id === parseInt(id)) || 0
   );
@@ -49,21 +49,15 @@ const Encuentros = () => {
   const siguienteImagen = () => {
     setImagenActual(
       (prev) =>
-        mascotas[perfilActual].imagenes &&
-        mascotas[perfilActual].imagenes.length > 0
-          ? (prev + 1) % mascotas[perfilActual].imagenes.length
-          : 0
+        (prev + 1) % mascotas[perfilActual].imagenes.length
     );
   };
 
   const anteriorImagen = () => {
     setImagenActual(
       (prev) =>
-        mascotas[perfilActual].imagenes &&
-        mascotas[perfilActual].imagenes.length > 0
-          ? (prev - 1 + mascotas[perfilActual].imagenes.length) %
-            mascotas[perfilActual].imagenes.length
-          : 0
+        (prev - 1 + mascotas[perfilActual].imagenes.length) %
+        mascotas[perfilActual].imagenes.length
     );
   };
 
@@ -71,21 +65,19 @@ const Encuentros = () => {
 
   return (
     <div className="encuentros-container">
+      {/* Botón para cambiar al perfil anterior */}
       <button className="flecha" onClick={anteriorPerfil}>
         {"<"}
       </button>
 
       <div className="perfil-card">
         <div className="imagen-container">
+          {/* Botones para cambiar de imagen */}
           <button className="imagen-flecha" onClick={anteriorImagen}>
             {"<"}
           </button>
           <img
-            src={
-              mascota.imagenes && mascota.imagenes.length > 0
-                ? mascota.imagenes[imagenActual]
-                : "/assets/default.jpg"
-            }
+            src={mascota.imagenes[imagenActual]}
             alt={`Imagen de ${mascota.nombre}`}
           />
           <button className="imagen-flecha" onClick={siguienteImagen}>
@@ -115,6 +107,7 @@ const Encuentros = () => {
         </div>
       </div>
 
+      {/* Botón para cambiar al siguiente perfil */}
       <button className="flecha" onClick={siguientePerfil}>
         {">"}
       </button>
@@ -123,3 +116,4 @@ const Encuentros = () => {
 };
 
 export default Encuentros;
+  

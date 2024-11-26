@@ -1,4 +1,3 @@
-import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../css/Mascotas.css';
 import Carlos01 from "../assets/Carlos.jpg";

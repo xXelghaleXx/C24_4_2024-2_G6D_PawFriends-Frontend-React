@@ -1,0 +1,136 @@
+/* Contenedor principal */
+.perfil-container {
+  margin: 0 auto;
+  margin-top: 50px;
+  max-width: 900px;
+  padding: 30px;
+  background-color: #4b8e8d;
+  color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  animation: fadeIn 1.5s ease-in-out;
+}
+
+/* Cabecera con imagen y nombre a la derecha */
+.perfil-header {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  margin-bottom: 30px;
+}
+
+.perfil-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #ffa629;
+  margin-right: 20px;
+}
+
+/* Información del perfil */
+.perfil-info {
+  text-align: left;
+}
+
+.perfil-info h1 {
+  font-size: 36px;
+  margin: 0;
+}
+
+.perfil-info h3 {
+  font-size: 20px;
+  color: #ffa629;
+  margin: 5px 0;
+}
+
+/* Cuerpo del perfil */
+.perfil-body {
+  text-align: left;
+  font-size: 18px;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.perfil-body p {
+  margin: 10px 0;
+}
+
+/* Animación en fuente */
+.animated-font {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  animation: glowText 2s ease-in-out infinite alternate;
+}
+
+/* Botones */
+.perfil-footer {
+  margin-top: 20px;
+}
+
+.perfil-button {
+  background-color: #ffa629;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 18px;
+  cursor: pointer;
+  margin: 10px;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.perfil-button:hover {
+  background-color: #d82307;
+  transform: scale(1.1);
+}
+
+.input-field {
+  width: 100%;
+  max-width: 400px;
+  margin: 10px auto;
+  padding: 10px;
+  font-size: 16px;
+  border: 2px solid #ffa629;
+  border-radius: 5px;
+  outline: none;
+}
+
+.input-field:focus {
+  border-color: #e58c24;
+  box-shadow: 0 0 5px #e58c24;
+}
+
+/* Imagen de perfil */
+.image-container {
+  position: relative;
+  display: inline-block;
+}
+
+.perfil-image {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  border: 4px solid #ffa629;
+  margin-right: 20px;
+}
+
+.file-input {
+  display: none; /* Ocultar el input de archivo */
+}
+
+.file-label {
+  display: block;
+  margin-top: 10px;
+  background-color: #ffa629;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.file-label:hover {
+  background-color: #d82307;
+}

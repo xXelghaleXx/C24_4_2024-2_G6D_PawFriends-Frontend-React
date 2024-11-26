@@ -1,99 +1,58 @@
-@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap');
-
-/* Estilos generales para el UserMenu */
+/* Estilo general del menú */
 .user-menu {
-  position: fixed; /* Fija el menú en una posición fija */
+  position: fixed;
   top: 0;
   right: 0;
-  height: 100vh; /* Ocupa toda la altura de la ventana */
-  width: 250px; /* Ancho del menú */
-  background-color: #4B8E8D; /* Color de fondo */
-  color: #fff; /* Color del texto */
-  padding: 20px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2); /* Sombra del menú */
-  transform: translateX(100%); /* Posición inicial fuera de la vista */
-  opacity: 0; /* Comienza invisible */
-  z-index: 1000; /* Asegura que esté por encima del contenido */
-  transition: transform 0.5s ease, opacity 0.5s ease; /* Transiciones suaves */
-}
-
-/* Muestra el menú cuando está abierto */
-.user-menu.open {
-  transform: translateX(0); /* Mueve el menú a la vista */
-  opacity: 1; /* Lo hace visible */
-}
-
-/* Título del UserMenu */
-.user-menu h2 {
-  font-family: 'Kanit', sans-serif; /* Fuente personalizada */
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  text-align: center;
+  height: 100vh;
+  width: 300px; /* Ancho del menú */
+  background-color: #4b8e8d;
   color: #fff;
+  padding: 20px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.2); /* Sombra */
+  z-index: 1000;
+  transform: translateX(100%); /* Fuera de la pantalla inicialmente */
+  opacity: 0; /* Invisible */
+  transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; /* Transición suave */
 }
 
-/* Lista del UserMenu */
+/* Cuando el menú está abierto */
+.user-menu.menu-open {
+  transform: translateX(0); /* Entra a la vista */
+  opacity: 1; /* Visible */
+}
+
+/* Cuando el menú está cerrado */
+.user-menu.menu-closed {
+  transform: translateX(100%); /* Sale hacia fuera */
+  opacity: 0; /* Invisible */
+}
+
 .user-menu ul {
-  list-style: none; /* Eliminar viñetas */
-  padding: 0;
-  margin: 0;
+  list-style: none; /* Elimina las viñetas */
+  padding: 0; /* Elimina el padding predeterminado */
+  margin: 0; /* Elimina el margen predeterminado */
 }
 
 .user-menu ul li {
-  margin-bottom: 15px;
+  margin-bottom: 15px; /* Espaciado entre los elementos */
 }
 
-/* Enlaces del menú */
-.user-menu ul li a {
+/* Botones dentro del UserMenu */
+.menu-button {
   display: block;
-  color: #fff;
-  text-decoration: none;
-  font-weight: 500;
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 5px; /* Bordes redondeados */
-  transition: background-color 0.3s ease, color 0.3s ease; /* Transiciones suaves */
-}
-
-/* Efecto hover en los enlaces */
-.user-menu ul li a:hover {
-  background-color: #FFA629; /* Color de fondo en hover */
-  color: #fff; /* Asegura que el texto sea visible */
-}
-
-/* Botón de cierre (si se añade uno en el futuro) */
-.user-menu-close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 20px;
-  color: #fff;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.user-menu-close:hover {
-  color: #FFA629; /* Cambia el color del botón al pasar el mouse */
-}
-
-/* Fondo semitransparente detrás del menú */
-.menu-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
   width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5); /* Fondo oscuro semitransparente */
-  z-index: 999;
-  opacity: 0;
-  display: none; /* Inicialmente oculto */
-  transition: opacity 0.5s ease; /* Transición suave */
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ffa629;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
 }
 
-.menu-overlay.open {
-  display: block; /* Muestra el fondo cuando el menú está abierto */
-  opacity: 1;
-}
+.menu-button:hover {
+  background-color: #d82307;
+  transform: scale(1.1); /* Efecto de agrandamiento al pasar el mouse */
+} 

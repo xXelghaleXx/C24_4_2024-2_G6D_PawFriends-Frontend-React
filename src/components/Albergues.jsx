@@ -3,6 +3,8 @@ import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css'; // Estilos necesarios para el carrusel
 import 'slick-carousel/slick/slick-theme.css'; // Tema del carrusel
 import '../css/Albergues.css';
+import albergue01 from '../assets/albergue01.jpg';
+import albergue02 from '../assets/albergue02.jpg';
 
 const Albergues = () => {
   const navigate = useNavigate();
@@ -12,27 +14,19 @@ const Albergues = () => {
       id: 1,
       name: 'PawFriends',
       description: 'Conoce a nuestras mascotas rescatadas y dales un hogar.',
-      images: [
-        '/assets/pawfriends1.jpg',
-        '/assets/pawfriends2.jpg',
-        '/assets/pawfriends3.jpg',
-      ],
+      images: [albergue01], // Cambiado a "images"
     },
     {
       id: 2,
       name: 'Patitas Amigas',
       description: 'Descubre cómo puedes cambiar la vida de estas mascotas.',
-      images: [
-        '/assets/patitasamigas1.jpg',
-        '/assets/patitasamigas2.jpg',
-        '/assets/patitasamigas3.jpg',
-      ],
+      images: [albergue02], // Cambiado a "images"
     },
   ];
 
   const settings = {
     dots: true,
-    infinite: true,
+    infinite: false,
     speed: 500,
     slidesToShow: 1,
     slidesToScroll: 1,
@@ -52,7 +46,7 @@ const Albergues = () => {
           <h2>{albergue.name}</h2>
           <div className="carousel-container">
             <Slider {...settings}>
-              {albergue.images.map((image, index) => (
+              {albergue.images.map((image, index) => ( // Cambiado "image" a "images"
                 <div key={index} className="carousel-slide">
                   <img src={image} alt={`${albergue.name} slide ${index + 1}`} />
                 </div>
@@ -73,3 +67,4 @@ const Albergues = () => {
 };
 
 export default Albergues;
+

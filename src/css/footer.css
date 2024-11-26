@@ -1,0 +1,31 @@
+.footer {
+    background-color: #335353;
+    padding: 20px 0;
+    text-align: center;
+    position: relative; /* Elimina el comportamiento fijo */
+    width: 100%;
+    bottom: 0;
+    margin-top: auto; /* Esto asegura que el footer se mantenga al final */
+}
+
+.footer ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+}
+
+.footer li {
+    margin: 0 15px;
+}
+
+.footer a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+}
+
+.footer a:hover {
+    color: #d1d1d1;
+}

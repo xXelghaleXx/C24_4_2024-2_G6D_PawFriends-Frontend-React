@@ -1,16 +1,16 @@
-import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
-import PerfilModal from "./PerfilModal"; // Importa el modal
+import { useEffect, useRef } from "react";
+import { useNavigate } from "react-router-dom";
 import "../css/UserMenuStyles.css";
 
 const UserMenu = ({ isOpen, toggleMenu }) => {
-  const menuRef = useRef(null);
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal de perfil
+  const navigate = useNavigate(); // Hook para redirigir
+  const menuRef = useRef(null); // Referencia al menú
 
-  // Función para manejar clics fuera del menú
+  // Función para cerrar el menú al hacer clic fuera de él
   const handleOutsideClick = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-      toggleMenu();
+      toggleMenu(); // Cierra el menú
     }
   };
 
@@ -21,43 +21,43 @@ const UserMenu = ({ isOpen, toggleMenu }) => {
       document.removeEventListener("mousedown", handleOutsideClick);
     }
 
+    // Limpieza al desmontar el componente
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [isOpen]);
 
-  // Función para abrir el modal
-  const openModal = () => {
-    setIsModalOpen(true);
-    toggleMenu(); // Cierra el menú al abrir el modal
+  // Función para redirigir al perfil
+  const goToPerfil = () => {
+    toggleMenu(); // Cierra el menú
+    navigate("/perfil");
   };
 
-  // Función para cerrar el modal
-  const closeModal = () => {
-    setIsModalOpen(false);
+  // Función para cerrar sesión y redirigir al login
+  const goToLogin = () => {
+    toggleMenu(); // Cierra el menú
+    navigate("/login");
   };
 
   return (
-    <>
-      <div ref={menuRef} className={`user-menu ${isOpen ? "open" : ""}`}>
-        <h2>Menú de Usuario</h2>
-        <ul>
-          <li>
-            <button className="menu-button" onClick={openModal}>
-              Perfil
-            </button>
-          </li>
-          <li>
-            <button className="menu-button" onClick={toggleMenu}>
-              Cerrar Sesión
-            </button>
-          </li>
-        </ul>
-      </div>
-
-      {/* Modal del perfil */}
-      <PerfilModal isOpen={isModalOpen} onClose={closeModal} />
-    </>
+    <div
+      ref={menuRef}
+      className={`user-menu ${isOpen ? "menu-open" : "menu-closed"}`}
+    >
+      <h2>Menú de Usuario</h2>
+      <ul>
+        <li>
+          <button className="menu-button" onClick={goToPerfil}>
+            Perfil
+          </button>
+        </li>
+        <li>
+          <button className="menu-button" onClick={goToLogin}>
+            Cerrar Sesión
+          </button>
+        </li>
+      </ul>
+    </div>
   );
 };
 

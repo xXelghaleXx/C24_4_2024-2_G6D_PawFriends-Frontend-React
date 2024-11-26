@@ -1,0 +1,43 @@
+/* Estilos para el Navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #335353;
+    padding: 10px 20px;
+}
+
+.navbar-left, .navbar-center, .navbar-right {
+    display: flex;
+    align-items: center;
+}
+
+.navbar-left img.menu-icon {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.navbar-left a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.navbar-left a:hover {
+    color: #d1d1d1;
+}
+
+.navbar-center img {
+    width: 100px;
+    height: auto;
+}
+
+.navbar-right img.profile-icon {
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+}

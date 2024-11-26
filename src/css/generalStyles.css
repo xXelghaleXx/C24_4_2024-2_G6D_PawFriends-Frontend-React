@@ -17,50 +17,6 @@ body, html {
     min-height: 100vh; /* Altura mínima igual a la ventana */
 }
 
-/* Estilos para el Navbar */
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #335353;
-    padding: 10px 20px;
-}
-
-.navbar-left, .navbar-center, .navbar-right {
-    display: flex;
-    align-items: center;
-}
-
-.navbar-left img.menu-icon {
-    width: 30px;
-    height: auto;
-    margin-right: 10px;
-    cursor: pointer;
-}
-
-.navbar-left a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-}
-
-.navbar-left a:hover {
-    color: #d1d1d1;
-}
-
-.navbar-center img {
-    width: 100px;
-    height: auto;
-}
-
-.navbar-right img.profile-icon {
-    width: 30px;
-    height: auto;
-    border-radius: 50%;
-    cursor: pointer;
-}
-
 /* Contenido principal */
 .main-content {
     flex: 1; /* Ocupa el espacio disponible */
@@ -109,33 +65,19 @@ body, html {
     background-color: #e39400;
 }
 
-/* Estilos para el Footer */
-.footer {
-    background-color: #335353;
-    padding: 20px 0;
-    text-align: center;
+/* Contenedor principal */
+.app-container {
     display: flex;
-    justify-content: center;
-    flex-shrink: 0; /* Evita que se comprima */
+    flex-direction: column; /* Orientación vertical */
+    min-height: 100vh; /* Altura mínima igual a la ventana */
 }
 
-.footer ul {
+/* Contenido principal */
+.main-content {
+    flex: 1; /* Ocupa todo el espacio restante */
     display: flex;
-    list-style: none;
-    margin: 0;
-    padding: 0;
-}
-
-.footer li {
-    margin: 0 15px;
-}
-
-.footer a {
-    text-decoration: none;
-    color: white;
-    font-size: 16px;
-}
-
-.footer a:hover {
-    color: #d1d1d1;
+    flex-direction: column;
+    justify-content: center; /* Centra el contenido si es necesario */
+    align-items: center;
+    padding: 20px;
 }

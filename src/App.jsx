@@ -8,8 +8,9 @@ import QuienesSomos from "./components/QuienesSomos";
 import Donaciones from "./components/Donaciones";
 import TerminosLegales from "./components/TerminosLegales";
 import Albergues from "./components/Albergues";
-import Encuentros from "./components/Encuentros"; // Importamos el componente Encuentros
-import Mascotas from "./components/Mascotas"; // Importamos el componente Mascotas
+import Encuentros from "./components/Encuentros";
+import Mascotas from "./components/Mascotas";
+import Perfil from "./components/Perfil"; // Importamos la nueva página
 
 function App() {
   return (
@@ -36,6 +37,9 @@ function App() {
           {/* Rutas para Mascotas y Encuentros */}
           <Route path="/mascotas" element={<Mascotas />} />
           <Route path="/encuentros/:id" element={<Encuentros />} />
+
+          {/* Ruta para la nueva página Perfil */}
+          <Route path="/perfil" element={<Perfil />} />
         </Routes>
       </div>
       <Footer />
