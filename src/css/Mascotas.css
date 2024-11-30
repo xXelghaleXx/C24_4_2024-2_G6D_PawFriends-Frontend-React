@@ -1,44 +1,56 @@
+/* Contenedor principal del componente */
 .mascotas-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #f5f5f5; /* Color de fondo */
-  box-sizing: border-box;
+  position: fixed; /* Fija el contenedor respecto a la ventana */
+  top: 50%; /* Posiciona el centro del contenedor en el 50% de la altura */
+  left: 50%; /* Posiciona el centro del contenedor en el 50% del ancho */
+  transform: translate(-50%, -50%); /* Ajusta el contenedor para que quede perfectamente centrado */
+  background-color: #ffffff; /* Fondo blanco para destacar el contenido */
+  padding: 30px; /* Espaciado interno */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para separación visual */
+  width: 90%; /* Ajusta el ancho relativo a la ventana */
+  max-width: 800px; /* Limita el ancho máximo */
+  z-index: 10; /* Asegura que esté por encima del contenido normal */
+  overflow-y: auto; /* Permite scroll interno si el contenido excede la altura */
+  box-sizing: border-box; /* Incluye padding y bordes en las dimensiones */
 }
 
+/* Título dentro del contenedor */
 .mascotas-title {
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: #54736b;
   margin-bottom: 20px;
+  text-align: center;
 }
 
+/* Cuadrícula de tarjetas */
 .mascotas-grid {
   display: flex;
-  gap: 30px; /* Más espacio entre tarjetas */
-  justify-content: center;
+  gap: 20px; /* Espaciado entre tarjetas */
   flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas */
-  max-width: 1200px; /* Limita el ancho máximo */
-  width: 100%; /* Ocupa todo el ancho disponible */
+  justify-content: center;
 }
 
+/* Tarjetas */
 .mascota-card {
   background-color: #54736b;
-  border-radius: 10px;
-  padding: 15px; /* Más padding para que se vea más espaciosa */
+  border-radius: 8px;
+  padding: 15px;
   width: 200px;
-  text-align: center;
   color: white;
+  text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   cursor: pointer;
 }
 
 .mascota-card:hover {
-  transform: scale(1.05);
+  transform: scale(1.05); /* Zoom suave al hacer hover */
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
 
+
+/* Imagen */
 .mascota-image {
   width: 100%;
   height: 250px;
@@ -47,6 +59,7 @@
   margin-bottom: 10px;
 }
 
+/* Información */
 .mascota-info {
   text-align: center;
 }
@@ -57,6 +70,7 @@
   margin-bottom: 10px;
 }
 
+/* Botón */
 .mascota-button {
   background-color: #fca311;
   color: white;
@@ -66,29 +80,36 @@
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  display: none; /* Oculto por defecto */
+}
+
+.mascota-card:hover .mascota-button {
+  display: block; /* Mostrar el botón al hacer hover */
 }
 
 .mascota-button:hover {
   background-color: #e39400;
 }
 
-/* Footer Pegado */
+/* Footer */
 footer {
   background-color: #54736b;
   color: white;
   text-align: center;
   padding: 15px;
-  margin-top: auto; /* Empuja el footer hacia la parte inferior si no hay suficiente contenido */
+  margin-top: auto;
   width: 100%;
 }
 
+/* Estilo general para evitar colisiones */
 body {
+  margin: 0;
+  padding: 0;
   display: flex;
   flex-direction: column;
-  margin: 0;
   min-height: 100vh;
 }
 
 main {
-  flex: 1; /* Hace que el contenido principal ocupe el espacio restante */
+  flex: 1;
 }

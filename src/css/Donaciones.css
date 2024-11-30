@@ -3,11 +3,15 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center; /* Centra el contenido verticalmente */
   font-family: Arial, sans-serif;
   background-color: #f0f0f0; /* Fondo general */
   padding: 20px;
+  min-height: calc(100vh - 120px); /* Resta el tamaño del navbar y footer */
+  box-sizing: border-box;
 }
 
+/* Encabezado */
 .donaciones-header {
   display: flex;
   flex-direction: column;
@@ -16,7 +20,7 @@
   padding: 10px;
   border-radius: 8px;
   width: 90%;
-  max-width: 500px; /* Reducido */
+  max-width: 500px;
 }
 
 .donaciones-header h2 {
@@ -40,16 +44,18 @@
 .donaciones-products {
   display: flex;
   flex-wrap: wrap;
-  gap: 15px; /* Menor espacio entre las tarjetas */
+  gap: 15px; /* Espacio entre las tarjetas */
   justify-content: center;
   margin-top: 20px;
+  width: 100%; /* Asegura que ocupe todo el espacio horizontal */
 }
 
+/* Tarjetas de productos */
 .donaciones-product-card {
   background-color: #54736b; /* Fondo de las tarjetas */
   border-radius: 8px;
   padding: 10px; /* Menor padding */
-  width: 300px; /* Ancho reducido */
+  width: 300px;
   text-align: center;
   color: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra de la tarjeta */
@@ -94,4 +100,25 @@
 
 .donar-button:hover {
   background-color: #e39400; /* Color del botón al pasar el mouse */
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+  .donaciones-products {
+    gap: 10px; /* Menos espacio entre tarjetas en pantallas pequeñas */
+  }
+
+  .donaciones-product-card {
+    width: 100%; /* Ocupa todo el ancho disponible */
+    max-width: 300px; /* Limita el ancho máximo */
+  }
+
+  .donaciones-main-image {
+    width: 100%; /* Imagen se adapta al ancho */
+  }
+
+  .donaciones-header {
+    width: 100%;
+    max-width: 300px; /* Reduce el tamaño en pantallas pequeñas */
+  }
 }

@@ -1,28 +1,36 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types"; // Importar PropTypes para validar las props
 import "../css/DonationModal.css"; // Importar estilos del modal
 
-const DonationModal = ({ product, onClose }) => {
+const DonationModal = ({ product, onClose, shelters }) => {
   const [quantity, setQuantity] = useState(1); // Controla la cantidad seleccionada
+  const [selectedShelter, setSelectedShelter] = useState(""); // Controla el albergue seleccionado
   const modalRef = useRef(null); // Referencia al contenedor del modal
 
   const handleQuantityChange = (event) => {
     setQuantity(event.target.value);
   };
 
-  // Detectar clic fuera del modal y cerrar
-  const handleOutsideClick = (event) => {
-    if (modalRef.current && !modalRef.current.contains(event.target)) {
-      onClose(); // Cerrar el modal si el clic es fuera del contenido
-    }
+  const handleShelterChange = (event) => {
+    setSelectedShelter(event.target.value);
   };
+
+  // Detectar clic fuera del modal y cerrar
+  const handleOutsideClick = useCallback(
+    (event) => {
+      if (modalRef.current && !modalRef.current.contains(event.target)) {
+        onClose(); // Cerrar el modal si el clic es fuera del contenido
+      }
+    },
+    [onClose] // Agregar `onClose` como dependencia
+  );
 
   useEffect(() => {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
-  }, []);
+  }, [handleOutsideClick]); // Incluimos `handleOutsideClick` como dependencia
 
   return (
     <div className="donation-modal">
@@ -49,6 +57,20 @@ const DonationModal = ({ product, onClose }) => {
                 </option>
               ))}
             </select>
+            <p>
+              <strong>Seleccionar albergue:</strong>
+            </p>
+            <select value={selectedShelter} onChange={handleShelterChange}>
+              <option value="" disabled>
+                Selecciona un albergue
+              </option>
+              {shelters &&
+                shelters.map((shelter, index) => (
+                  <option key={index} value={shelter}>
+                    {shelter}
+                  </option>
+                ))}
+            </select>
           </div>
         </div>
         <div className="modal-footer">
@@ -56,8 +78,13 @@ const DonationModal = ({ product, onClose }) => {
             Regresar
           </button>
           <button
-            className="btn btn-donate"
-            onClick={() => alert(`Donaste ${quantity} ${product.name}`)}
+            className={`btn btn-donate ${!selectedShelter ? "disabled" : ""}`}
+            onClick={() =>
+              alert(
+                `Donaste ${quantity} ${product.name} al albergue ${selectedShelter}`
+              )
+            }
+            disabled={!selectedShelter} // Desactiva el botón si no se seleccionó un albergue
           >
             Donar
           </button>
@@ -75,6 +102,7 @@ DonationModal.propTypes = {
     description: PropTypes.string.isRequired,
   }).isRequired,
   onClose: PropTypes.func.isRequired,
+  shelters: PropTypes.arrayOf(PropTypes.string).isRequired, // Validación de lista de albergues
 };
 
 export default DonationModal;

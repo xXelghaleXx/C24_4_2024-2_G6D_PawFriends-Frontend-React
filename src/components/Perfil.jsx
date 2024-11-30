@@ -123,13 +123,6 @@ const Perfil = () => {
               onChange={handleInputChange}
               className="input-field"
             />
-            <input
-              type="text"
-              name="shelter"
-              value={userData.shelter}
-              onChange={handleInputChange}
-              className="input-field"
-            />
           </>
         ) : (
           <>
@@ -137,7 +130,6 @@ const Perfil = () => {
             <p className="animated-font">Teléfono: {userData.phone}</p>
             <p className="animated-font">Dirección: {userData.address}</p>
             <p className="animated-font">Distrito: {userData.district}</p>
-            <p className="animated-font">Albergue: {userData.shelter}</p>
           </>
         )}
       </div>

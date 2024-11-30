@@ -1,12 +1,8 @@
-import { useParams, useNavigate } from "react-router-dom"; // Importar useNavigate
+import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import "../css/Encuentros.css";
 import Carlos01 from "../assets/Carlos.jpg";
-import Carlos02 from "../assets/Carlos_02.jpg";
-import Carlos03 from "../assets/Carlos_03.jpg";
 import Luna01 from "../assets/Luna.jpg";
-import Luna02 from "../assets/Luna_02.jpg";
-import Luna03 from "../assets/Luna_03.jpg";
 
 const mascotas = [
   {
@@ -16,7 +12,7 @@ const mascotas = [
     descripcion: "Bulldog amigable y cariñoso",
     albergue: "Albergue Happy Paws",
     texto: ["Vacunado", "Esterilizado", "Convive bien con niños"],
-    imagenes: [Carlos01, Carlos02, Carlos03],
+    imagen: Carlos01,
   },
   {
     id: 2,
@@ -25,69 +21,38 @@ const mascotas = [
     descripcion: "Gata juguetona y curiosa",
     albergue: "Refugio Cat Lovers",
     texto: ["Vacunada", "No convive con perros", "Muy independiente"],
-    imagenes: [Luna01, Luna02, Luna03],
+    imagen: Luna01,
   },
 ];
 
 const Encuentros = () => {
   const { id } = useParams();
-  const navigate = useNavigate(); // Crear instancia de useNavigate
+  const navigate = useNavigate();
   const [perfilActual, setPerfilActual] = useState(
     mascotas.findIndex((m) => m.id === parseInt(id)) || 0
   );
-  const [imagenActual, setImagenActual] = useState(0);
+  const [animando, setAnimando] = useState(false);
 
   const siguientePerfil = () => {
-    setPerfilActual((prev) => (prev + 1) % mascotas.length);
-    setImagenActual(0);
-  };
+    setAnimando(true); // Inicia la animación
 
-  const anteriorPerfil = () => {
-    setPerfilActual((prev) => (prev - 1 + mascotas.length) % mascotas.length);
-    setImagenActual(0);
-  };
-
-  const siguienteImagen = () => {
-    setImagenActual(
-      (prev) =>
-        (prev + 1) % mascotas[perfilActual].imagenes.length
-    );
-  };
-
-  const anteriorImagen = () => {
-    setImagenActual(
-      (prev) =>
-        (prev - 1 + mascotas[perfilActual].imagenes.length) %
-        mascotas[perfilActual].imagenes.length
-    );
+    setTimeout(() => {
+      setPerfilActual((prev) => (prev + 1) % mascotas.length); // Cambia al siguiente perfil
+      setAnimando(false); // Finaliza la animación
+    }, 500); // Tiempo de la animación en ms
   };
 
   const redirigirConfirmacion = () => {
-    navigate(`/confirmacion/${mascotas[perfilActual].id}`); // Redirige a EncuentroConfirmacion con el ID actual
+    navigate(`/confirmacion/${mascotas[perfilActual].id}`);
   };
 
   const mascota = mascotas[perfilActual];
 
   return (
     <div className="encuentros-container">
-      {/* Botón para cambiar al perfil anterior */}
-      <button className="flecha" onClick={anteriorPerfil}>
-        {"<"}
-      </button>
-
-      <div className="perfil-card">
+      <div className={`perfil-card ${animando ? "animating-out" : ""}`}>
         <div className="imagen-container">
-          {/* Botones para cambiar de imagen */}
-          <button className="imagen-flecha" onClick={anteriorImagen}>
-            {"<"}
-          </button>
-          <img
-            src={mascota.imagenes[imagenActual]}
-            alt={`Imagen de ${mascota.nombre}`}
-          />
-          <button className="imagen-flecha" onClick={siguienteImagen}>
-            {">"}
-          </button>
+          <img src={mascota.imagen} alt={`Imagen de ${mascota.nombre}`} />
         </div>
 
         <div className="datos-container">
@@ -109,15 +74,12 @@ const Encuentros = () => {
             <button className="boton-verde" onClick={redirigirConfirmacion}>
               ✔
             </button>
-            <button className="boton-rojo">✖</button>
+            <button className="boton-rojo" onClick={siguientePerfil}>
+              ✖
+            </button>
           </div>
         </div>
       </div>
-
-      {/* Botón para cambiar al siguiente perfil */}
-      <button className="flecha" onClick={siguientePerfil}>
-        {">"}
-      </button>
     </div>
   );
 };

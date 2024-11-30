@@ -101,3 +101,25 @@
 .btn-donate:hover {
     background-color: #d82307;
 }
+
+select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    font-size: 1rem;
+  }
+  
+  select:focus {
+    outline: none;
+    border-color: #54736b;
+    box-shadow: 0 0 5px rgba(84, 115, 107, 0.5);
+  }
+  
+  select:disabled {
+    background-color: #f0f0f0;
+    color: #888;
+    cursor: not-allowed;
+  }
+  

@@ -12,6 +12,12 @@ const Donaciones = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
+  const shelters = [
+    "Albergue Happy Paws",
+    "Refugio Cat Lovers",
+    "Casa de Mascotas",
+  ];
+
   const products = [
     {
       imgSrc: DNImage1,
@@ -79,6 +85,7 @@ const Donaciones = () => {
       {isModalOpen && (
         <DonationModal
           product={selectedProduct}
+          shelters={shelters} // Pasamos la lista de albergues
           onClose={closeModal} // Pasa la función para cerrar el modal
         />
       )}
@@ -87,3 +94,4 @@ const Donaciones = () => {
 };
 
 export default Donaciones;
+

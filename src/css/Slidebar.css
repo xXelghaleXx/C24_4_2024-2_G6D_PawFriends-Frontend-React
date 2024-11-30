@@ -13,17 +13,19 @@
     left: 0;
     height: 100vh; /* Asegúrate de que cubra toda la pantalla */
     width: 210px; /* Cambia este valor para ajustar el ancho */
-    background-color: #4B8E8D;
+    background-color: rgba(75, 142, 141, 0.8); /* Fondo semitransparente para efecto glass */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidad con Safari */
     transition: transform 0.5s ease, opacity 0.5s ease; /* Ajuste de transición */
     transform: translateX(-250px); /* Posición inicial fuera de la vista */
     z-index: 1000; /* Asegúrate de que el slidebar esté por encima del contenido */
-    opacity: 0;
+    opacity: 0; /* Oculto por defecto */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar el slidebar */
 }
 
 .slide_unico.open {
     transform: translateX(0); /* Mostrar el slidebar */
     opacity: 1;
-    box-shadow: 0 0 15px #466c6c;
 }
 
 .titulo_unico {
@@ -51,7 +53,7 @@
 
 .ul_unico .li_unico:hover .a_unico {
     color: #fff;
-    background-color: #FFA629;
+    background-color: rgba(255, 166, 41, 0.9); /* Efecto hover con transparencia */
 }
 
 .ul_unico .li_unico .a_unico .icono_unico {
@@ -73,7 +75,9 @@
     z-index: 1111; /* Asegúrate de que el botón esté encima del slidebar */
     cursor: pointer;
     border-radius: 5px;
-    background-color: #4B8E8D;
+    background-color: rgba(75, 142, 141, 0.8); /* Fondo semitransparente para efecto glass */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidad con Safari */
     display: flex;
     align-items: center;
     justify-content: center;
@@ -131,12 +135,6 @@
 }
 
 .input_unico:checked ~ .slide_unico {
-    transform: translateX(0);
+    transform: translateX(0); /* Muestra el slidebar */
     opacity: 1;
-}
-
-
-.input_unico:checked ~ .slide_unico {
-    transform: translateX(0);
-    box-shadow: 0 0 15px #466c6c ;
 }

@@ -1,25 +1,45 @@
+/* Contenedor general */
 .encuentros-container {
+  position: fixed; /* Fija el contenedor respecto a la ventana */
+  top: 50%; /* Centra verticalmente */
+  left: 50%; /* Centra horizontalmente */
+  transform: translate(-50%, -50%); /* Ajusta el contenedor al centro exacto */
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 20px;
-  margin: 20px auto;
-  position: relative; /* Necesario para posicionar los botones */
+  width: 90%; /* Ancho máximo relativo */
+  max-width: 900px; /* Limita el ancho máximo */
+  padding: 20px;
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  overflow-y: auto; /* Permite scroll si hay demasiado contenido */
+  z-index: 10; /* Asegura que esté sobre otros elementos */
 }
 
+/* Tarjeta de perfil */
 .perfil-card {
   display: flex;
   flex-direction: row;
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 800px;
-  max-width: 90%;
+  width: 100%; /* Ajusta el ancho al contenedor */
   padding: 20px;
   gap: 20px;
   position: relative;
+  opacity: 1; /* Comienza completamente visible */
+  transition: transform 0.5s ease, opacity 0.5s ease; /* Transición para movimiento y opacidad */
 }
 
+/* Tarjeta en transición (desapareciendo) */
+.perfil-card.animating-out {
+  transform: translate(100px, -100px); /* Mueve la tarjeta hacia la derecha y arriba */
+  opacity: 0; /* Desvanece la tarjeta */
+}
+
+/* Contenedor de la imagen */
 .imagen-container {
   position: relative;
   display: flex;
@@ -37,70 +57,51 @@
   border-radius: 8px; /* Bordes redondeados */
 }
 
-.imagen-flecha {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.5);
-  color: white;
-  border: none;
-  font-size: 18px;
-  cursor: pointer;
-  z-index: 10;
-  padding: 10px;
-  border-radius: 5px;
+/* Animación para la tarjeta */
+@keyframes moveUpRight {
+  0% {
+    transform: translate(0, 0); /* Punto inicial */
+    opacity: 1; /* Totalmente visible */
+  }
+  100% {
+    transform: translate(100px, -100px); /* Mueve hacia arriba y a la derecha */
+    opacity: 0; /* Totalmente invisible */
+  }
 }
 
-.imagen-flecha:first-child {
-  left: 10px; /* Botón izquierdo */
+.perfil-card.animating-out {
+  animation: moveUpRight 0.5s ease forwards; /* Activa la animación */
 }
 
-.imagen-flecha:last-child {
-  right: 10px; /* Botón derecho */
-}
-
-.imagen-flecha:hover {
-  background: rgba(0, 0, 0, 1);
-}
-
-.flecha {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: teal;
-  color: white;
-  border: none;
-  padding: 10px;
-  border-radius: 50%;
-  cursor: pointer;
-  font-size: 18px;
-}
-
-.flecha:first-of-type {
-  left: -40px; /* Fija el botón a la izquierda del contenedor */
-}
-
-.flecha:last-of-type {
-  right: -40px; /* Fija el botón a la derecha del contenedor */
-}
-
-.flecha:hover {
-  background-color: #1a6a6a;
-}
-
+/* Contenedor de los datos */
 .datos-container {
-  width: 50%; /* Ocupa el 50% del ancho disponible */
+  width: 50%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  padding: 10px;
 }
 
+/* Texto */
 .datos-container h2 {
-  font-size: 24px;
+  font-size: 1.5rem;
   margin-bottom: 10px;
 }
 
+.datos-container p {
+  margin: 5px 0;
+}
+
+.datos-container ul {
+  padding: 0;
+  list-style-type: none;
+  margin: 10px 0;
+}
+
+.datos-container ul li {
+  margin-bottom: 5px;
+}
+
+/* Botones */
 .acciones {
   display: flex;
   justify-content: space-evenly;
@@ -153,21 +154,6 @@
     width: 100%;
     text-align: center;
   }
-
-  .flecha {
-    top: 50%; /* Fija los botones al centro vertical */
-    transform: translateY(-50%);
-    padding: 8px;
-    font-size: 16px;
-  }
-
-  .flecha:first-of-type {
-    left: -30px;
-  }
-
-  .flecha:last-of-type {
-    right: -30px;
-  }
 }
 
 @media (max-width: 480px) {
@@ -184,10 +170,5 @@
     width: 50px;
     height: 50px;
     font-size: 16px;
-  }
-
-  .flecha {
-    padding: 6px;
-    font-size: 14px;
   }
 }
