@@ -1,20 +1,21 @@
 /* Contenedor general */
 .encuentros-container {
-  position: fixed; /* Fija el contenedor respecto a la ventana */
-  top: 50%; /* Centra verticalmente */
-  left: 50%; /* Centra horizontalmente */
-  transform: translate(-50%, -50%); /* Ajusta el contenedor al centro exacto */
+  position: fixed;
+  top: 50%; /* Centrado verticalmente */
+  left: 50%; /* Centrado horizontalmente */
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  width: 90%; /* Ancho máximo relativo */
-  max-width: 900px; /* Limita el ancho máximo */
+  width: 90%; /* Máximo ancho relativo */
+  max-width: 900px; /* Ancho máximo */
   padding: 20px;
-  background-color: #ffffff; /* Fondo blanco */
-  border-radius: 10px;
+  background-color: rgba(51, 83, 83, 0.5); /* Fondo semitransparente */
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  overflow-y: auto; /* Permite scroll si hay demasiado contenido */
+  backdrop-filter: blur(10px); /* Efecto de desenfoque */
+  -webkit-backdrop-filter: blur(10px);
+  border-radius: 10px;
+  overflow-y: auto; /* Permite scroll si hay mucho contenido */
   z-index: 10; /* Asegura que esté sobre otros elementos */
 }
 
@@ -25,24 +26,24 @@
   background: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-  width: 100%; /* Ajusta el ancho al contenedor */
+  width: 100%;
   padding: 20px;
   gap: 20px;
   position: relative;
-  opacity: 1; /* Comienza completamente visible */
-  transition: transform 0.5s ease, opacity 0.5s ease; /* Transición para movimiento y opacidad */
+  opacity: 1;
+  transition: transform 0.5s ease, opacity 0.5s ease;
 }
 
 /* Tarjeta en transición (desapareciendo) */
 .perfil-card.animating-out {
-  transform: translate(100px, -100px); /* Mueve la tarjeta hacia la derecha y arriba */
-  opacity: 0; /* Desvanece la tarjeta */
+  animation: moveUpRight 0.5s ease forwards;
 }
 
 /* Contenedor de la imagen */
 .imagen-container {
   position: relative;
   display: flex;
+  flex-direction: column; /* Asegura que los dots estén debajo de la imagen */
   align-items: center;
   justify-content: center;
   width: 50%; /* 50% del ancho de la tarjeta */
@@ -57,20 +58,55 @@
   border-radius: 8px; /* Bordes redondeados */
 }
 
-/* Animación para la tarjeta */
-@keyframes moveUpRight {
-  0% {
-    transform: translate(0, 0); /* Punto inicial */
-    opacity: 1; /* Totalmente visible */
-  }
-  100% {
-    transform: translate(100px, -100px); /* Mueve hacia arriba y a la derecha */
-    opacity: 0; /* Totalmente invisible */
-  }
+/* Botones del carrusel */
+.carrusel-boton {
+  position: absolute;
+  top: 50%; /* Centrado vertical */
+  transform: translateY(-50%);
+  background-color: rgba(0, 0, 0, 0.5);
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 50%;
+  font-size: 20px;
+  z-index: 10;
+  transition: background-color 0.3s ease;
 }
 
-.perfil-card.animating-out {
-  animation: moveUpRight 0.5s ease forwards; /* Activa la animación */
+.carrusel-boton:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carrusel-boton:first-of-type {
+  left: 10px; /* Botón izquierdo */
+}
+
+.carrusel-boton:last-of-type {
+  right: 10px; /* Botón derecho */
+}
+
+/* Indicadores (dots) */
+.dots-container {
+  position: absolute; /* Posiciona los dots en relación al contenedor */
+  bottom: 10px; /* Coloca los dots justo debajo de la imagen */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px; /* Espaciado entre los puntos */
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  background-color: #ece9e94d;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.dot.active {
+  background-color: rgba(255, 255, 255, 0.7); /* Punto activo */
 }
 
 /* Contenedor de los datos */
@@ -78,13 +114,14 @@
   width: 50%;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+  gap: 15px;
 }
 
-/* Texto */
 .datos-container h2 {
-  font-size: 1.5rem;
-  margin-bottom: 10px;
+  font-size: 1.8rem;
+  margin: 0;
+  text-align: center;
 }
 
 .datos-container p {
@@ -94,54 +131,81 @@
 .datos-container ul {
   padding: 0;
   list-style-type: none;
-  margin: 10px 0;
 }
 
 .datos-container ul li {
   margin-bottom: 5px;
+  font-size: 1rem;
 }
 
-/* Botones */
+/* Contenedor de los botones (acciones) */
 .acciones {
-  display: flex;
-  justify-content: space-evenly;
-  align-items: center;
-  margin-top: 20px;
+  display: flex; /* Usa flexbox para alinear */
+  justify-content: center; /* Centra los botones horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  gap: 20px; /* Espaciado entre los botones */
+  margin-top: 20px; /* Espaciado desde el contenido superior */
 }
 
-.boton-verde,
-.boton-rojo {
+/* Botón verde (✔) */
+.boton-verde {
   width: 60px;
   height: 60px;
   border-radius: 50%;
-  font-size: 20px;
+  font-size: 24px;
   color: white;
+  background: #28a745;
   border: none;
   cursor: pointer;
-}
-
-.boton-verde {
-  background: #28a745;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease; /* Transiciones */
 }
 
 .boton-verde:hover {
   background: #218838;
+  transform: scale(1.1); /* Agranda el botón ligeramente al hacer hover */
 }
 
+/* Botón rojo (✖) */
 .boton-rojo {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  font-size: 24px;
+  color: white;
   background: #dc3545;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background 0.3s ease, transform 0.2s ease; /* Transiciones */
 }
 
 .boton-rojo:hover {
   background: #c82333;
+  transform: scale(1.1); /* Agranda el botón ligeramente al hacer hover */
 }
 
-/* Responsiveness */
+/* Animación de la tarjeta */
+@keyframes moveUpRight {
+  0% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(100px, -100px);
+    opacity: 0;
+  }
+}
+
+/* Responsividad */
 @media (max-width: 768px) {
   .perfil-card {
     flex-direction: column; /* Cambia a diseño vertical */
     align-items: center;
-    width: 100%; /* Ocupa todo el ancho disponible */
     gap: 10px;
   }
 
@@ -154,6 +218,10 @@
     width: 100%;
     text-align: center;
   }
+
+  .acciones {
+    gap: 15px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -162,7 +230,7 @@
   }
 
   .datos-container h2 {
-    font-size: 18px;
+    font-size: 1.5rem;
   }
 
   .boton-verde,
@@ -170,5 +238,10 @@
     width: 50px;
     height: 50px;
     font-size: 16px;
+  }
+
+  .carrusel-boton {
+    font-size: 16px;
+    padding: 8px;
   }
 }

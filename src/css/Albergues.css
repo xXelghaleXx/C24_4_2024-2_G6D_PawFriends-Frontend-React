@@ -1,51 +1,81 @@
 /* Contenedor general del componente */
 .albergues-container {
   padding: 20px;
-  background-color: #4B8E8D; /* Fondo del contenedor */
-  min-height: 100vh; /* Asegura que el contenedor ocupe toda la pantalla */
+  background-color: #4b8e8d; /* Fondo del contenedor */
+  min-height: calc(100vh - 120px); /* Resta la altura del navbar y footer */
   display: flex;
   flex-direction: column;
   align-items: center;
+  gap: 20px;
 }
 
-/* Estilo para el título */
+/* Estilo para el título principal */
 .albergues-container h1 {
   color: white;
+  font-size: 48px;
   text-align: center;
-  font-size: 36px;
-  margin-bottom: 20px;
+  margin-top: 20px; /* Asegura separación con el navbar */
+}
+
+/* Subtítulo */
+.albergues-container h2 {
+  color: #335353;
+  font-size: 24px;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+/* Contenedor de los albergues */
+.albergues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Ajuste dinámico */
+  gap: 20px; /* Espaciado entre tarjetas */
+  width: 100%;
+  max-width: 1200px; /* Limita el ancho máximo */
+  padding-bottom: 20px;
 }
 
 /* Tarjeta de cada albergue */
 .albergue-card {
   border: 1px solid #ccc;
-  border-radius: 8px;
-  margin: 20px auto; /* Espaciado entre tarjetas */
+  border-radius: 10px;
+  background-color: white;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   padding: 16px;
   text-align: center;
-  background-color: white;
-  max-width: 700px; /* Limita el ancho máximo de las tarjetas */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
-  width: 100%; /* Asegura que sea responsivo */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.albergue-card:hover {
+  transform: translateY(-5px); /* Efecto de elevación */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
 }
 
 /* Contenedor del carrusel */
 .carousel-container {
-  margin: 16px auto;
-  max-width: 600px; /* Limita el ancho del carrusel */
-  width: 100%; /* Se ajusta al contenedor */
+  width: 100%;
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
 }
 
-/* Imágenes del carrusel */
-.carousel img {
-  width: 100%; /* Ocupa todo el ancho disponible */
-  height: auto; /* Mantiene la proporción */
-  border-radius: 8px; /* Bordes redondeados */
+.carousel-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 300px;
+}
+
+.carousel-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
 }
 
 /* Botón para ver mascotas */
 .view-mascotas-btn {
-  background-color: #FFA629;
+  background-color: #ffa629;
   color: white;
   padding: 10px 16px;
   border: none;
@@ -53,25 +83,79 @@
   cursor: pointer;
   font-size: 16px;
   margin-top: 10px;
-  transition: background-color 0.3s ease; /* Animación suave */
+  transition: background-color 0.3s ease;
 }
 
 .view-mascotas-btn:hover {
-  background-color: #d82307; /* Cambia de color al pasar el cursor */
+  background-color: #d82307;
 }
 
-/* Responsivo: Ajustes para pantallas pequeñas */
-@media (max-width: 768px) {
-  .carousel-container {
-      max-width: 90%; /* Reduce el tamaño del carrusel */
-  }
+/* Contenedor de filtros */
+.filtros-container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 20px auto;
+  text-align: center;
+}
 
+.filtros-container button {
+  background-color: #ffa629;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
+}
+
+.filtros-container button:hover {
+  background-color: #d82307;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
   .albergue-card {
-      max-width: 90%; /* Ajusta las tarjetas a pantallas pequeñas */
+    padding: 10px;
   }
 
   .view-mascotas-btn {
-      font-size: 14px; /* Reduce el tamaño del texto del botón */
-      padding: 8px 12px; /* Reduce el tamaño del botón */
+    font-size: 14px;
+    padding: 8px 12px;
+  }
+
+  .carousel-slide {
+    height: 250px; /* Reduce la altura del carrusel */
   }
 }
+
+@media (max-width: 480px) {
+  .albergues-container h1 {
+    font-size: 36px; /* Reduce el tamaño del título */
+  }
+
+  .carousel-slide {
+    height: 200px; /* Reduce aún más la altura */
+  }
+
+  .view-mascotas-btn {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+}
+
+
+/* Estilo para los botones del carrusel */
+.slick-prev, .slick-next {
+  width: 40px;
+  height: 40px;
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
+  color: white; /* Color del icono */
+  border-radius: 50%; /* Forma circular */
+  display: flex !important; /* Asegura que sean visibles */
+  justify-content: center;
+  align-items: center;
+  z-index: 10;
+}
+

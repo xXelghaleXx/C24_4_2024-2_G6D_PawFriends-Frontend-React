@@ -1,8 +1,12 @@
-import { useParams, useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom"; // Importa useNavigate para redirección
 import "../css/Encuentros.css";
 import Carlos01 from "../assets/Carlos.jpg";
+import Carlos02 from "../assets/Carlos_02.jpg";
+import Carlos03 from "../assets/Carlos_03.jpg";
 import Luna01 from "../assets/Luna.jpg";
+import Luna02 from "../assets/Luna_02.jpg";
+import Luna03 from "../assets/Luna_03.jpg";
 
 const mascotas = [
   {
@@ -12,7 +16,7 @@ const mascotas = [
     descripcion: "Bulldog amigable y cariñoso",
     albergue: "Albergue Happy Paws",
     texto: ["Vacunado", "Esterilizado", "Convive bien con niños"],
-    imagen: Carlos01,
+    imagenes: [Carlos01, Carlos02, Carlos03],
   },
   {
     id: 2,
@@ -21,40 +25,71 @@ const mascotas = [
     descripcion: "Gata juguetona y curiosa",
     albergue: "Refugio Cat Lovers",
     texto: ["Vacunada", "No convive con perros", "Muy independiente"],
-    imagen: Luna01,
+    imagenes: [Luna01, Luna02, Luna03],
   },
 ];
 
 const Encuentros = () => {
-  const { id } = useParams();
-  const navigate = useNavigate();
-  const [perfilActual, setPerfilActual] = useState(
-    mascotas.findIndex((m) => m.id === parseInt(id)) || 0
-  );
-  const [animando, setAnimando] = useState(false);
+  const [perfilActual, setPerfilActual] = useState(0); // Maneja el perfil actual (mascota)
+  const [imagenActual, setImagenActual] = useState(0); // Maneja la imagen actual del carrusel
+  const [animando, setAnimando] = useState(false); // Nuevo estado para manejar la animación
+  const navigate = useNavigate(); // Inicializa el hook para redirección
 
-  const siguientePerfil = () => {
-    setAnimando(true); // Inicia la animación
+  // Cambiar a la siguiente imagen del carrusel
+  const siguienteImagen = () => {
+    setImagenActual((prev) => (prev + 1) % mascotas[perfilActual].imagenes.length);
+  };
 
+  // Cambiar a la imagen anterior del carrusel
+  const anteriorImagen = () => {
+    setImagenActual((prev) =>
+      prev === 0 ? mascotas[perfilActual].imagenes.length - 1 : prev - 1
+    );
+  };
+
+  // Cambiar directamente a una imagen específica
+  const cambiarImagen = (index) => {
+    setImagenActual(index);
+  };
+
+  // Aceptar mascota (Check) y redirigir
+  const aceptarMascota = () => {
+    navigate(`/confirmacion/${mascotas[perfilActual].id}`); // Redirige al componente EncuentroConfirmacion
+  };
+
+  // Rechazar mascota (Equis)
+  const rechazarMascota = () => {
+    setAnimando(true); // Activa la clase de animación
     setTimeout(() => {
       setPerfilActual((prev) => (prev + 1) % mascotas.length); // Cambia al siguiente perfil
-      setAnimando(false); // Finaliza la animación
-    }, 500); // Tiempo de la animación en ms
+      setAnimando(false); // Reinicia el estado de animación
+      setImagenActual(0); // Reinicia el carrusel
+    }, 500); // Tiempo debe coincidir con la duración de la animación CSS
   };
 
-  const redirigirConfirmacion = () => {
-    navigate(`/confirmacion/${mascotas[perfilActual].id}`);
-  };
-
-  const mascota = mascotas[perfilActual];
+  const mascota = mascotas[perfilActual]; // Obtiene la mascota actual
 
   return (
     <div className="encuentros-container">
       <div className={`perfil-card ${animando ? "animating-out" : ""}`}>
         <div className="imagen-container">
-          <img src={mascota.imagen} alt={`Imagen de ${mascota.nombre}`} />
+          <button className="carrusel-boton" onClick={anteriorImagen}>
+            ◀
+          </button>
+          <img src={mascota.imagenes[imagenActual]} alt={`Imagen de ${mascota.nombre}`} />
+          <button className="carrusel-boton" onClick={siguienteImagen}>
+            ▶
+          </button>
+          <div className="dots-container">
+            {mascota.imagenes.map((_, index) => (
+              <div
+                key={index}
+                className={`dot ${index === imagenActual ? "active" : ""}`}
+                onClick={() => cambiarImagen(index)}
+              ></div>
+            ))}
+          </div>
         </div>
-
         <div className="datos-container">
           <h2>
             {mascota.nombre}, {mascota.edad}
@@ -70,14 +105,15 @@ const Encuentros = () => {
               <li key={index}>{item}</li>
             ))}
           </ul>
-          <div className="acciones">
-            <button className="boton-verde" onClick={redirigirConfirmacion}>
-              ✔
-            </button>
-            <button className="boton-rojo" onClick={siguientePerfil}>
-              ✖
-            </button>
-          </div>
+        </div>
+        {/* Contenedor centrado de botones */}
+        <div className="acciones">
+          <button className="boton-verde" onClick={aceptarMascota}>
+            ✔
+          </button>
+          <button className="boton-rojo" onClick={rechazarMascota}>
+            ✖
+          </button>
         </div>
       </div>
     </div>

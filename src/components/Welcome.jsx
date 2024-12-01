@@ -27,6 +27,8 @@ const Welcome = () => {
   };
 
   return (
+    <div>
+      <br /><br /><br /><br />
     <div className="welcome-container">
       <div className="welcome-header">
         <h2>Hola, Adrian</h2>
@@ -79,6 +81,8 @@ const Welcome = () => {
           </Link>
         </div>
       </div>
+    </div>
+    <br /><br />
     </div>
   );
 };

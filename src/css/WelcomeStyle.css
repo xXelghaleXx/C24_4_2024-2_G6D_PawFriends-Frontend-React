@@ -21,20 +21,23 @@ body {
   margin-top: 60px; /* Espacio para evitar el navbar */
   margin-bottom: 60px; /* Espacio para evitar el footer */
   box-sizing: border-box; /* Asegura que el padding y el borde no se sumen al tamaño */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra suave para darle profundidad */
 }
 
 /* Encabezado */
 .welcome-header h2 {
   font-size: 2.5rem;
   font-weight: bold;
-  color: #ffffff;
+  color: #1b5351;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-bottom: 10px;
 }
 
 .welcome-header p {
   font-size: 1.5rem;
-  color: #ffffff;
+  color: #1b5351;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
   margin-bottom: 30px;
 }

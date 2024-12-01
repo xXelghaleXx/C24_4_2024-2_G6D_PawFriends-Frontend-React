@@ -1,18 +1,18 @@
 /* Contenedor principal del componente */
 .mascotas-container {
-  position: fixed; /* Fija el contenedor respecto a la ventana */
-  top: 50%; /* Posiciona el centro del contenedor en el 50% de la altura */
-  left: 50%; /* Posiciona el centro del contenedor en el 50% del ancho */
-  transform: translate(-50%, -50%); /* Ajusta el contenedor para que quede perfectamente centrado */
-  background-color: #ffffff; /* Fondo blanco para destacar el contenido */
-  padding: 30px; /* Espaciado interno */
-  border-radius: 10px; /* Bordes redondeados */
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para separación visual */
-  width: 90%; /* Ajusta el ancho relativo a la ventana */
-  max-width: 800px; /* Limita el ancho máximo */
-  z-index: 10; /* Asegura que esté por encima del contenido normal */
-  overflow-y: auto; /* Permite scroll interno si el contenido excede la altura */
-  box-sizing: border-box; /* Incluye padding y bordes en las dimensiones */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 800px;
+  z-index: 10;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 /* Título dentro del contenedor */
@@ -26,8 +26,8 @@
 /* Cuadrícula de tarjetas */
 .mascotas-grid {
   display: flex;
-  gap: 20px; /* Espaciado entre tarjetas */
-  flex-wrap: wrap; /* Permite que las tarjetas se ajusten en varias filas */
+  gap: 20px;
+  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -40,21 +40,21 @@
   color: white;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition: transform 0.5s ease, box-shadow 0.5s ease; /* Animación más lenta */
   cursor: pointer;
+  position: relative;
 }
 
 .mascota-card:hover {
-  transform: scale(1.05); /* Zoom suave al hacer hover */
+  transform: scale(1.05);
   box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
 }
-
 
 /* Imagen */
 .mascota-image {
   width: 100%;
   height: 250px;
-  object-fit: cover; 
+  object-fit: cover;
   border-radius: 8px;
   margin-bottom: 10px;
 }
@@ -80,7 +80,9 @@
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  margin: 10px auto 0; /* Espaciado hacia abajo y centrado horizontal */
   display: none; /* Oculto por defecto */
+  width: 80%; /* Ajusta el tamaño del botón */
 }
 
 .mascota-card:hover .mascota-button {

@@ -8,7 +8,6 @@ import DNImage3 from "../assets/DN_03.webp";
 import DNImage4 from "../assets/DN_04.jpg";
 
 const Donaciones = () => {
-  // Estado para manejar el modal
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -41,20 +40,19 @@ const Donaciones = () => {
     },
   ];
 
-  // Función para abrir el modal
   const openModal = (product) => {
     setSelectedProduct(product);
     setIsModalOpen(true);
   };
 
-  // Función para cerrar el modal
   const closeModal = () => {
     setIsModalOpen(false);
     setSelectedProduct(null);
   };
 
   return (
-    <div className="donaciones">
+    <div className="donaciones-container">
+      <br /><br />
       <div className="donaciones-header">
         <h2>Donaciones</h2>
         <img src={DNImage} alt="Main donation" className="donaciones-main-image" />
@@ -73,7 +71,7 @@ const Donaciones = () => {
             <p className="product-name">{product.title}</p>
             <button
               className="donar-button"
-              onClick={() => openModal(product)} // Abre el modal con el producto seleccionado
+              onClick={() => openModal(product)}
             >
               Donar
             </button>
@@ -81,12 +79,11 @@ const Donaciones = () => {
         ))}
       </div>
 
-      {/* Modal para el producto seleccionado */}
       {isModalOpen && (
         <DonationModal
           product={selectedProduct}
-          shelters={shelters} // Pasamos la lista de albergues
-          onClose={closeModal} // Pasa la función para cerrar el modal
+          shelters={shelters}
+          onClose={closeModal}
         />
       )}
     </div>
@@ -94,4 +91,3 @@ const Donaciones = () => {
 };
 
 export default Donaciones;
-

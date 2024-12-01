@@ -1,3 +1,4 @@
+/* Estilo general del modal */
 .donation-modal {
     position: fixed;
     top: 0;
@@ -7,8 +8,9 @@
     background: rgba(0, 0, 0, 0.5); /* Fondo semitransparente */
     display: flex;
     justify-content: center;
-    align-items: center;
-    z-index: 1000;
+    align-items: center; /* Centrar verticalmente el modal */
+    z-index: 2000;
+    padding: 50px 0; /* Espaciado adicional para navbar y footer */
 }
 
 /* Contenedor del contenido del modal */
@@ -23,22 +25,26 @@
     flex-direction: column;
     gap: 20px;
     color: white; /* Texto blanco */
+    max-height: 80%; /* Limitar altura para evitar desbordamiento */
+    overflow-y: auto; /* Habilitar scroll interno */
 }
 
 /* Encabezado */
 .modal-header h2 {
     margin: 0;
     text-align: center;
-    font-size: 2rem; /* Incrementar tamaño del texto */
-    font-weight: bold; /* Hacerlo más grueso */
-    color: white; /* Texto blanco */
-    text-transform: uppercase; /* Convertir texto a mayúsculas */
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    text-transform: uppercase;
 }
 
 /* Cuerpo del modal */
 .modal-body {
     display: flex;
     gap: 20px;
+    justify-content: center;
+    align-items: center;
 }
 
 /* Imagen del producto */
@@ -56,17 +62,9 @@
     justify-content: center;
 }
 
-.product-details h3 {
-    margin: 0;
-    margin-bottom: 10px;
-    font-size: 1.5rem; /* Tamaño un poco menor que el encabezado */
-    font-weight: bold;
-    color: white; /* Texto blanco */
-}
-
 .product-details p {
     margin: 5px 0;
-    color: white; /* Texto blanco */
+    color: white;
 }
 
 /* Pie del modal */
@@ -102,24 +100,62 @@
     background-color: #d82307;
 }
 
-select {
-    width: 100%;
-    padding: 8px;
-    margin-top: 5px;
-    border-radius: 4px;
-    border: 1px solid #ccc;
-    font-size: 1rem;
-  }
-  
-  select:focus {
-    outline: none;
-    border-color: #54736b;
-    box-shadow: 0 0 5px rgba(84, 115, 107, 0.5);
-  }
-  
-  select:disabled {
-    background-color: #f0f0f0;
-    color: #888;
-    cursor: not-allowed;
-  }
-  
+/* Mensaje de confirmación */
+.confirmation-message {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centrar horizontal y verticalmente */
+    background-color: #e6f7e6;
+    border: 2px solid #a5d6a7;
+    color: #388e3c;
+    padding: 30px 20px;
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 2100; /* Asegurar que esté sobre otros elementos */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Centrar contenido horizontal */
+    justify-content: center; /* Centrar contenido vertical */
+    animation: fadeIn 0.5s ease, fadeOut 0.5s ease 2.5s; /* Animación */
+}
+
+/* Contenedor del check */
+.check-container {
+    font-size: 4rem; /* Tamaño grande para el check */
+    color: #4caf50; /* Verde para el check */
+    margin-bottom: 15px; /* Espaciado entre el check y el texto */
+    animation: scaleIn 0.5s ease; /* Animación adicional */
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -60%); /* Empezar un poco más arriba */
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%); /* Finalizar centrado */
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+    to {
+        opacity: 0;
+        transform: translate(-50%, -60%);
+    }
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+    }
+    to {
+        transform: scale(1);
+    }
+}

@@ -5,6 +5,7 @@ import "../css/DonationModal.css"; // Importar estilos del modal
 const DonationModal = ({ product, onClose, shelters }) => {
   const [quantity, setQuantity] = useState(1); // Controla la cantidad seleccionada
   const [selectedShelter, setSelectedShelter] = useState(""); // Controla el albergue seleccionado
+  const [showConfirmation, setShowConfirmation] = useState(false); // Controla si mostrar el mensaje de confirmación
   const modalRef = useRef(null); // Referencia al contenedor del modal
 
   const handleQuantityChange = (event) => {
@@ -32,64 +33,77 @@ const DonationModal = ({ product, onClose, shelters }) => {
     };
   }, [handleOutsideClick]); // Incluimos `handleOutsideClick` como dependencia
 
+  const handleDonate = () => {
+    setShowConfirmation(true);
+    setTimeout(() => {
+      setShowConfirmation(false); // Ocultar el mensaje después de 3 segundos
+      onClose(); // Cerrar el modal
+    }, 3000); // Duración del mensaje de confirmación
+  };
+
   return (
     <div className="donation-modal">
-      <div className="modal-content" ref={modalRef}>
-        <div className="modal-header">
-          <h2>{product.name}</h2>
-        </div>
-        <div className="modal-body">
-          <div className="product-image">
-            <img src={product.imgSrc} alt={product.name} />
+      {showConfirmation ? (
+        <div className="confirmation-message">
+          <div className="check-container">
+            <span className="checkmark">✔</span>
           </div>
-          <div className="product-details">
-            <h3>{product.name}</h3>
-            <p>
-              <strong>Descripción:</strong> {product.description}
-            </p>
-            <p>
-              <strong>Cantidad:</strong>
-            </p>
-            <select value={quantity} onChange={handleQuantityChange}>
-              {[...Array(10)].map((_, index) => (
-                <option key={index} value={index + 1}>
-                  {index + 1}
+          <h3>¡Donación Exitosa!</h3>
+          <p>Gracias por tu donación. Las mascotas te lo agradecerán.</p>
+        </div>
+      ) : (
+        <div className="modal-content" ref={modalRef}>
+          <div className="modal-header">
+            <h2>{product.name}</h2>
+          </div>
+          <div className="modal-body">
+            <div className="product-image">
+              <img src={product.imgSrc} alt={product.name} />
+            </div>
+            <div className="product-details">
+              <h3>{product.name}</h3>
+              <p>
+                <strong>Descripción:</strong> {product.description}
+              </p>
+              <p>
+                <strong>Cantidad:</strong>
+              </p>
+              <select value={quantity} onChange={handleQuantityChange}>
+                {[...Array(10)].map((_, index) => (
+                  <option key={index} value={index + 1}>
+                    {index + 1}
+                  </option>
+                ))}
+              </select>
+              <p>
+                <strong>Seleccionar albergue:</strong>
+              </p>
+              <select value={selectedShelter} onChange={handleShelterChange}>
+                <option value="" disabled>
+                  Selecciona un albergue
                 </option>
-              ))}
-            </select>
-            <p>
-              <strong>Seleccionar albergue:</strong>
-            </p>
-            <select value={selectedShelter} onChange={handleShelterChange}>
-              <option value="" disabled>
-                Selecciona un albergue
-              </option>
-              {shelters &&
-                shelters.map((shelter, index) => (
+                {shelters.map((shelter, index) => (
                   <option key={index} value={shelter}>
                     {shelter}
                   </option>
                 ))}
-            </select>
+              </select>
+            </div>
+          </div>
+          <div className="modal-footer">
+            <button className="btn btn-back" onClick={onClose}>
+              Regresar
+            </button>
+            <button
+              className={`btn btn-donate ${!selectedShelter ? "disabled" : ""}`}
+              onClick={handleDonate}
+              disabled={!selectedShelter} // Desactiva el botón si no se seleccionó un albergue
+            >
+              Donar
+            </button>
           </div>
         </div>
-        <div className="modal-footer">
-          <button className="btn btn-back" onClick={onClose}>
-            Regresar
-          </button>
-          <button
-            className={`btn btn-donate ${!selectedShelter ? "disabled" : ""}`}
-            onClick={() =>
-              alert(
-                `Donaste ${quantity} ${product.name} al albergue ${selectedShelter}`
-              )
-            }
-            disabled={!selectedShelter} // Desactiva el botón si no se seleccionó un albergue
-          >
-            Donar
-          </button>
-        </div>
-      </div>
+      )}
     </div>
   );
 };

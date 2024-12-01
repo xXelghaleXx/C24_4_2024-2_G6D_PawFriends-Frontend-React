@@ -9,6 +9,8 @@
     box-sizing: border-box;
     font-family: 'Arial', sans-serif; /* Fuente consistente */
     transition: background-color 0.5s ease, opacity 0.5s ease; /* Transición suave */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque para efecto glass */
+    -webkit-backdrop-filter: blur(10px);
     z-index: 999; /* Asegura que esté sobre otros elementos */
 }
 

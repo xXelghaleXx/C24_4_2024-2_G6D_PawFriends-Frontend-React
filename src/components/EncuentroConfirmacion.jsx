@@ -1,7 +1,12 @@
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import "../css/EncuentroConfirmacion.css";
 import { useState } from "react";
 import Carlos01 from "../assets/Carlos.jpg";
+import Carlos02 from "../assets/Carlos_02.jpg";
+import Carlos03 from "../assets/Carlos_03.jpg";
+import Luna01 from "../assets/Luna.jpg";
+import Luna02 from "../assets/Luna_02.jpg";
+import Luna03 from "../assets/Luna_03.jpg";
 
 const mascotas = [
   {
@@ -14,7 +19,7 @@ const mascotas = [
     vacunas: "Sí",
     esterilizado: "Sí",
     descripcion: "Bulldog amigable y cariñoso.",
-    imagenes: [Carlos01],
+    imagenes: [Carlos01, Carlos02, Carlos03],
   },
   {
     id: 2,
@@ -26,12 +31,13 @@ const mascotas = [
     vacunas: "No",
     esterilizado: "Sí",
     descripcion: "Gata juguetona y curiosa.",
-    imagenes: [Carlos01],
+    imagenes: [Luna01, Luna02, Luna03],
   },
 ];
 
 const EncuentroConfirmacion = () => {
   const { id } = useParams();
+  const navigate = useNavigate(); // Para redirigir
   const mascota = mascotas.find((m) => m.id === parseInt(id)) || mascotas[0];
   const [imagenActual, setImagenActual] = useState(0);
 
@@ -43,6 +49,17 @@ const EncuentroConfirmacion = () => {
   // Función para retroceder en el carrusel
   const anteriorImagen = () => {
     setImagenActual((prev) => (prev - 1 + mascota.imagenes.length) % mascota.imagenes.length);
+  };
+
+  // Función para manejar "Hablar con el albergue"
+  const hablarConAlbergue = () => {
+    alert(`Conectando con el albergue: ${mascota.albergue}`);
+    // Aquí puedes agregar la lógica para el chat o la conexión
+  };
+
+  // Función para regresar a la página anterior
+  const regresar = () => {
+    navigate(-1); // Redirige a la página anterior
   };
 
   return (
@@ -88,7 +105,15 @@ const EncuentroConfirmacion = () => {
             <strong>Descripción:</strong> {mascota.descripcion}
           </p>
           <div className="acciones">
-            <button className="boton-amarillo">Adoptar</button>
+            <button className="boton-amarillo" onClick={() => alert("Formulario de adopción")}>
+              Adoptar
+            </button>
+            <button className="boton-naranja" onClick={hablarConAlbergue}>
+              Hablar con el albergue
+            </button>
+            <button className="boton-gris" onClick={regresar}>
+              Regresar
+            </button>
           </div>
         </div>
       </div>

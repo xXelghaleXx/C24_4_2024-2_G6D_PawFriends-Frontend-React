@@ -49,100 +49,102 @@ const Perfil = () => {
   };
 
   return (
-    <div className="perfil-container">
-      <div className="perfil-header">
-        <div className="image-container">
-          <img src={profileImage} alt="User" className="perfil-image" />
-          {isEditing && (
+    <div className="perfil-wrapper">
+      <div className="perfil-container">
+        <div className="perfil-header">
+          <div className="image-container">
+            <img src={profileImage} alt="User" className="perfil-image" />
+            {isEditing && (
+              <>
+                <input
+                  type="file"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  className="file-input"
+                />
+                <label htmlFor="file-input" className="file-label">
+                  Cambiar Imagen
+                </label>
+              </>
+            )}
+          </div>
+          <div className="perfil-info">
+            {isEditing ? (
+              <input
+                type="text"
+                name="name"
+                value={userData.name}
+                onChange={handleInputChange}
+                className="input-field"
+              />
+            ) : (
+              <h1 className="animated-font">{userData.name}</h1>
+            )}
+            {isEditing ? (
+              <input
+                type="number"
+                name="age"
+                value={userData.age}
+                onChange={handleInputChange}
+                className="input-field"
+              />
+            ) : (
+              <h3>{userData.age} años</h3>
+            )}
+          </div>
+        </div>
+        <div className="perfil-body">
+          {isEditing ? (
             <>
               <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="file-input"
+                type="email"
+                name="email"
+                value={userData.email}
+                onChange={handleInputChange}
+                className="input-field"
               />
-              <label htmlFor="file-input" className="file-label">
-                Cambiar Imagen
-              </label>
+              <input
+                type="text"
+                name="phone"
+                value={userData.phone}
+                onChange={handleInputChange}
+                className="input-field"
+              />
+              <input
+                type="text"
+                name="address"
+                value={userData.address}
+                onChange={handleInputChange}
+                className="input-field"
+              />
+              <input
+                type="text"
+                name="district"
+                value={userData.district}
+                onChange={handleInputChange}
+                className="input-field"
+              />
+            </>
+          ) : (
+            <>
+              <p className="animated-font">Correo: {userData.email}</p>
+              <p className="animated-font">Teléfono: {userData.phone}</p>
+              <p className="animated-font">Dirección: {userData.address}</p>
+              <p className="animated-font">Distrito: {userData.district}</p>
             </>
           )}
         </div>
-        <div className="perfil-info">
+        <div className="perfil-footer">
           {isEditing ? (
-            <input
-              type="text"
-              name="name"
-              value={userData.name}
-              onChange={handleInputChange}
-              className="input-field"
-            />
+            <button className="perfil-button save-button" onClick={saveChanges}>
+              Guardar
+            </button>
           ) : (
-            <h1 className="animated-font">{userData.name}</h1>
-          )}
-          {isEditing ? (
-            <input
-              type="number"
-              name="age"
-              value={userData.age}
-              onChange={handleInputChange}
-              className="input-field"
-            />
-          ) : (
-            <h3>{userData.age} años</h3>
+            <button className="perfil-button edit-button" onClick={toggleEdit}>
+              Editar Perfil
+            </button>
           )}
         </div>
-      </div>
-      <div className="perfil-body">
-        {isEditing ? (
-          <>
-            <input
-              type="email"
-              name="email"
-              value={userData.email}
-              onChange={handleInputChange}
-              className="input-field"
-            />
-            <input
-              type="text"
-              name="phone"
-              value={userData.phone}
-              onChange={handleInputChange}
-              className="input-field"
-            />
-            <input
-              type="text"
-              name="address"
-              value={userData.address}
-              onChange={handleInputChange}
-              className="input-field"
-            />
-            <input
-              type="text"
-              name="district"
-              value={userData.district}
-              onChange={handleInputChange}
-              className="input-field"
-            />
-          </>
-        ) : (
-          <>
-            <p className="animated-font">Correo: {userData.email}</p>
-            <p className="animated-font">Teléfono: {userData.phone}</p>
-            <p className="animated-font">Dirección: {userData.address}</p>
-            <p className="animated-font">Distrito: {userData.district}</p>
-          </>
-        )}
-      </div>
-      <div className="perfil-footer">
-        {isEditing ? (
-          <button className="perfil-button save-button" onClick={saveChanges}>
-            Guardar
-          </button>
-        ) : (
-          <button className="perfil-button edit-button" onClick={toggleEdit}>
-            Editar Perfil
-          </button>
-        )}
       </div>
     </div>
   );

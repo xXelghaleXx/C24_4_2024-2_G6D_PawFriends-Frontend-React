@@ -1,7 +1,8 @@
 /* Contenedor principal */
 .perfil-container {
   margin: 0 auto;
-  margin-top: 50px;
+  margin-top: 100px; /* Espacio suficiente para evitar que el navbar lo cubra */
+  margin-bottom: 100px; /* Espacio suficiente para evitar el footer */
   max-width: 900px;
   padding: 30px;
   background-color: #4b8e8d;
@@ -10,27 +11,34 @@
   box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
   text-align: center;
   animation: fadeIn 1.5s ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centrar el contenido horizontalmente */
+  justify-content: center; /* Centrar el contenido verticalmente */
 }
 
-/* Cabecera con imagen y nombre a la derecha */
+
+/* Ajustar la cabecera para alinearla */
 .perfil-header {
   display: flex;
+  flex-direction: column; /* Asegurar alineación en columna */
   align-items: center;
-  justify-content: start;
+  justify-content: center; /* Centrar horizontalmente */
   margin-bottom: 30px;
 }
 
+/* Imagen del perfil */
 .perfil-image {
   width: 150px;
   height: 150px;
   border-radius: 50%;
   border: 4px solid #ffa629;
-  margin-right: 20px;
+  margin-bottom: 20px; /* Espacio entre la imagen y el nombre */
 }
 
 /* Información del perfil */
 .perfil-info {
-  text-align: left;
+  text-align: center; /* Centrar la información */
 }
 
 .perfil-info h1 {
@@ -46,7 +54,7 @@
 
 /* Cuerpo del perfil */
 .perfil-body {
-  text-align: left;
+  text-align: center; /* Centrar el contenido del cuerpo */
   font-size: 18px;
   margin-top: 20px;
   padding: 0 20px;
@@ -56,15 +64,11 @@
   margin: 10px 0;
 }
 
-/* Animación en fuente */
-.animated-font {
-  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  animation: glowText 2s ease-in-out infinite alternate;
-}
-
 /* Botones */
 .perfil-footer {
   margin-top: 20px;
+  display: flex;
+  justify-content: center; /* Centrar el botón horizontalmente */
 }
 
 .perfil-button {
@@ -77,6 +81,7 @@
   cursor: pointer;
   margin: 10px;
   transition: background-color 0.3s ease, transform 0.3s ease;
+  width: auto; /* Asegura que el tamaño se adapte al contenido */
 }
 
 .perfil-button:hover {
@@ -84,8 +89,9 @@
   transform: scale(1.1);
 }
 
+/* Input para editar campos */
 .input-field {
-  width: 100%;
+  width: 90%;
   max-width: 400px;
   margin: 10px auto;
   padding: 10px;
@@ -106,14 +112,7 @@
   display: inline-block;
 }
 
-.perfil-image {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 4px solid #ffa629;
-  margin-right: 20px;
-}
-
+/* Botón para subir imágenes */
 .file-input {
   display: none; /* Ocultar el input de archivo */
 }
@@ -133,4 +132,50 @@
 
 .file-label:hover {
   background-color: #d82307;
+}
+
+/* Estilo para la transición fija */
+.transition-message {
+  position: fixed; /* Fijar al centro de la ventana */
+  top: 50%; /* Centrar verticalmente */
+  left: 50%; /* Centrar horizontalmente */
+  transform: translate(-50%, -50%); /* Mantenerlo centrado desde el inicio */
+  background-color: rgba(0, 0, 0, 0.8); /* Fondo semitransparente */
+  color: #fff;
+  padding: 20px 40px;
+  border-radius: 15px;
+  text-align: center;
+  z-index: 2000; /* Asegura que esté sobre otros elementos */
+  animation: fadeIn 0.5s ease, fadeOut 0.5s ease 2.5s;
+  visibility: hidden; /* Ocultar inicialmente */
+  opacity: 0; /* Sin opacidad inicialmente */
+}
+
+/* Mostrar cuando se activa */
+.transition-message.active {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -50%); /* Comienza exactamente en el centro */
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%); /* Permanece en el centro */
+  }
+}
+
+@keyframes fadeOut {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%); /* Comienza exactamente en el centro */
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -50%); /* Permanece en el centro */
+  }
 }
