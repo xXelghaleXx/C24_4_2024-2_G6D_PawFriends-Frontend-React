@@ -5,6 +5,8 @@ import PF_03 from '../assets/PF_03.png';
 
 const QuienesSomos = () => {
   return (
+    <div>
+      <br /><br /><br /><br /><br /><br /><br />
     <div className="quienes-somos-container">
       {/* Sección: ¿Qué es PawFriends? */}
       <div className="section-card">
@@ -49,6 +51,8 @@ const QuienesSomos = () => {
         />
         <button className="cta-button">Ver Mascotas</button>
       </div>
+    </div>
+    <br /><br /><br /><br />
     </div>
   );
 };

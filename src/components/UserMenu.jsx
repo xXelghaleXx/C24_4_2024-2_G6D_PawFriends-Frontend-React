@@ -39,6 +39,12 @@ const UserMenu = ({ isOpen, toggleMenu }) => {
     navigate("/login");
   };
 
+  // Función para ir al chat de albergues
+  const goToChat = () => {
+    toggleMenu(); // Cierra el menú
+    navigate("/chat-albergues");
+  };
+
   return (
     <div
       ref={menuRef}
@@ -49,6 +55,11 @@ const UserMenu = ({ isOpen, toggleMenu }) => {
         <li>
           <button className="menu-button" onClick={goToPerfil}>
             Perfil
+          </button>
+        </li>
+        <li>
+          <button className="menu-button" onClick={goToChat}>
+            Chatear con Albergues
           </button>
         </li>
         <li>

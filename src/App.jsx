@@ -6,12 +6,14 @@ import Register from "./components/Register";
 import Welcome from "./components/Welcome";
 import QuienesSomos from "./components/QuienesSomos";
 import Donaciones from "./components/Donaciones";
-import TerminosLegales from "./components/TerminosLegales";
 import Albergues from "./components/Albergues";
 import Encuentros from "./components/Encuentros";
 import Mascotas from "./components/Mascotas";
-import Perfil from "./components/Perfil"; // Importamos la página Perfil
-import EncuentroConfirmacion from "./components/EncuentroConfirmacion"; // Importamos la nueva página
+import Perfil from "./components/Perfil"; // Página Perfil
+import EncuentroConfirmacion from "./components/EncuentroConfirmacion"; // Confirmación de Encuentros
+import ChatAlbergue from "./components/ChatAlbergues"; // Chat de Albergues
+import FormAdopcion from "./components/FormAdopcion"; // Formulario de Adopción
+import InfoLegal from "./components/InfoLegal"; // Nuevo componente InfoLegal
 
 function App() {
   return (
@@ -32,7 +34,6 @@ function App() {
           {/* Rutas adicionales */}
           <Route path="/quienes-somos" element={<QuienesSomos />} />
           <Route path="/donaciones" element={<Donaciones />} />
-          <Route path="/terminos-legales" element={<TerminosLegales />} />
           <Route path="/albergues" element={<Albergues />} />
 
           {/* Rutas para Mascotas y Encuentros */}
@@ -44,6 +45,15 @@ function App() {
 
           {/* Ruta para la página Perfil */}
           <Route path="/perfil" element={<Perfil />} />
+
+          {/* Ruta para Chat de Albergues */}
+          <Route path="/chat-albergues" element={<ChatAlbergue />} />
+
+          {/* Ruta para Formulario de Adopción */}
+          <Route path="/form-adopcion" element={<FormAdopcion />} />
+
+          {/* Ruta para InfoLegal con soporte para parámetros */}
+          <Route path="/info-legal" element={<InfoLegal />} />
         </Routes>
       </div>
       <Footer />

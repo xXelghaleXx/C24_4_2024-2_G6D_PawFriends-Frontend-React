@@ -51,8 +51,9 @@ const Donaciones = () => {
   };
 
   return (
+    <div>
+      <br /><br /><br /><br />
     <div className="donaciones-container">
-      <br /><br />
       <div className="donaciones-header">
         <h2>Donaciones</h2>
         <img src={DNImage} alt="Main donation" className="donaciones-main-image" />
@@ -86,6 +87,8 @@ const Donaciones = () => {
           onClose={closeModal}
         />
       )}
+    </div>
+    <br /><br />
     </div>
   );
 };

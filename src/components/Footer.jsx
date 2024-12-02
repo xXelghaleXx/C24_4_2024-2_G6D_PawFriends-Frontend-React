@@ -1,8 +1,10 @@
-import { useState, useEffect } from 'react';
-import '../css/Footer.css'; // Importamos los estilos únicos
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Importar useNavigate
+import "../css/Footer.css"; // Importamos los estilos únicos
 
 const Footer = () => {
     const [isNearBottom, setIsNearBottom] = useState(false);
+    const navigate = useNavigate(); // Inicializar el hook para redirigir
 
     const handleScroll = () => {
         const scrollPosition = window.scrollY + window.innerHeight; // Posición actual de scroll más la altura de la ventana
@@ -16,26 +18,45 @@ const Footer = () => {
         }
     };
 
+    const handleNavigation = (section) => {
+        navigate(`/info-legal?section=${section}`); // Redirigir con query params
+    };
+
     useEffect(() => {
-        window.addEventListener('scroll', handleScroll);
+        window.addEventListener("scroll", handleScroll);
 
         // Cleanup del evento cuando el componente se desmonta
         return () => {
-            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
     return (
-        <footer className={`unique-footer ${isNearBottom ? 'solid' : 'transparent'}`}>
+        <footer className={`unique-footer ${isNearBottom ? "solid" : "transparent"}`}>
             <ul className="unique-footer-list">
                 <li className="unique-footer-item">
-                    <a href="/contacto" className="unique-footer-link">Contacto</a>
+                    <button
+                        className="unique-footer-link"
+                        onClick={() => handleNavigation("contacto")}
+                    >
+                        Contacto
+                    </button>
                 </li>
                 <li className="unique-footer-item">
-                    <a href="/terminos" className="unique-footer-link">Términos de Uso</a>
+                    <button
+                        className="unique-footer-link"
+                        onClick={() => handleNavigation("terminos")}
+                    >
+                        Términos de Uso
+                    </button>
                 </li>
                 <li className="unique-footer-item">
-                    <a href="/privacidad" className="unique-footer-link">Política de Privacidad</a>
+                    <button
+                        className="unique-footer-link"
+                        onClick={() => handleNavigation("privacidad")}
+                    >
+                        Política de Privacidad
+                    </button>
                 </li>
             </ul>
         </footer>
