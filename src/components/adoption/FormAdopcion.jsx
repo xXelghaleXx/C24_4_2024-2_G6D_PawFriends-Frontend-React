@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../css/FormAdopcion.css";
+import "../../styles/adoption/FormAdopcion.css";
 import FormModal from "./FormModal";
 
 const FormAdopcion = () => {

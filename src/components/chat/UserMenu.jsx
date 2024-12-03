@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import "../css/UserMenuStyles.css";
+import "../../styles/chat/UserMenuStyles.css";
 
 const UserMenu = ({ isOpen, toggleMenu }) => {
   const navigate = useNavigate(); // Hook para redirigir

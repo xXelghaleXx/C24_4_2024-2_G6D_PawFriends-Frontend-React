@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom'; // Importar Link desde react-router-dom
-import '../css/Slidebar.css'; // Importar el archivo CSS con los estilos
+import '../../styles/shared/Slidebar.css'; // Importar el archivo CSS con los estilos
 
 const Slidebar = () => {
   const [isOpen, setIsOpen] = useState(false); // Controla si el slidebar está abierto

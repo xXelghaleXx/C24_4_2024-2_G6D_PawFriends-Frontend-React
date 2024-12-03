@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'; // Importar useState y useEffect
 import { Link } from 'react-router-dom';
-import Logo from '../assets/PawFriends_Logo.webp';  // Importar logo
-import ProfileIcon from '../assets/user.png';       // Importar icono de usuario
+import Logo from '../../assets/PawFriends_Logo.webp';  // Importar logo
+import ProfileIcon from '../../assets/user.png';       // Importar icono de usuario
 import Slidebar from './Slidebar';                 // Importar el slidebar
-import UserMenu from './UserMenu';                 // Importar el UserMenu
-import "../css/navbar.css";
-import "../css/generalStyles.css";
+import UserMenu from '../chat/UserMenu';                 // Importar el UserMenu
+import "../../styles/shared/navbar.css";
+import "../../styles/global/generalStyles.css";
 
 const Navbar = () => {
   // Estado para controlar si el menú de usuario está abierto

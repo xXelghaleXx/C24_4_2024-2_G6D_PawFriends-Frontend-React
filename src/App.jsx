@@ -1,19 +1,19 @@
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import Login from "./components/Login";
-import Register from "./components/Register";
-import Welcome from "./components/Welcome";
-import QuienesSomos from "./components/QuienesSomos";
-import Donaciones from "./components/Donaciones";
-import Albergues from "./components/Albergues";
-import Encuentros from "./components/Encuentros";
-import Mascotas from "./components/Mascotas";
-import Perfil from "./components/Perfil"; // Página Perfil
-import EncuentroConfirmacion from "./components/EncuentroConfirmacion"; // Confirmación de Encuentros
-import ChatAlbergue from "./components/ChatAlbergues"; // Chat de Albergues
-import FormAdopcion from "./components/FormAdopcion"; // Formulario de Adopción
-import InfoLegal from "./components/InfoLegal"; // Nuevo componente InfoLegal
+import Navbar from "./components/shared/Navbar";
+import Footer from "./components/shared/Footer";
+import Login from "./components/users/Login";
+import Register from "./components/users/Register";
+import Welcome from "./components/shared/Welcome";
+import QuienesSomos from "./components/shared/QuienesSomos";
+import Donaciones from "./components/donations/Donaciones";
+import Albergues from "./components/shelters/Albergues";
+import Encuentros from "./components/adoption/Encuentros";
+import Mascotas from "./components/users/Mascotas";
+import Perfil from "./components/shelters/Perfil"; // Página Perfil
+import EncuentroConfirmacion from "./components/adoption/EncuentroConfirmacion"; // Confirmación de Encuentros
+import ChatAlbergue from "./components/chat/ChatAlbergues"; // Chat de Albergues
+import FormAdopcion from "./components/adoption/FormAdopcion"; // Formulario de Adopción
+import InfoLegal from "./components/shared/InfoLegal"; // Nuevo componente InfoLegal
 
 function App() {
   return (

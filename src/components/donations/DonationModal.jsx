@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef, useCallback } from "react";
 import PropTypes from "prop-types"; // Importar PropTypes para validar las props
-import "../css/DonationModal.css"; // Importar estilos del modal
+import "../../styles/donations/DonationModal.css"; // Importar estilos del modal
 
 const DonationModal = ({ product, onClose, shelters }) => {
   const [quantity, setQuantity] = useState(1); // Controla la cantidad seleccionada

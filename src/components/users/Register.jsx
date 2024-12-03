@@ -2,8 +2,8 @@
 import { useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom"; // Importa Link para manejar la navegación
-import '../css/FormStyles.css'; // Importamos los estilos compartidos
-import GoogleIcon from '../assets/google.png'; // Importamos el ícono de Google
+import '../../styles/users/FormStyles.css'; // Importamos los estilos compartidos
+import GoogleIcon from '../../assets/google.png'; // Importamos el ícono de Google
 
 function Register() {
     const [formData, setFormData] = useState({

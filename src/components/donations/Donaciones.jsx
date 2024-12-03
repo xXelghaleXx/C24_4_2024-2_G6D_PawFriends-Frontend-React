@@ -1,11 +1,11 @@
 import { useState } from "react";
-import "../css/Donaciones.css";
+import "../../styles/donations/Donaciones.css";
 import DonationModal from "./DonationModal"; // Importa el componente del modal
-import DNImage from "../assets/DN_00.png";
-import DNImage1 from "../assets/DN_01.webp";
-import DNImage2 from "../assets/DN_02.webp";
-import DNImage3 from "../assets/DN_03.webp";
-import DNImage4 from "../assets/DN_04.jpg";
+import DNImage from "../../assets/DN_00.png";
+import DNImage1 from "../../assets/DN_01.webp";
+import DNImage2 from "../../assets/DN_02.webp";
+import DNImage3 from "../../assets/DN_03.webp";
+import DNImage4 from "../../assets/DN_04.jpg";
 
 const Donaciones = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);

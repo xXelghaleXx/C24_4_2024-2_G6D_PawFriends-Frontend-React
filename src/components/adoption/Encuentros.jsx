@@ -1,12 +1,12 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom"; // Importa useNavigate para redirección
-import "../css/Encuentros.css";
-import Carlos01 from "../assets/Carlos.jpg";
-import Carlos02 from "../assets/Carlos_02.jpg";
-import Carlos03 from "../assets/Carlos_03.jpg";
-import Luna01 from "../assets/Luna.jpg";
-import Luna02 from "../assets/Luna_02.jpg";
-import Luna03 from "../assets/Luna_03.jpg";
+import "../../styles/adoption/Encuentros.css";
+import Carlos01 from "../../assets/Carlos.jpg";
+import Carlos02 from "../../assets/Carlos_02.jpg";
+import Carlos03 from "../../assets/Carlos_03.jpg";
+import Luna01 from "../../assets/Luna.jpg";
+import Luna02 from "../../assets/Luna_02.jpg";
+import Luna03 from "../../assets/Luna_03.jpg";
 
 const mascotas = [
   {
@@ -70,6 +70,8 @@ const Encuentros = () => {
   const mascota = mascotas[perfilActual]; // Obtiene la mascota actual
 
   return (
+    <div>
+      <br /><br /><br /><br /><br />
     <div className="encuentros-container">
       <div className={`perfil-card ${animando ? "animating-out" : ""}`}>
         <div className="imagen-container">
@@ -116,6 +118,8 @@ const Encuentros = () => {
           </button>
         </div>
       </div>
+    </div>
+    <br /><br /><br /><br />
     </div>
   );
 };

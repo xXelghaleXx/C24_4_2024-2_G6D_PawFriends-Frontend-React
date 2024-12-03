@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import "../css/ChatAlbergues.css";
+import "../../styles/chat/ChatAlbergues.css";
 
 const ChatAlbergue = () => {
   const [searchParams] = useSearchParams();

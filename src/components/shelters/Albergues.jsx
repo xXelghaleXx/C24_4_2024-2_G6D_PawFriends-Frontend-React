@@ -2,13 +2,13 @@ import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-import "../css/Albergues.css";
-import albergue01 from "../assets/albergue01.jpg";
-import albergue02 from "../assets/albergue02.jpg";
-import albergue03 from "../assets/albergue03.jpg";
-import albergue04 from "../assets/albergue04.jpg";
-import albergue05 from "../assets/albergue05.jpeg";
-import albergue06 from "../assets/albergue06.jpg";
+import "../../styles/shelters/Albergues.css";
+import albergue01 from "../../assets/albergue01.jpg";
+import albergue02 from "../../assets/albergue02.jpg";
+import albergue03 from "../../assets/albergue03.jpg";
+import albergue04 from "../../assets/albergue04.jpg";
+import albergue05 from "../../assets/albergue05.jpeg";
+import albergue06 from "../../assets/albergue06.jpg";
 
 const Albergues = () => {
   const navigate = useNavigate();

@@ -1,12 +1,12 @@
 import { useParams, useNavigate } from "react-router-dom";
-import "../css/EncuentroConfirmacion.css";
+import "../../styles/adoption/EncuentroConfirmacion.css";
 import { useState } from "react";
-import Carlos01 from "../assets/Carlos.jpg";
-import Carlos02 from "../assets/Carlos_02.jpg";
-import Carlos03 from "../assets/Carlos_03.jpg";
-import Luna01 from "../assets/Luna.jpg";
-import Luna02 from "../assets/Luna_02.jpg";
-import Luna03 from "../assets/Luna_03.jpg";
+import Carlos01 from "../../assets/Carlos.jpg";
+import Carlos02 from "../../assets/Carlos_02.jpg";
+import Carlos03 from "../../assets/Carlos_03.jpg";
+import Luna01 from "../../assets/Luna.jpg";
+import Luna02 from "../../assets/Luna_02.jpg";
+import Luna03 from "../../assets/Luna_03.jpg";
 
 const mascotas = [
   {

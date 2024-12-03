@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
-import "../css/Footer.css"; // Importamos los estilos únicos
+import "../../styles/shared/footer.css"; // Importamos los estilos únicos
 
 const Footer = () => {
     const [isNearBottom, setIsNearBottom] = useState(false);

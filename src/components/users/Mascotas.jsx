@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import '../css/Mascotas.css';
-import Carlos01 from "../assets/Carlos.jpg";
-import Luna01 from "../assets/Luna.jpg";
+import '../../styles/users/Mascotas.css';
+import Carlos01 from "../../assets/Carlos.jpg";
+import Luna01 from "../../assets/Luna.jpg";
 
 const Mascotas = () => {
   const navigate = useNavigate();

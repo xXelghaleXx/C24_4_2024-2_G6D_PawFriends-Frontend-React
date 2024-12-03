@@ -1,13 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import "../css/WelcomeStyle.css";
-import Mascota1 from "../assets/Carlos.jpg";
-import Mascota2 from "../assets/Luna.jpg";
-import Mascota3 from "../assets/Carlos_02.jpg";
-import Donation from "../assets/donacion.png";
-import Adopcion from "../assets/Adopcion.png";
-import Albergue from "../assets/Albergues.png";
-import Quienes_Somos from "../assets/Quienes_somos.png";
+import "../../styles/shared/WelcomeStyle.css";
+import Mascota1 from "../../assets/Carlos.jpg";
+import Mascota2 from "../../assets/Luna.jpg";
+import Mascota3 from "../../assets/Carlos_02.jpg";
+import Donation from "../../assets/donacion.png";
+import Adopcion from "../../assets/Adopcion.png";
+import Albergue from "../../assets/Albergues.png";
+import Quienes_Somos from "../../assets/Quienes_somos.png";
 
 const Welcome = () => {
   const mascotas = [

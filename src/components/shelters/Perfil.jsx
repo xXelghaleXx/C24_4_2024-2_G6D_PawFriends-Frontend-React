@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
-import "../css/PerfilStyles.css";
-import DefaultProfile from "../assets/user.png"; // Ruta a la imagen predeterminada
+import "../../styles/shelters/PerfilStyles.css";
+import DefaultProfile from "../../assets/user.png"; // Ruta a la imagen predeterminada
 
 const Perfil = () => {
   const [isEditing, setIsEditing] = useState(false); // Estado para modo edición

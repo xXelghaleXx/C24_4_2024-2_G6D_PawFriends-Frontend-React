@@ -41,13 +41,29 @@
 }
 
 .unique-footer-link {
-    text-decoration: none;
-    color: white; /* Texto blanco */
-    font-size: 16px;
-    font-weight: bold;
+    background: none; /* Elimina el fondo del botón */
+    border: none; /* Elimina los bordes */
+    outline: none; /* Elimina el contorno */
+    padding: 0; /* Opcional: ajusta el padding si es necesario */
+    color: white; /* Asegúrate de mantener el color */
+    font-size: 16px; /* Ajusta el tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cambia el cursor a pointer */
+    text-decoration: none; /* Opcional: elimina decoraciones si se heredan */
 }
 
 .unique-footer-link:hover {
     color: #d1d1d1; /* Cambia a gris claro al pasar el mouse */
 }
-    
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    border: none;
+    outline: none;
+}

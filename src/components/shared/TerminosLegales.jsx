@@ -1,4 +1,4 @@
-import '../css/TerminosLegales.css'; // Importar estilos
+import '../../styles/shared/TerminosLegales.css'; // Importar estilos
 
 const TerminosLegales = () => {
   return (

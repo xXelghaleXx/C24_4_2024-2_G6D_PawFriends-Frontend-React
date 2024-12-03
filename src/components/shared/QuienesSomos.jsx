@@ -1,7 +1,7 @@
-import '../css/QuienesSomos.css';
-import PF_01 from '../assets/PF_01.png';
-import PF_02 from '../assets/PF_02.png';
-import PF_03 from '../assets/PF_03.png';
+import '../../styles/shared/QuienesSomos.css';
+import PF_01 from '../../assets/PF_01.png';
+import PF_02 from '../../assets/PF_02.png';
+import PF_03 from '../../assets/PF_03.png';
 
 const QuienesSomos = () => {
   return (

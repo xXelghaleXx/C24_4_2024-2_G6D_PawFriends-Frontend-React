@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "../css/InfoLegal.css";
+import "../../styles/shared/InfoLegal.css";
 
 const InfoLegal = () => {
   const [activeSection, setActiveSection] = useState("contacto"); // Estado para alternar entre secciones

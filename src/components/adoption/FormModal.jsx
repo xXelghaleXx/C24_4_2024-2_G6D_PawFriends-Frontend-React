@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom"; // Importar useNavigate
-import "../css/FormModal.css";
+import "../../styles/adoption/FormModal.css";
 
 const FormModal = ({ isOpen, onClose }) => {
   const navigate = useNavigate(); // Inicializar useNavigate
