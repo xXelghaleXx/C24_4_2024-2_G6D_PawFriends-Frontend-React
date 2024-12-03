@@ -12,6 +12,7 @@ import Mascotas from "./components/users/Mascotas";
 import Perfil from "./components/shelters/Perfil"; // Página Perfil
 import EncuentroConfirmacion from "./components/adoption/EncuentroConfirmacion"; // Confirmación de Encuentros
 import ChatAlbergue from "./components/chat/ChatAlbergues"; // Chat de Albergues
+import TerminosLegales from "./components/shared/TerminosLegales";
 import FormAdopcion from "./components/adoption/FormAdopcion"; // Formulario de Adopción
 import InfoLegal from "./components/shared/InfoLegal"; // Nuevo componente InfoLegal
 
@@ -54,6 +55,7 @@ function App() {
 
           {/* Ruta para InfoLegal con soporte para parámetros */}
           <Route path="/info-legal" element={<InfoLegal />} />
+          <Route path="/terminos-legales" element={<TerminosLegales />} />
         </Routes>
       </div>
       <Footer />

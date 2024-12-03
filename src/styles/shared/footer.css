@@ -55,15 +55,3 @@
 .unique-footer-link:hover {
     color: #d1d1d1; /* Cambia a gris claro al pasar el mouse */
 }
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-a {
-    text-decoration: none;
-    color: inherit;
-    border: none;
-    outline: none;
-}
