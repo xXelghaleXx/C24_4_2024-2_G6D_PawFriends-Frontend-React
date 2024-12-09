@@ -6,13 +6,15 @@ const Slidebar = () => {
   const [isOpen, setIsOpen] = useState(false); // Controla si el slidebar está abierto
   const slidebarRef = useRef(null); // Referencia al contenedor del Slidebar
 
+  // Alternar la visibilidad del Slidebar
   const toggleSlidebar = () => {
-    setIsOpen(!isOpen); // Cambia el estado del slidebar
+    setIsOpen(!isOpen);
   };
 
+  // Cerrar el Slidebar si el usuario hace clic fuera de él
   const handleClickOutside = (event) => {
     if (slidebarRef.current && !slidebarRef.current.contains(event.target)) {
-      setIsOpen(false); // Cierra el Slidebar si el clic no es dentro de él
+      setIsOpen(false);
     }
   };
 
@@ -42,7 +44,7 @@ const Slidebar = () => {
         <span className="bajo_unico comun_unico"></span>
       </div>
       <div className={`slide_unico ${isOpen ? 'open' : ''}`}>
-        <h1 className="titulo_unico">Menu Principal</h1>
+        <h1 className="titulo_unico">Menú Principal</h1>
         <ul className="ul_unico">
           <li className="li_unico">
             <Link className="a_unico" to="/welcome" onClick={toggleSlidebar}>
@@ -66,12 +68,17 @@ const Slidebar = () => {
           </li>
           <li className="li_unico">
             <Link className="a_unico" to="/quienes-somos" onClick={toggleSlidebar}>
-              Quienes Somos
+              Quiénes Somos
             </Link>
           </li>
           <li className="li_unico">
             <Link className="a_unico" to="/terminos-legales" onClick={toggleSlidebar}>
               Términos Legales
+            </Link>
+          </li>
+          <li className="li_unico">
+            <Link className="a_unico" to="/solicitudes-adopciones" onClick={toggleSlidebar}>
+              Solicitudes de Adopciones
             </Link>
           </li>
         </ul>

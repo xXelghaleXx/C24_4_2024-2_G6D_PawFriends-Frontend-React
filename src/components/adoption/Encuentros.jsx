@@ -1,125 +1,98 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom"; // Importa useNavigate para redirección
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../../styles/adoption/Encuentros.css";
-import Carlos01 from "../../assets/Carlos.jpg";
-import Carlos02 from "../../assets/Carlos_02.jpg";
-import Carlos03 from "../../assets/Carlos_03.jpg";
-import Luna01 from "../../assets/Luna.jpg";
-import Luna02 from "../../assets/Luna_02.jpg";
-import Luna03 from "../../assets/Luna_03.jpg";
-
-const mascotas = [
-  {
-    id: 1,
-    nombre: "Carlos",
-    edad: "2 años",
-    descripcion: "Bulldog amigable y cariñoso",
-    albergue: "Albergue Happy Paws",
-    texto: ["Vacunado", "Esterilizado", "Convive bien con niños"],
-    imagenes: [Carlos01, Carlos02, Carlos03],
-  },
-  {
-    id: 2,
-    nombre: "Luna",
-    edad: "3 años",
-    descripcion: "Gata juguetona y curiosa",
-    albergue: "Refugio Cat Lovers",
-    texto: ["Vacunada", "No convive con perros", "Muy independiente"],
-    imagenes: [Luna01, Luna02, Luna03],
-  },
-];
 
 const Encuentros = () => {
-  const [perfilActual, setPerfilActual] = useState(0); // Maneja el perfil actual (mascota)
-  const [imagenActual, setImagenActual] = useState(0); // Maneja la imagen actual del carrusel
-  const [animando, setAnimando] = useState(false); // Nuevo estado para manejar la animación
-  const navigate = useNavigate(); // Inicializa el hook para redirección
+  const [mascotas, setMascotas] = useState([]); // Lista de mascotas desde la API
+  const [perfilActual, setPerfilActual] = useState(0); // Controla la mascota actual
+  const [imagenActual, setImagenActual] = useState(0); // Controla la imagen actual del carrusel
+  const [animando, setAnimando] = useState(false);
+  const navigate = useNavigate(); 
 
-  // Cambiar a la siguiente imagen del carrusel
+  // Llamar a la API para obtener la lista de mascotas
+  useEffect(() => {
+    const fetchMascotas = async () => {
+      try {
+        const response = await axios.get('http://localhost:8094/api/mascotas', { withCredentials: true });
+        console.log(response.data); // Asegúrate de que ves la lista de mascotas aquí
+        setMascotas(response.data);
+      } catch (error) {
+        console.error('Error al obtener las mascotas:', error);
+      }
+    };
+    fetchMascotas();
+  }, []);
+  
+
   const siguienteImagen = () => {
-    setImagenActual((prev) => (prev + 1) % mascotas[perfilActual].imagenes.length);
+    setImagenActual((prev) => (prev + 1) % (mascotas[perfilActual]?.imagenes?.length || 1));
   };
 
-  // Cambiar a la imagen anterior del carrusel
   const anteriorImagen = () => {
-    setImagenActual((prev) =>
-      prev === 0 ? mascotas[perfilActual].imagenes.length - 1 : prev - 1
+    setImagenActual((prev) => 
+      (prev - 1 + (mascotas[perfilActual]?.imagenes?.length || 1)) % (mascotas[perfilActual]?.imagenes?.length || 1)
     );
   };
 
-  // Cambiar directamente a una imagen específica
-  const cambiarImagen = (index) => {
-    setImagenActual(index);
-  };
-
-  // Aceptar mascota (Check) y redirigir
   const aceptarMascota = () => {
-    navigate(`/confirmacion/${mascotas[perfilActual].id}`); // Redirige al componente EncuentroConfirmacion
+    const mascotaActual = mascotas[perfilActual];
+  
+    if (mascotaActual && mascotaActual.idPerro) {
+      console.log("ID de la mascota:", mascotaActual.idPerro); 
+      navigate(`/confirmacion/${mascotaActual.idPerro}`);
+    } else {
+      console.error("El ID de la mascota es undefined o inválido");
+      alert("No se pudo procesar esta mascota. Inténtalo de nuevo.");
+    }
   };
-
-  // Rechazar mascota (Equis)
+  
+  
   const rechazarMascota = () => {
-    setAnimando(true); // Activa la clase de animación
+    setAnimando(true);
     setTimeout(() => {
-      setPerfilActual((prev) => (prev + 1) % mascotas.length); // Cambia al siguiente perfil
-      setAnimando(false); // Reinicia el estado de animación
-      setImagenActual(0); // Reinicia el carrusel
-    }, 500); // Tiempo debe coincidir con la duración de la animación CSS
+      setPerfilActual((prev) => (prev + 1) % mascotas.length);
+      setAnimando(false);
+      setImagenActual(0);
+    }, 500);
   };
 
-  const mascota = mascotas[perfilActual]; // Obtiene la mascota actual
+  if (mascotas.length === 0) {
+    return <p>Cargando mascotas...</p>;
+  }
+
+  const mascota = mascotas[perfilActual];
 
   return (
-    <div>
-      <br /><br /><br /><br /><br />
     <div className="encuentros-container">
       <div className={`perfil-card ${animando ? "animating-out" : ""}`}>
         <div className="imagen-container">
           <button className="carrusel-boton" onClick={anteriorImagen}>
             ◀
           </button>
-          <img src={mascota.imagenes[imagenActual]} alt={`Imagen de ${mascota.nombre}`} />
+          <img 
+            src={mascota.imagenes?.[imagenActual] || "https://via.placeholder.com/150"} 
+            alt={`Imagen de ${mascota.nombre}`} 
+          />
           <button className="carrusel-boton" onClick={siguienteImagen}>
             ▶
           </button>
-          <div className="dots-container">
-            {mascota.imagenes.map((_, index) => (
-              <div
-                key={index}
-                className={`dot ${index === imagenActual ? "active" : ""}`}
-                onClick={() => cambiarImagen(index)}
-              ></div>
-            ))}
-          </div>
         </div>
         <div className="datos-container">
-          <h2>
-            {mascota.nombre}, {mascota.edad}
-          </h2>
-          <p>
-            <strong>Descripción:</strong> {mascota.descripcion}
-          </p>
-          <p>
-            <strong>Albergue:</strong> {mascota.albergue}
-          </p>
+          <h2>{mascota.nombre}, {mascota.edad}</h2>
+          <p><strong>Descripción:</strong> {mascota.descripcion}</p>
+          <p><strong>Albergue:</strong> {mascota.albergue?.nombre || "Sin albergue"}</p>
           <ul>
-            {mascota.texto.map((item, index) => (
+            {mascota.caracteristicas?.map((item, index) => (
               <li key={index}>{item}</li>
             ))}
           </ul>
         </div>
-        {/* Contenedor centrado de botones */}
         <div className="acciones">
-          <button className="boton-verde" onClick={aceptarMascota}>
-            ✔
-          </button>
-          <button className="boton-rojo" onClick={rechazarMascota}>
-            ✖
-          </button>
+          <button className="boton-verde" onClick={aceptarMascota}>✔</button>
+          <button className="boton-rojo" onClick={rechazarMascota}>✖</button>
         </div>
       </div>
-    </div>
-    <br /><br /><br /><br />
     </div>
   );
 };

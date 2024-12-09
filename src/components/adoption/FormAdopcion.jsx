@@ -1,140 +1,90 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import "../../styles/adoption/FormAdopcion.css";
-import FormModal from "./FormModal";
+import FormModal from "./FormModal"; // Importa el modal de confirmación
 
 const FormAdopcion = () => {
-  const [formData, setFormData] = useState({
-    nombre: "",
-    correo: "",
-    telefono: "",
-    direccion: "",
-    mensaje: "",
-  });
+  const { idPerro } = useParams(); // Obtiene el ID del perro desde la URL
+  const [questions, setQuestions] = useState([]); // Preguntas adicionales desde el backend
+  const [answers, setAnswers] = useState({}); // Respuestas a las preguntas adicionales
+  const [isModalOpen, setIsModalOpen] = useState(false); // Estado del modal
+  const [errorMessage, setErrorMessage] = useState(""); // Mensaje de error
+  const [successMessage, setSuccessMessage] = useState(""); // Mensaje de éxito
 
-  const [additionalQuestions, setAdditionalQuestions] = useState([
-    { id: 1, question: "¿Tienes otras mascotas en casa?", answer: "" },
-    { id: 2, question: "¿Dónde pasará el animal la mayor parte del tiempo?", answer: "" },
-    { id: 3, question: "¿Por qué quieres adoptar a esta mascota?", answer: "" },
-  ]);
-
-  const [isModalOpen, setIsModalOpen] = useState(false); // Estado para el modal
-
-  // Manejar cambios en los campos del formulario principal
-  const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
-
-  // Manejar cambios en las preguntas adicionales
-  const handleAdditionalAnswerChange = (id, value) => {
-    setAdditionalQuestions((prevQuestions) =>
-      prevQuestions.map((q) =>
-        q.id === id ? { ...q, answer: value } : q
-      )
-    );
-  };
-
-  // Manejar envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-
-    // Simulación de envío de datos
-    const submissionData = {
-      ...formData,
-      additionalQuestions,
+  // Cargar preguntas desde el backend
+  useEffect(() => {
+    const fetchQuestions = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:8094/api/adopcion/${idPerro}/formulario`,
+          { withCredentials: true } // Enviar cookies de sesión
+        );
+        setQuestions(response.data.preguntas); // Almacenar preguntas
+      } catch (error) {
+        console.error("Error al cargar las preguntas:", error);
+        setErrorMessage("No se pudieron cargar las preguntas del formulario.");
+      }
     };
 
-    console.log("Datos enviados:", submissionData);
-    setIsModalOpen(true); // Abrir el modal
+    fetchQuestions();
+  }, [idPerro]);
+
+  // Manejar cambios en las respuestas
+  const handleInputChange = (id, value) => {
+    setAnswers((prev) => ({
+      ...prev,
+      [`respuesta_${id}`]: value, // Guardar respuesta con formato "respuesta_id"
+    }));
   };
 
-  // Cerrar modal
+  // Enviar las respuestas del formulario
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrorMessage(""); // Reinicia mensajes de error
+    setSuccessMessage(""); // Reinicia mensajes de éxito
+
+    try {
+      const response = await axios.post(
+        `http://localhost:8094/api/adopcion/${idPerro}/guardar`,
+        answers,
+        { withCredentials: true } // Enviar credenciales
+      );
+      setSuccessMessage(response.data); // Mostrar éxito
+      setIsModalOpen(true); // Abrir modal
+    } catch (error) {
+      console.error("Error al enviar el formulario:", error);
+      setErrorMessage("Hubo un problema al enviar tus respuestas."); // Mostrar error
+    }
+  };
+
+  // Cerrar el modal y redirigir al inicio
   const closeModal = () => {
     setIsModalOpen(false);
-    window.location.href = "/"; // Redirigir al inicio
+    window.location.href = "/"; // Redirigir
   };
 
   return (
     <div>
-        <br /><br /><br /><br /><br />
-    <div>
-      {/* Modal de éxito */}
-      <FormModal isOpen={isModalOpen} onClose={closeModal} />
-
+      <FormModal isOpen={isModalOpen} onClose={closeModal} /> {/* Modal de éxito */}
       <div className="form-adopcion-container-new">
         <h2 className="titlename-new">Formulario de Adopción</h2>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {successMessage && <p className="success-message">{successMessage}</p>}
+
         <form onSubmit={handleSubmit} className="adopcion-form-new">
-          <div className="form-group-new">
-            <label htmlFor="nombre">Nombre Completo:</label>
-            <input
-              type="text"
-              id="nombre"
-              name="nombre"
-              value={formData.nombre}
-              onChange={handleInputChange}
-              placeholder="Ingresa tu nombre completo"
-              required
-            />
-          </div>
-
-          <div className="form-group-new">
-            <label htmlFor="correo">Correo Electrónico:</label>
-            <input
-              type="email"
-              id="correo"
-              name="correo"
-              value={formData.correo}
-              onChange={handleInputChange}
-              placeholder="Ingresa tu correo electrónico"
-              required
-            />
-          </div>
-
-          <div className="form-group-new">
-            <label htmlFor="telefono">Teléfono:</label>
-            <input
-              type="tel"
-              id="telefono"
-              name="telefono"
-              value={formData.telefono}
-              onChange={handleInputChange}
-              placeholder="Ingresa tu número de teléfono"
-              required
-            />
-          </div>
-
-          <div className="form-group-new">
-            <label htmlFor="direccion">Dirección:</label>
-            <input
-              type="text"
-              id="direccion"
-              name="direccion"
-              value={formData.direccion}
-              onChange={handleInputChange}
-              placeholder="Ingresa tu dirección"
-              required
-            />
-          </div>
-
-          <div className="form-group-new">
-            <label htmlFor="mensaje">Mensaje Adicional:</label>
-            <textarea
-              id="mensaje"
-              name="mensaje"
-              value={formData.mensaje}
-              onChange={handleInputChange}
-              placeholder="Escribe un mensaje adicional (opcional)"
-            ></textarea>
-          </div>
-
+          {/* Preguntas adicionales dinámicas */}
           <div className="additional-questions-new">
             <h3>Preguntas Adicionales</h3>
-            {additionalQuestions.map((q) => (
-              <div className="form-group-new" key={q.id}>
-                <label>{q.question}</label>
+            {questions.map((q) => (
+              <div className="form-group-new" key={q.id_pregunta}>
+                <label>{q.pregunta}</label>
                 <textarea
-                  value={q.answer}
-                  onChange={(e) => handleAdditionalAnswerChange(q.id, e.target.value)}
+                  value={answers[`respuesta_${q.id_pregunta}`] || ""}
+                  onChange={(e) =>
+                    handleInputChange(q.id_pregunta, e.target.value)
+                  }
                   placeholder="Escribe tu respuesta"
                   required
                 ></textarea>
@@ -144,13 +94,11 @@ const FormAdopcion = () => {
 
           <div className="form-actions-new">
             <button type="submit" className="submit-button-new">
-              Enviar Formulario
+              Enviar Respuestas
             </button>
           </div>
         </form>
       </div>
-    </div>
-    <br /><br /><br /><br />
     </div>
   );
 };

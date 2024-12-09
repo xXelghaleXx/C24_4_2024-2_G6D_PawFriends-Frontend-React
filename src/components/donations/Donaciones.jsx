@@ -1,44 +1,38 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import "../../styles/donations/Donaciones.css";
-import DonationModal from "./DonationModal"; // Importa el componente del modal
-import DNImage from "../../assets/DN_00.png";
-import DNImage1 from "../../assets/DN_01.webp";
-import DNImage2 from "../../assets/DN_02.webp";
-import DNImage3 from "../../assets/DN_03.webp";
-import DNImage4 from "../../assets/DN_04.jpg";
+import DonationModal from "./DonationModal"; // Componente del modal
+import { Elements } from "@stripe/react-stripe-js"; // Importar Elements
+import { loadStripe } from "@stripe/stripe-js"; // Importar Stripe
+
+// Clave pública de Stripe (reemplázala con tu clave)
+const stripePromise = loadStripe("pk_test_51QTv3FRwW1GMSsQzfzmR7XmFNXOnaxdKDRccmLNdlDruKHcoviOZepAnRL1VrSMSV4jgKtoiRS1aKz3f0uNffp5d00qn09p42k");
 
 const Donaciones = () => {
+  const [products, setProducts] = useState([]);
+  const [shelters, setShelters] = useState([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
 
-  const shelters = [
-    "Albergue Happy Paws",
-    "Refugio Cat Lovers",
-    "Casa de Mascotas",
-  ];
+  useEffect(() => {
+    const fetchProductsAndShelters = async () => {
+      try {
+        const [productResponse, shelterResponse] = await Promise.all([
+          axios.get("http://localhost:8094/api/donaciones/productos"),
+          axios.get("http://localhost:8094/api/donaciones/albergues"),
+        ]);
 
-  const products = [
-    {
-      imgSrc: DNImage1,
-      title: "Bolsa Ricocan 8kg para perros",
-      description: "Alimento premium para perros con sabor a cordero y cereales.",
-    },
-    {
-      imgSrc: DNImage2,
-      title: "Bolsa Ricocat 8kg para gatos",
-      description: "Alimento premium para gatos con todos los nutrientes esenciales.",
-    },
-    {
-      imgSrc: DNImage3,
-      title: "Cama para perros/gatos",
-      description: "Cama cómoda y resistente para perros y gatos.",
-    },
-    {
-      imgSrc: DNImage4,
-      title: "Rascadera para gatos",
-      description: "Rascadera perfecta para mantener a los gatos activos y felices.",
-    },
-  ];
+        console.log("Respuesta de shelters:", shelterResponse.data);
+
+        setProducts(productResponse.data);
+        setShelters(shelterResponse.data);
+      } catch (error) {
+        console.error("Error loading products or shelters:", error);
+      }
+    };
+
+    fetchProductsAndShelters();
+  }, []);
 
   const openModal = (product) => {
     setSelectedProduct(product);
@@ -51,44 +45,34 @@ const Donaciones = () => {
   };
 
   return (
-    <div>
-      <br /><br /><br /><br />
     <div className="donaciones-container">
-      <div className="donaciones-header">
-        <h2>Donaciones</h2>
-        <img src={DNImage} alt="Main donation" className="donaciones-main-image" />
-      </div>
-
-      <h3 className="donaciones-subtitle">Donaciones:</h3>
-
+      <h2>Donaciones</h2>
+      <h3>Productos Disponibles:</h3>
       <div className="donaciones-products">
-        {products.map((product, index) => (
-          <div className="donaciones-product-card" key={index}>
+        {products.map((product) => (
+          <div key={product.idProducto} className="donaciones-product-card">
             <img
-              src={product.imgSrc}
-              alt={product.title}
+              src={product.imagen || "URL_DE_IMAGEN_POR_DEFECTO"}
+              alt={product.nombreProducto}
               className="donaciones-product-image"
             />
-            <p className="product-name">{product.title}</p>
-            <button
-              className="donar-button"
-              onClick={() => openModal(product)}
-            >
+            <p className="product-name">{product.nombreProducto}</p>
+            <p className="product-price">Precio: ${product.precio.toFixed(2)}</p>
+            <button className="donar-button" onClick={() => openModal(product)}>
               Donar
             </button>
           </div>
         ))}
       </div>
-
       {isModalOpen && (
-        <DonationModal
-          product={selectedProduct}
-          shelters={shelters}
-          onClose={closeModal}
-        />
+        <Elements stripe={stripePromise}>
+          <DonationModal
+            product={selectedProduct}
+            shelters={shelters}
+            onClose={closeModal}
+          />
+        </Elements>
       )}
-    </div>
-    <br /><br />
     </div>
   );
 };

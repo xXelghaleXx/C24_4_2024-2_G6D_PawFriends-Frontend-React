@@ -1,57 +1,78 @@
-import { useNavigate } from 'react-router-dom';
-import '../../styles/users/Mascotas.css';
-import Carlos01 from "../../assets/Carlos.jpg";
-import Luna01 from "../../assets/Luna.jpg";
+import { useState, useEffect } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import axios from "axios";
+import "../../styles/users/Mascotas.css";
 
 const Mascotas = () => {
   const navigate = useNavigate();
+  const location = useLocation();
+  const [mascotas, setMascotas] = useState([]);
+  const [albergueNombre, setAlbergueNombre] = useState("");
 
-  // Array de datos de mascotas
-  const mascotas = [
-    {
-      id: 1,
-      name: "Carlos",
-      age: "2 años",
-      image: Carlos01,
-    },
-    {
-      id: 2,
-      name: "Luna",
-      age: "3 años",
-      image: Luna01,
-    },
-  ];
+  useEffect(() => {
+    const fetchMascotas = async () => {
+      try {
+        const { state } = location;
 
-  const handleNavigation = (id) => {
-    navigate(`/encuentros/${id}`); // Redirige a Encuentros con el id de la mascota
+        if (!state || !state.albergueId || !state.albergueName) {
+          alert("No se proporcionó información válida del albergue.");
+          navigate("/albergues");
+          return;
+        }
+
+        setAlbergueNombre(state.albergueName);
+
+        const response = await axios.get(
+          `http://localhost:8094/api/albergues/${state.albergueId}/mascotas`,
+          { withCredentials: true }
+        );
+        setMascotas(response.data);
+      } catch (error) {
+        console.error("Error al obtener las mascotas:", error);
+        alert("Hubo un problema al cargar las mascotas. Por favor, intenta nuevamente.");
+        navigate("/albergues");
+      }
+    };
+
+    fetchMascotas();
+  }, [location, navigate]);
+
+  const handleNavigation = (mascota) => {
+    // Redirige directamente a Confirmación con el id de la mascota
+    navigate(`/confirmacion/${mascota.idPerro}`, { state: { mascota } });
   };
 
   return (
     <div className="mascotas-container">
-      <h1 className="mascotas-title">Mascotas</h1>
-      <div className="mascotas-grid">
-        {mascotas.map((mascota) => (
-          <div
-            key={mascota.id}
-            className="mascota-card"
-            onClick={() => handleNavigation(mascota.id)}
-          >
-            <img
-              src={mascota.image} // Llama a la imagen del array
-              alt={mascota.name}
-              className="mascota-image"
-            />
-            <div className="mascota-info">
-              <h3 className="mascota-name">
-                {mascota.name}, {mascota.age}
-              </h3>
-              <button className="mascota-button">Ver Perfil</button>
+      <h1 className="mascotas-title">Mascotas Disponibles en {albergueNombre}</h1>
+      {mascotas.length > 0 ? (
+        <div className="mascotas-grid">
+          {mascotas.map((mascota) => (
+            <div
+              key={mascota.idPerro}
+              className="mascota-card"
+              onClick={() => handleNavigation(mascota)}
+            >
+              <img
+                src={mascota.imagen || "https://via.placeholder.com/150"}
+                alt={mascota.nombre}
+                className="mascota-image"
+              />
+              <div className="mascota-info">
+                <h3 className="mascota-name">
+                  {mascota.nombre}, {mascota.edad || "Edad no especificada"}
+                </h3>
+                <button className="mascota-button">Ver Perfil</button>
+              </div>
             </div>
-          </div>
-        ))}
-      </div>
+          ))}
+        </div>
+      ) : (
+        <p className="no-mascotas">No hay mascotas disponibles en este albergue.</p>
+      )}
     </div>
   );
 };
 
 export default Mascotas;
+

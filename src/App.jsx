@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes, Navigate } from "react-router-dom";
 import Navbar from "./components/shared/Navbar";
 import Footer from "./components/shared/Footer";
 import Login from "./components/users/Login";
@@ -9,12 +9,19 @@ import Donaciones from "./components/donations/Donaciones";
 import Albergues from "./components/shelters/Albergues";
 import Encuentros from "./components/adoption/Encuentros";
 import Mascotas from "./components/users/Mascotas";
-import Perfil from "./components/shelters/Perfil"; // Página Perfil
-import EncuentroConfirmacion from "./components/adoption/EncuentroConfirmacion"; // Confirmación de Encuentros
-import ChatAlbergue from "./components/chat/ChatAlbergues"; // Chat de Albergues
+import Perfil from "./components/shelters/Perfil";
+import EncuentroConfirmacion from "./components/adoption/EncuentroConfirmacion";
+import ChatAlbergue from "./components/chat/ChatAlbergues";
 import TerminosLegales from "./components/shared/TerminosLegales";
-import FormAdopcion from "./components/adoption/FormAdopcion"; // Formulario de Adopción
-import InfoLegal from "./components/shared/InfoLegal"; // Nuevo componente InfoLegal
+import FormAdopcion from "./components/adoption/FormAdopcion";
+import InfoLegal from "./components/shared/InfoLegal";
+import PrivateRoute from "./components/PrivateRoute";
+import SolicitudesAdopcion from "./components/adoption/SolicitudesAdopcion";
+import React from "react";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+
+const stripePromise = loadStripe("pk_test_51QTv3FRwW1GMSsQzfzmR7XmFNXOnaxdKDRccmLNdlDruKHcoviOZepAnRL1VrSMSV4jgKtoiRS1aKz3f0uNffp5d00qn09p42k");
 
 function App() {
   return (
@@ -23,7 +30,7 @@ function App() {
       <div className="main-content">
         <Routes>
           {/* Ruta principal */}
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Navigate to="/welcome" replace />} />
 
           {/* Rutas de autenticación */}
           <Route path="/login" element={<Login />} />
@@ -34,12 +41,22 @@ function App() {
 
           {/* Rutas adicionales */}
           <Route path="/quienes-somos" element={<QuienesSomos />} />
-          <Route path="/donaciones" element={<Donaciones />} />
+
+          {/* Envolver la ruta de Donaciones con el proveedor de Stripe */}
+          <Route
+            path="/donaciones"
+            element={
+              <Elements stripe={stripePromise}>
+                <Donaciones />
+              </Elements>
+            }
+          />
+
           <Route path="/albergues" element={<Albergues />} />
 
           {/* Rutas para Mascotas y Encuentros */}
-          <Route path="/mascotas" element={<Mascotas />} />
-          <Route path="/encuentros/:id" element={<Encuentros />} />
+          <Route path="/mascotas/:id" element={<Mascotas />} />
+          <Route path="/encuentros" element={<Encuentros />} />
 
           {/* Ruta para la nueva funcionalidad EncuentroConfirmacion */}
           <Route path="/confirmacion/:id" element={<EncuentroConfirmacion />} />
@@ -51,7 +68,8 @@ function App() {
           <Route path="/chat-albergues" element={<ChatAlbergue />} />
 
           {/* Ruta para Formulario de Adopción */}
-          <Route path="/form-adopcion" element={<FormAdopcion />} />
+          <Route path="/form-adopcion/:idPerro" element={<FormAdopcion />} />
+          <Route path="/solicitudes-adopciones" element={<SolicitudesAdopcion />} />
 
           {/* Ruta para InfoLegal con soporte para parámetros */}
           <Route path="/info-legal" element={<InfoLegal />} />

@@ -1,16 +1,17 @@
+import axios from "axios";
+
 import PropTypes from "prop-types";
 import { useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import "../../styles/chat/UserMenuStyles.css";
 
-const UserMenu = ({ isOpen, toggleMenu }) => {
-  const navigate = useNavigate(); // Hook para redirigir
-  const menuRef = useRef(null); // Referencia al menú
+const UserMenu = ({ isOpen, toggleMenu, userImage }) => {
+  const navigate = useNavigate();
+  const menuRef = useRef(null);
 
-  // Función para cerrar el menú al hacer clic fuera de él
   const handleOutsideClick = (event) => {
     if (menuRef.current && !menuRef.current.contains(event.target)) {
-      toggleMenu(); // Cierra el menú
+      toggleMenu();
     }
   };
 
@@ -20,50 +21,53 @@ const UserMenu = ({ isOpen, toggleMenu }) => {
     } else {
       document.removeEventListener("mousedown", handleOutsideClick);
     }
-
-    // Limpieza al desmontar el componente
     return () => {
       document.removeEventListener("mousedown", handleOutsideClick);
     };
   }, [isOpen]);
 
-  // Función para redirigir al perfil
   const goToPerfil = () => {
-    toggleMenu(); // Cierra el menú
+    toggleMenu();
     navigate("/perfil");
   };
 
-  // Función para cerrar sesión y redirigir al login
-  const goToLogin = () => {
-    toggleMenu(); // Cierra el menú
-    navigate("/login");
+  const goToLogin = async () => {
+    try {
+      // Enviar solicitud de logout al backend
+      const response = await axios.get("http://localhost:8094/api/users/logout", {
+        withCredentials: true,
+      });
+  
+      // Limpiar almacenamiento local y redirigir al login
+      localStorage.clear();
+      sessionStorage.clear();
+      document.cookie = "JSESSIONID=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      toggleMenu();
+      navigate("/login");
+    } catch (error) {
+      console.error("Error al cerrar la sesión:", error);
+      alert("Error al cerrar la sesión, inténtalo de nuevo.");
+    }
   };
-
-  // Función para ir al chat de albergues
-  const goToChat = () => {
-    toggleMenu(); // Cierra el menú
-    navigate("/chat-albergues");
-  };
+  
 
   return (
     <div
       ref={menuRef}
       className={`user-menu ${isOpen ? "menu-open" : "menu-closed"}`}
     >
-      <h2>Menú de Usuario</h2>
-      <ul>
-        <li>
+      <div className="user-menu-header">
+
+        <h2 className="user-menu-title">Menú de Usuario</h2>
+      </div>
+      <ul className="user-menu-list">
+        <li className="user-menu-item">
           <button className="menu-button" onClick={goToPerfil}>
             Perfil
           </button>
         </li>
-        <li>
-          <button className="menu-button" onClick={goToChat}>
-            Chatear con Albergues
-          </button>
-        </li>
-        <li>
-          <button className="menu-button" onClick={goToLogin}>
+        <li className="user-menu-item">
+          <button className="menu-button logout-button" onClick={goToLogin}>
             Cerrar Sesión
           </button>
         </li>
@@ -75,6 +79,7 @@ const UserMenu = ({ isOpen, toggleMenu }) => {
 UserMenu.propTypes = {
   isOpen: PropTypes.bool.isRequired,
   toggleMenu: PropTypes.func.isRequired,
+  userImage: PropTypes.string, // Añadir tipo para la imagen
 };
 
 export default UserMenu;

@@ -1,0 +1,99 @@
+.solicitudes-container {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 120px); /* Asegura que se ajuste al espacio disponible */
+  }
+  
+  /* Fondo del contenedor */
+  .solicitudes-wrapper {
+    background-color: #ffffff; /* Fondo blanco para el contenido */
+    padding: 2rem;
+    border-radius: 0.625rem; /* Bordes redondeados */
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2); /* Sombra */
+    max-width: 80%; /* Limita el ancho */
+    width: 100%;
+    text-align: center;
+  }
+  
+  /* Título */
+  .solicitudes-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  /* Tabla de solicitudes */
+  .table-container {
+    overflow-x: auto;
+    margin-top: 1rem;
+  }
+  
+  .solicitudes-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 0.5rem;
+    overflow: hidden;
+  }
+  
+  .solicitudes-table th,
+  .solicitudes-table td {
+    text-align: center;
+    padding: 1rem;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .solicitudes-table th {
+    background-color: #15654a; /* Verde */
+    color: #fff;
+  }
+  
+  .solicitudes-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .solicitudes-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  /* Estilo de estado */
+  .status-pendiente {
+    background-color: #ffcc00;
+    color: #000;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+  }
+  
+  .status-aprobada {
+    background-color: #28a745;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+  }
+  
+  .status-rechazada {
+    background-color: #dc3545;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-weight: bold;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .solicitudes-title {
+      font-size: 1.75rem;
+    }
+  
+    .solicitudes-table th,
+    .solicitudes-table td {
+      padding: 0.5rem;
+    }
+  }
+  

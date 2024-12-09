@@ -1,99 +1,152 @@
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "../../styles/shelters/Albergues.css";
-import albergue01 from "../../assets/albergue01.jpg";
-import albergue02 from "../../assets/albergue02.jpg";
-import albergue03 from "../../assets/albergue03.jpg";
-import albergue04 from "../../assets/albergue04.jpg";
-import albergue05 from "../../assets/albergue05.jpeg";
-import albergue06 from "../../assets/albergue06.jpg";
 
 const Albergues = () => {
   const navigate = useNavigate();
-
-  const albergues = [
-    {
-      id: 1,
-      name: "PawFriends",
-      description: "Conoce a nuestras mascotas rescatadas y dales un hogar.",
-      images: [albergue01, albergue03, albergue05],
-    },
-    {
-      id: 2,
-      name: "Patitas Amigas",
-      description: "Descubre cómo puedes cambiar la vida de estas mascotas.",
-      images: [albergue02, albergue04, albergue06],
-    },
-  ];
+  const [albergues, setAlbergues] = useState([]);
+  const [departamentos, setDepartamentos] = useState([]);
+  const [distritos, setDistritos] = useState([]);
+  const [selectedDepartamento, setSelectedDepartamento] = useState("");
+  const [selectedDistrito, setSelectedDistrito] = useState("");
 
   const settings = {
-    dots: true, // Muestra los indicadores (dots)
-    infinite: true, // Ciclo infinito
-    speed: 500, // Velocidad de transición
-    slidesToShow: 1, // Muestra solo una imagen a la vez
-    slidesToScroll: 1, // Avanza de una en una
-    autoplay: true, // Activa el cambio automático
-    autoplaySpeed: 3000, // Cambia cada 3 segundos
-    arrows: false, // Desactiva las flechas de navegación
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 3000,
+    arrows: false,
   };
 
-  const handleViewMascotas = (albergueName) => {
-    navigate("/mascotas", { state: { albergueName } });
-  };
+  useEffect(() => {
+    const fetchAlbergues = async () => {
+      try {
+        const response = await fetch("http://localhost:8094/api/albergues");
+        const data = await response.json();
+        setAlbergues(data);
 
-  const handleNearbyAlbergues = () => {
-    navigator.geolocation.getCurrentPosition(
-      (position) => {
-        const { latitude, longitude } = position.coords;
-        console.log(`Ubicación actual: Lat ${latitude}, Long ${longitude}`);
-        alert("Mostrando albergues cercanos basados en tu ubicación.");
-      },
-      (error) => {
-        console.error("Error obteniendo ubicación:", error);
-        alert("No pudimos acceder a tu ubicación. Por favor activa el GPS.");
+        const uniqueDepartamentos = [
+          ...new Set(data.map((albergue) => albergue.departamento)),
+        ];
+        setDepartamentos(uniqueDepartamentos);
+      } catch (error) {
+        console.error("Error al obtener los albergues:", error);
       }
-    );
+    };
+
+    fetchAlbergues();
+  }, []);
+
+  useEffect(() => {
+    if (selectedDepartamento) {
+      const filteredDistritos = [
+        ...new Set(
+          albergues
+            .filter((albergue) => albergue.departamento === selectedDepartamento)
+            .map((albergue) => albergue.distrito)
+        ),
+      ];
+      setDistritos(filteredDistritos);
+    } else {
+      setDistritos([]);
+    }
+  }, [selectedDepartamento, albergues]);
+
+  const handleDepartamentoChange = (e) => {
+    setSelectedDepartamento(e.target.value);
+    setSelectedDistrito("");
   };
+
+  const handleDistritoChange = (e) => {
+    setSelectedDistrito(e.target.value);
+  };
+
+  const handleViewMascotas = (albergueId, albergueName) => {
+    navigate("/mascotas/:id", { state: { albergueId, albergueName } });
+  };
+
+  const filteredAlbergues = albergues.filter((albergue) => {
+    return (
+      (!selectedDepartamento || albergue.departamento === selectedDepartamento) &&
+      (!selectedDistrito || albergue.distrito === selectedDistrito)
+    );
+  });
 
   return (
     <div>
-      <br /><br /><br /><br /><br /><br />
+      <br />
+      <br />
+      <br />
+      <br />
       <div className="albergues-container">
         <h1>Nuestros Albergues Disponibles</h1>
         <div className="filtros-container">
-          <button onClick={handleNearbyAlbergues}>Albergues por zona</button>
+          <select
+            value={selectedDepartamento}
+            onChange={handleDepartamentoChange}
+            className="filtro-select"
+          >
+            <option value="">Seleccionar Departamento</option>
+            {departamentos && departamentos.map((departamento, index) => (
+              <option key={index} value={departamento}>
+                {departamento}
+              </option>
+            ))}
+          </select>
+          <select
+            value={selectedDistrito}
+            onChange={handleDistritoChange}
+            className="filtro-select"
+            disabled={!selectedDepartamento}
+          >
+            <option value="">Seleccionar Distrito</option>
+            {distritos && distritos.map((distrito, index) => (
+              <option key={index} value={distrito}>
+                {distrito}
+              </option>
+            ))}
+          </select>
         </div>
         <div className="albergues-grid">
-          {albergues.map((albergue) => (
-            <div key={albergue.id} className="albergue-card">
-              <h2>{albergue.name}</h2>
+          {filteredAlbergues && filteredAlbergues.map((albergue) => (
+            <div key={albergue.idAlbergue} className="albergue-card">
+              <h2>{albergue.nombre}</h2>
               <div className="carousel-container">
                 <Slider {...settings}>
-                  {albergue.images.map((image, index) => (
-                    <div key={index} className="carousel-slide">
-                      <img
-                        src={image}
-                        alt={`${albergue.name} slide ${index + 1}`}
-                        className="carousel-image"
-                      />
-                    </div>
-                  ))}
+                  {albergue.imagenes &&
+                    albergue.imagenes.map((image, index) => (
+                      <div key={index} className="carousel-slide">
+                        <img
+                          src={image}
+                          alt={`${albergue.nombre} slide ${index + 1}`}
+                          className="carousel-image"
+                        />
+                      </div>
+                    ))}
                 </Slider>
               </div>
-              <p>{albergue.description}</p>
+              <p>{albergue.descripcion}</p>
               <button
                 className="view-mascotas-btn"
-                onClick={() => handleViewMascotas(albergue.name)}
+                onClick={() =>
+                  handleViewMascotas(albergue.idAlbergue, albergue.nombre)
+                }
               >
                 Ver Mascotas
               </button>
             </div>
           ))}
         </div>
+        {filteredAlbergues.length === 0 && (
+          <p>No se encontraron albergues para los filtros seleccionados.</p>
+        )}
       </div>
-      <br /><br /><br /><br />
     </div>
   );
 };

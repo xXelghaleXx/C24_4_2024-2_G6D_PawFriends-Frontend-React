@@ -14,7 +14,14 @@
   opacity: 0; /* Invisible */
   transition: transform 0.4s ease-in-out, opacity 0.4s ease-in-out; /* Transición suave */
 }
-
+.navbar-right img {
+  width: 70px; /* Aumenta el ancho */
+  height: 70px; /* Aumenta la altura */
+  border-radius: 50%; /* Mantiene la imagen circular */
+  cursor: pointer; /* Muestra el cursor como puntero al pasar sobre la imagen */
+  border: 2px solid #ffd700; /* Borde decorativo amarillo */
+  object-fit: cover; /* Asegura que la imagen no se deforme */
+}
 /* Cuando el menú está abierto */
 .user-menu.menu-open {
   transform: translateX(0); /* Entra a la vista */

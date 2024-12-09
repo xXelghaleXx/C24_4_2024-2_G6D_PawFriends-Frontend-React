@@ -1,38 +1,51 @@
-import { useState, useEffect } from 'react'; // Importar useState y useEffect
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Logo from '../../assets/PawFriends_Logo.webp';  // Importar logo
-import ProfileIcon from '../../assets/user.png';       // Importar icono de usuario
-import Slidebar from './Slidebar';                 // Importar el slidebar
-import UserMenu from '../chat/UserMenu';                 // Importar el UserMenu
+import axios from 'axios'; // Asegúrate de importar Axios
+import Logo from '../../assets/PawFriends_Logo.webp'; // Importar logo
+import Slidebar from './Slidebar'; // Importar el Slidebar
+import UserMenu from '../chat/UserMenu'; // Importar el UserMenu
 import "../../styles/shared/navbar.css";
 import "../../styles/global/generalStyles.css";
 
 const Navbar = () => {
-  // Estado para controlar si el menú de usuario está abierto
-  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false); // Controla el menú de usuario
+  const [isScrolled, setIsScrolled] = useState(false); // Controla el estado del navbar al hacer scroll
+  const [userImage, setUserImage] = useState(null); // Estado para la imagen del usuario
 
-  // Estado para manejar el estilo del navbar en scroll
-  const [isScrolled, setIsScrolled] = useState(false);
-
-  // Función para alternar el menú de usuario
   const toggleUserMenu = () => {
-    setIsUserMenuOpen(!isUserMenuOpen); // Alterna el estado entre true y false
+    setIsUserMenuOpen(!isUserMenuOpen); // Alterna el estado del menú
   };
 
-  // useEffect para detectar el scroll
   useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 50) {
-        setIsScrolled(true); // Cambiar estado a scrolled si el scroll es mayor a 50px
-      } else {
-        setIsScrolled(false); // Volver al estado inicial si no hay scroll
+    // Obtener los datos del usuario desde el backend (incluyendo la imagen)
+    const fetchUserData = async () => {
+      try {
+        const response = await axios.get('http://localhost:8094/api/users/perfil', {
+          withCredentials: true, // Asegura que se envíen las cookies de sesión
+        });
+        if (response.data.imagen) {
+          setUserImage(response.data.imagen); // Guarda la URL de la imagen del usuario
+        } else {
+          setUserImage('/path/to/default-image.png'); // Imagen por defecto si no hay imagen del usuario
+        }
+      } catch (error) {
+        console.error('Error al obtener los datos del usuario:', error);
+        setUserImage('/path/to/default-image.png'); // Imagen por defecto en caso de error
       }
     };
 
+    fetchUserData();
+
     // Escuchar el evento de scroll
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setIsScrolled(true);
+      } else {
+        setIsScrolled(false);
+      }
+    };
     window.addEventListener('scroll', handleScroll);
 
-    // Limpieza del evento de scroll
     return () => {
       window.removeEventListener('scroll', handleScroll);
     };
@@ -40,31 +53,32 @@ const Navbar = () => {
 
   return (
     <nav className={`navbar ${isScrolled ? 'scrolled' : ''}`}>
-      {/* Slidebar deslizante */}
       <Slidebar />
-
-      {/* Logo centrado con enlace */}
       <div className="navbar-center">
         <Link to="/welcome">
           <img src={Logo} alt="PawFriends Logo" />
         </Link>
       </div>
-
-      {/* Icono de perfil a la derecha con toggle */}
       <div className="navbar-right">
-        <img
-          src={ProfileIcon}
-          alt="Perfil"
-          className="profile-icon"
-          onClick={toggleUserMenu} // Aquí alterna el menú al hacer clic
-        />
+        <div className="profile-container" onClick={toggleUserMenu}>
+          <div className="profile-image-wrapper">
+            <img
+              src={userImage || '/path/to/default-image.png'} // Mostrar imagen del usuario o imagen por defecto
+              alt="Perfil"
+              className="profile-image-circle"
+            />
+          </div>
+        </div>
       </div>
-
-      {/* Menú de usuario desplegable */}
-      {isUserMenuOpen && <UserMenu isOpen={isUserMenuOpen} toggleMenu={toggleUserMenu} />}
+      {isUserMenuOpen && (
+        <UserMenu
+          isOpen={isUserMenuOpen}
+          toggleMenu={toggleUserMenu}
+          userImage={userImage} // Pasar la imagen al UserMenu
+        />
+      )}
     </nav>
   );
 };
 
 export default Navbar;
-

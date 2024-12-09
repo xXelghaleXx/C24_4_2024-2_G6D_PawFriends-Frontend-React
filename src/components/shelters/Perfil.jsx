@@ -1,22 +1,47 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 import "../../styles/shelters/PerfilStyles.css";
-import DefaultProfile from "../../assets/user.png"; // Ruta a la imagen predeterminada
+import DefaultProfile from "../../assets/user.png"; // Imagen predeterminada
 
 const Perfil = () => {
-  const [isEditing, setIsEditing] = useState(false); // Estado para modo edición
+  const [isEditing, setIsEditing] = useState(false);
   const [userData, setUserData] = useState({
-    name: "Adrian",
-    age: 30,
-    email: "adrian@example.com",
-    phone: "+51 987654321",
-    address: "Av. Principal 123",
-    district: "Miraflores",
-    shelter: "Paw Shelter",
+    nombre: "",
+    correo: "",
+    telefono: "",
+    direccion: "",
+    distrito: "",
+    departamento: "",
+    tipoUsuario: "",
+    imagen: DefaultProfile,
   });
-  const [profileImage, setProfileImage] = useState(DefaultProfile); // Estado para la imagen de usuario
+  const [profileImage, setProfileImage] = useState(DefaultProfile);
+  const [selectedImageFile, setSelectedImageFile] = useState(null); // Archivo seleccionado
+  const navigate = useNavigate();
 
-  // Manejar cambios en los campos de entrada
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      try {
+        const response = await axios.get("http://localhost:8094/api/users/perfil", {
+          withCredentials: true,
+        });
+        setUserData(response.data);
+        setProfileImage(response.data.imagen || DefaultProfile);
+      } catch (error) {
+        if (error.response?.status === 401) {
+          alert("No estás autenticado. Redirigiendo al login.");
+          navigate("/login");
+        } else {
+          console.error("Error al obtener el perfil del usuario:", error);
+        }
+      }
+    };
+
+    fetchUserProfile();
+  }, [navigate]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setUserData((prevData) => ({
@@ -25,24 +50,52 @@ const Perfil = () => {
     }));
   };
 
-  // Alternar entre modo edición y vista normal
   const toggleEdit = () => {
     setIsEditing(!isEditing);
   };
 
-  // Guardar los cambios
-  const saveChanges = () => {
-    setIsEditing(false);
-    console.log("Datos guardados:", userData);
+  const saveChanges = async () => {
+    try {
+      const formData = new FormData();
+      // Agregar el objeto usuario como JSON
+      const userDataJson = JSON.stringify({
+        nombre: userData.nombre,
+        telefono: userData.telefono,
+        direccion: userData.direccion,
+        distrito: userData.distrito,
+        departamento: userData.departamento,
+      });
+  
+      formData.append("user", new Blob([userDataJson], { type: "application/json" })); // Enviar como JSON
+      if (selectedImageFile) {
+        formData.append("imagen", selectedImageFile); // Agregar la imagen
+      }
+  
+      const response = await axios.put("http://localhost:8094/api/users/editar-perfil", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        withCredentials: true,
+      });
+  
+      if (response.status === 200) {
+        alert("Perfil actualizado con éxito.");
+        setIsEditing(false);
+        setProfileImage(URL.createObjectURL(selectedImageFile)); // Actualizar la vista previa
+        setSelectedImageFile(null);
+      }
+    } catch (error) {
+      alert("Error al actualizar el perfil.");
+      console.error("Error al actualizar el perfil:", error);
+    }
   };
+  
 
-  // Cambiar la imagen de perfil
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
+      setSelectedImageFile(file); // Guardar el archivo seleccionado
       const reader = new FileReader();
       reader.onload = () => {
-        setProfileImage(reader.result); // Actualiza la imagen con el contenido del archivo
+        setProfileImage(reader.result); // Mostrar una vista previa de la imagen
       };
       reader.readAsDataURL(file);
     }
@@ -58,6 +111,7 @@ const Perfil = () => {
               <>
                 <input
                   type="file"
+                  id="file-input" // ID único
                   accept="image/*"
                   onChange={handleImageChange}
                   className="file-input"
@@ -72,24 +126,13 @@ const Perfil = () => {
             {isEditing ? (
               <input
                 type="text"
-                name="name"
-                value={userData.name}
+                name="nombre"
+                value={userData.nombre}
                 onChange={handleInputChange}
                 className="input-field"
               />
             ) : (
-              <h1 className="animated-font">{userData.name}</h1>
-            )}
-            {isEditing ? (
-              <input
-                type="number"
-                name="age"
-                value={userData.age}
-                onChange={handleInputChange}
-                className="input-field"
-              />
-            ) : (
-              <h3>{userData.age} años</h3>
+              <h1 className="animated-font">{userData.nombre}</h1>
             )}
           </div>
         </div>
@@ -97,40 +140,44 @@ const Perfil = () => {
           {isEditing ? (
             <>
               <input
-                type="email"
-                name="email"
-                value={userData.email}
+                type="text"
+                name="telefono"
+                value={userData.telefono}
                 onChange={handleInputChange}
                 className="input-field"
+                placeholder="Teléfono"
               />
               <input
                 type="text"
-                name="phone"
-                value={userData.phone}
+                name="direccion"
+                value={userData.direccion}
                 onChange={handleInputChange}
                 className="input-field"
+                placeholder="Dirección"
               />
               <input
                 type="text"
-                name="address"
-                value={userData.address}
+                name="distrito"
+                value={userData.distrito}
                 onChange={handleInputChange}
                 className="input-field"
+                placeholder="Distrito"
               />
               <input
                 type="text"
-                name="district"
-                value={userData.district}
+                name="departamento"
+                value={userData.departamento}
                 onChange={handleInputChange}
                 className="input-field"
+                placeholder="Departamento"
               />
             </>
           ) : (
             <>
-              <p className="animated-font">Correo: {userData.email}</p>
-              <p className="animated-font">Teléfono: {userData.phone}</p>
-              <p className="animated-font">Dirección: {userData.address}</p>
-              <p className="animated-font">Distrito: {userData.district}</p>
+              <p className="animated-font">Teléfono: {userData.telefono}</p>
+              <p className="animated-font">Dirección: {userData.direccion}</p>
+              <p className="animated-font">Distrito: {userData.distrito}</p>
+              <p className="animated-font">Departamento: {userData.departamento}</p>
             </>
           )}
         </div>
@@ -152,7 +199,6 @@ const Perfil = () => {
 
 Perfil.propTypes = {
   name: PropTypes.string,
-  age: PropTypes.number,
   email: PropTypes.string,
 };
 
