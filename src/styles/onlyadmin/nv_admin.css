@@ -1,0 +1,68 @@
+/* Navbar general */
+.nvadmin-navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #335353; /* Fondo semitransparente para el efecto glass */
+    padding: 10px 20px; /* Espaciado interno */
+    width: 100%; /* Ocupa todo el ancho */
+    box-sizing: border-box; /* Incluye el padding dentro del ancho */
+    position: fixed; /* Hace que el navbar sea fijo */
+    top: 0; /* Fija el navbar en la parte superior */
+    z-index: 1000; /* Asegura que esté por encima de otros elementos */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque para efecto glass */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidad para Safari */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra ligera para separar visualmente */
+}
+
+.nvadmin-navbar.nvadmin-scrolled {
+    background-color: rgba(51, 83, 83, 0.5); /* Más transparente al hacer scroll */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada */
+}
+
+/* Logo centrado */
+.nvadmin-navbar-center img {
+    width: 100px;
+    height: auto;
+}
+
+/* Icono de perfil a la derecha */
+.nvadmin-navbar-right img {
+    width: 30px;
+    height: auto;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.nvadmin-navbar-right img:hover {
+    transform: scale(1.1); /* Agranda el icono al pasar el mouse */
+}
+
+/* Menú lateral izquierdo */
+.nvadmin-navbar-left img {
+    width: 30px;
+    height: auto;
+    margin-right: 10px;
+    cursor: pointer;
+}
+
+.nvadmin-navbar-left a {
+    text-decoration: none;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.nvadmin-navbar-left a:hover {
+    color: #d1d1d1; /* Cambia el color al pasar el mouse */
+}
+
+/* Ajustes generales */
+body {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box; /* Ajusta el box-sizing para todos los elementos */
+    padding-top: 60px; /* Asegura que el contenido no quede detrás del navbar fijo */
+}

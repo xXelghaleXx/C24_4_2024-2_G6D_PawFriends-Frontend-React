@@ -1,8 +1,8 @@
 import { useState } from "react";
 import axios from "axios";
-import { useNavigate, Link } from "react-router-dom"; // Importa useNavigate para manejar redirección
-import '../../styles/users/FormStyles.css'; // Importamos los estilos compartidos
-import GoogleIcon from '../../assets/google.png'; // Importamos el ícono de Google
+import { useNavigate, Link } from "react-router-dom";
+import '../../styles/users/FormStyles.css';
+import GoogleIcon from '../../assets/google.png';
 
 function Login() {
     const [formData, setFormData] = useState({
@@ -10,7 +10,7 @@ function Login() {
         contraseña: ""
     });
 
-    const navigate = useNavigate(); // Hook para redirección
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         setFormData({
@@ -23,19 +23,30 @@ function Login() {
         e.preventDefault();
         try {
             const response = await axios.post(
-                "http://localhost:8094/api/users/login", // URL actualizada
+                "http://localhost:8094/api/users/login",
                 formData,
                 { withCredentials: true } // Asegura que las cookies se envíen/reciban
             );
 
             if (response.status === 200) {
-                alert("Login exitoso");
-                navigate("/welcome"); // Redirige al usuario a la página de bienvenida
+                const { redirectUrl, usuario } = response.data;
+
+                // Si el backend provee una URL de redirección, ir directamente
+                if (redirectUrl) {
+                    console.log(`Redirigiendo a: ${redirectUrl}`);
+                    window.location.href = redirectUrl;
+                } else {
+                    // Si no hay redirección específica, navegar a "/welcome"
+                    console.log(`Bienvenido, ${usuario.nombre}`);
+                    navigate("/welcome", { state: { usuario } });
+                }
             }
         } catch (error) {
+            // Manejar errores de autenticación
             if (error.response && error.response.status === 401) {
                 alert("Credenciales incorrectas. Por favor, inténtalo de nuevo.");
             } else {
+                console.error("Error al iniciar sesión:", error.message);
                 alert("Ocurrió un error al iniciar sesión. Inténtalo más tarde.");
             }
         }

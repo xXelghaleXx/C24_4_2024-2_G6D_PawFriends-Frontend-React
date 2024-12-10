@@ -10,3 +10,4 @@ export default defineConfig({
     },
   },
 })
+// Desarrollado por Adrian Nunuvero Ochoa

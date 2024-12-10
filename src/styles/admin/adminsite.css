@@ -1,0 +1,43 @@
+.albergue-admin-container {
+  max-width: 900px; /* Limita el ancho del contenedor */
+  margin: 20px auto; /* Centra el contenedor horizontalmente */
+  background-color: #ffffff; /* Fondo blanco */
+  border-radius: 10px; /* Bordes redondeados */
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  padding: 20px; /* Espaciado interno */
+}
+
+.albergue-admin-header {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #2d5c5c; /* Color principal */
+  text-align: center;
+}
+
+.albergue-admin-options {
+  display: flex;
+  justify-content: center;
+  gap: 15px; /* Espaciado entre botones */
+  margin-bottom: 20px;
+}
+
+.albergue-admin-button {
+  background-color: #2d5c5c; /* Color del botón */
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Efecto suave al pasar el mouse */
+}
+
+.albergue-admin-button:hover {
+  background-color: rgba(255, 166, 41, 0.9); /* Cambio de color al pasar el mouse */
+}
+
+.albergue-admin-content {
+  text-align: center; /* Centra el contenido internamente */
+  margin-top: 20px;
+}

@@ -1,0 +1,57 @@
+/* Footer general */
+.ftadmin-footer {
+    color: white; /* Texto blanco */
+    text-align: center;
+    padding: 20px 0; /* Espaciado interno */
+    width: 100%; /* Ocupa todo el ancho */
+    position: fixed; /* Siempre en la parte inferior de la pantalla */
+    bottom: 0;
+    box-sizing: border-box;
+    font-family: 'Arial', sans-serif; /* Fuente consistente */
+    transition: background-color 0.5s ease, opacity 0.5s ease; /* Transición suave */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque para efecto glass */
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 999; /* Asegura que esté sobre otros elementos */
+}
+
+/* Footer transparente por defecto */
+.ftadmin-footer.ftadmin-transparent {
+    background-color: rgba(51, 83, 83, 0.3); /* Fondo transparente */
+    opacity: 0.8; /* Ligera transparencia */
+}
+
+/* Footer sólido al acercarse al final */
+.ftadmin-footer.ftadmin-solid {
+    background-color: #335353; /* Fondo sólido */
+    opacity: 1; /* Totalmente visible */
+}
+
+/* Lista de enlaces */
+.ftadmin-footer-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    gap: 20px; /* Espacio entre los enlaces */
+}
+
+.ftadmin-footer-item {
+    margin: 0;
+}
+
+.ftadmin-footer-link {
+    background: none; /* Elimina el fondo del botón */
+    border: none; /* Elimina los bordes */
+    outline: none; /* Elimina el contorno */
+    padding: 0; /* Opcional: ajusta el padding si es necesario */
+    color: white; /* Asegúrate de mantener el color */
+    font-size: 16px; /* Ajusta el tamaño de fuente */
+    font-weight: bold; /* Texto en negrita */
+    cursor: pointer; /* Cambia el cursor a pointer */
+    text-decoration: none; /* Opcional: elimina decoraciones si se heredan */
+}
+
+.ftadmin-footer-link:hover {
+    color: #d1d1d1; /* Cambia a gris claro al pasar el mouse */
+}

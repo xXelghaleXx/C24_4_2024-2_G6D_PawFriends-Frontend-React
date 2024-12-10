@@ -1,0 +1,128 @@
+/* Estilo general del menú */
+.admin-menu-container {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 300px; /* Ancho del menú */
+  background-color: #4b8e8d;
+  color: #fff;
+  padding: 20px;
+  box-shadow: -5px 0 15px rgba(0, 0, 0, 0.3); /* Sombra */
+  z-index: 1000;
+  transform: translateX(100%); /* Fuera de la pantalla inicialmente */
+  opacity: 0; /* Invisible */
+  transition: transform 0.5s cubic-bezier(0.42, 0, 0.58, 1), 
+              opacity 0.5s ease-in-out; /* Transición más suave */
+  will-change: transform, opacity; /* Optimización para animaciones */
+}
+
+/* Cuando el menú está abierto */
+.admin-menu-container.admin-menu-open {
+  transform: translateX(0); /* Entra a la vista */
+  opacity: 1; /* Visible */
+}
+
+/* Cuando el menú está cerrado */
+.admin-menu-container.admin-menu-closed {
+  transform: translateX(100%); /* Sale hacia fuera */
+  opacity: 0; /* Invisible */
+}
+
+/* Lista del menú */
+.admin-menu-list {
+  list-style: none; /* Elimina las viñetas */
+  padding: 0; /* Elimina el padding predeterminado */
+  margin: 0; /* Elimina el margen predeterminado */
+}
+
+.admin-menu-item {
+  margin-bottom: 15px; /* Espaciado entre los elementos */
+}
+
+/* Botones dentro del AdminMenu */
+.admin-menu-button {
+  display: block;
+  width: 100%;
+  padding: 12px 15px; /* Espaciado interno */
+  font-size: 18px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #ffa629;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  text-align: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Sombra ligera */
+  transition: background-color 0.3s ease-in-out, 
+              transform 0.2s ease-in-out, 
+              box-shadow 0.3s ease-in-out; /* Efectos suaves */
+}
+
+.admin-menu-button:hover {
+  background-color: #d82307; /* Color al pasar el mouse */
+  transform: scale(1.05); /* Efecto de agrandamiento */
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.25); /* Sombra más intensa */
+}
+
+.admin-menu-button:active {
+  transform: scale(0.95); /* Reducir un poco el tamaño al hacer clic */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15); /* Sombra más pequeña */
+}
+
+/* Estilo del título */
+.admin-menu-title {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase; /* Convertir texto a mayúsculas */
+  letter-spacing: 1px; /* Espaciado entre letras */
+}
+
+/* Estilo del saludo */
+.admin-menu-greeting {
+  font-size: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-style: italic; /* Añadir cursiva para estilo */
+  color: #f0f0f0;
+}
+
+/* Efecto de entrada para los elementos de la lista */
+.admin-menu-item {
+  animation: fadeInUp 0.5s ease-in-out forwards;
+  opacity: 0; /* Iniciar invisible */
+}
+
+/* Animaciones de entrada */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px); /* Empieza desplazado hacia abajo */
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0); /* En su posición original */
+  }
+}
+
+/* Efectos responsivos */
+@media (max-width: 768px) {
+  .admin-menu-container {
+    width: 250px; /* Reducir el ancho del menú en pantallas pequeñas */
+  }
+
+  .admin-menu-button {
+    font-size: 16px; /* Reducir el tamaño de los botones */
+    padding: 10px 12px; /* Ajustar espaciado */
+  }
+
+  .admin-menu-title {
+    font-size: 20px; /* Reducir el tamaño del título */
+  }
+
+  .admin-menu-greeting {
+    font-size: 14px; /* Ajustar tamaño del saludo */
+  }
+}

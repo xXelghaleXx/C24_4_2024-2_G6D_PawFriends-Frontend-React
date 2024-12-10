@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Kanit:wght@400;500;700&display=swap');
+
+.sldbr-container {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Kanit', sans-serif;
+}
+
+.sldbr-menu {
+    position: fixed; /* Fija el Slidebar a la parte superior de la ventana */
+    top: 0;
+    left: 0;
+    height: 100vh; /* Asegúrate de que cubra toda la pantalla */
+    width: 210px; /* Cambia este valor para ajustar el ancho */
+    background-color: #4b8e8d;
+    transition: transform 0.5s ease, opacity 0.5s ease; /* Ajuste de transición */
+    transform: translateX(-250px); /* Posición inicial fuera de la vista */
+    z-index: 1000; /* Asegúrate de que el Slidebar esté por encima del contenido */
+    opacity: 0; /* Oculto por defecto */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Sombra para destacar el Slidebar */
+}
+
+.sldbr-menu.sldbr-open {
+    transform: translateX(0); /* Mostrar el Slidebar */
+    opacity: 1;
+}
+
+.sldbr-title {
+    color: #ffffff;
+    font-weight: 800;
+    text-align: right;
+    padding: 10px 0;
+    padding-right: 30px;
+    pointer-events: none;
+}
+
+.sldbr-list .sldbr-item {
+    list-style: none;
+}
+
+.sldbr-list .sldbr-item .sldbr-link {
+    color: #ffffff;
+    font-weight: 500;
+    padding: 5px 0;
+    display: block;
+    text-transform: capitalize;
+    text-decoration: none;
+    transition: 0.2s ease-out;
+}
+
+.sldbr-list .sldbr-item:hover .sldbr-link {
+    color: #fff;
+    background-color: rgba(255, 166, 41, 0.9); /* Efecto hover con transparencia */
+}
+
+.sldbr-list .sldbr-item .sldbr-icon {
+    width: 40px;
+    text-align: center;
+}
+
+.sldbr-input-checkbox {
+    display: none;
+    visibility: hidden;
+}
+
+.sldbr-toggle {
+    position: relative; /* Fijar el botón de hamburguesa en la esquina superior izquierda */
+    height: 40px; /* Ajuste de altura */
+    width: 40px; /* Ajuste de ancho */
+    top: 0;
+    left: 0;
+    z-index: 1111; /* Asegúrate de que el botón esté encima del Slidebar */
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: rgba(75, 142, 141, 0.8); /* Fondo semitransparente para efecto glass */
+    backdrop-filter: blur(10px); /* Efecto de desenfoque */
+    -webkit-backdrop-filter: blur(10px); /* Compatibilidad con Safari */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: none;
+    transition: opacity 0.3s ease; /* Transición de desvanecimiento */
+}
+
+.sldbr-toggle.sldbr-hide {
+    opacity: 0;
+}
+
+.sldbr-line {
+    position: absolute;
+    height: 2px;
+    width: 20px;
+    background-color: #ffffff;
+    border-radius: 50px;
+    transition: 0.3s ease;
+}
+
+.sldbr-line-top {
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sldbr-line-middle {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sldbr-line-bottom {
+    top: 70%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.sldbr-input-checkbox:checked ~ .sldbr-toggle .sldbr-line-top {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(45deg);
+    width: 25px;
+}
+
+.sldbr-input-checkbox:checked ~ .sldbr-toggle .sldbr-line-bottom {
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) rotate(-45deg);
+    width: 25px;
+}
+
+.sldbr-input-checkbox:checked ~ .sldbr-toggle .sldbr-line-middle {
+    opacity: 0;
+}
+
+.sldbr-input-checkbox:checked ~ .sldbr-menu {
+    transform: translateX(0); /* Muestra el Slidebar */
+    opacity: 1;
+}

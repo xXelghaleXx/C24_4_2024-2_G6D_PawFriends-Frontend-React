@@ -93,11 +93,12 @@ const Albergues = () => {
             className="filtro-select"
           >
             <option value="">Seleccionar Departamento</option>
-            {departamentos && departamentos.map((departamento, index) => (
-              <option key={index} value={departamento}>
-                {departamento}
-              </option>
-            ))}
+            {departamentos &&
+              departamentos.map((departamento, index) => (
+                <option key={index} value={departamento}>
+                  {departamento}
+                </option>
+              ))}
           </select>
           <select
             value={selectedDistrito}
@@ -106,42 +107,37 @@ const Albergues = () => {
             disabled={!selectedDepartamento}
           >
             <option value="">Seleccionar Distrito</option>
-            {distritos && distritos.map((distrito, index) => (
-              <option key={index} value={distrito}>
-                {distrito}
-              </option>
-            ))}
+            {distritos &&
+              distritos.map((distrito, index) => (
+                <option key={index} value={distrito}>
+                  {distrito}
+                </option>
+              ))}
           </select>
         </div>
         <div className="albergues-grid">
-          {filteredAlbergues && filteredAlbergues.map((albergue) => (
-            <div key={albergue.idAlbergue} className="albergue-card">
-              <h2>{albergue.nombre}</h2>
-              <div className="carousel-container">
-                <Slider {...settings}>
-                  {albergue.imagenes &&
-                    albergue.imagenes.map((image, index) => (
-                      <div key={index} className="carousel-slide">
-                        <img
-                          src={image}
-                          alt={`${albergue.nombre} slide ${index + 1}`}
-                          className="carousel-image"
-                        />
-                      </div>
-                    ))}
-                </Slider>
+          {filteredAlbergues &&
+            filteredAlbergues.map((albergue) => (
+              <div key={albergue.idAlbergue} className="albergue-card">
+                <h2>{albergue.nombre}</h2>
+                {albergue.imagen && (
+                  <img
+                    src={albergue.imagen}
+                    alt={albergue.nombre}
+                    className="albergue-image"
+                  />
+                )}
+                <p>{albergue.descripcion}</p>
+                <button
+                  className="view-mascotas-btn"
+                  onClick={() =>
+                    handleViewMascotas(albergue.idAlbergue, albergue.nombre)
+                  }
+                >
+                  Ver Mascotas
+                </button>
               </div>
-              <p>{albergue.descripcion}</p>
-              <button
-                className="view-mascotas-btn"
-                onClick={() =>
-                  handleViewMascotas(albergue.idAlbergue, albergue.nombre)
-                }
-              >
-                Ver Mascotas
-              </button>
-            </div>
-          ))}
+            ))}
         </div>
         {filteredAlbergues.length === 0 && (
           <p>No se encontraron albergues para los filtros seleccionados.</p>

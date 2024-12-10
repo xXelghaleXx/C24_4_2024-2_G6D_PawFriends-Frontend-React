@@ -36,3 +36,5 @@ export default [
     },
   },
 ]
+
+// Desarrollado por Adrian Nunuvero Ochoa

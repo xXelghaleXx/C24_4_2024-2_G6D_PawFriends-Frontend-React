@@ -24,6 +24,55 @@
   text-align: center;
   margin-bottom: 0.5rem;
 }
+.albergues-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  padding: 20px;
+}
+
+.albergue-card {
+  background-color: #ffffff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+  padding: 20px;
+}
+
+.albergue-image {
+  width: 100%;
+  height: 200px; /* Altura fija para mantener consistencia */
+  object-fit: cover; /* Asegura que la imagen mantenga su proporción */
+  border-radius: 8px;
+}
+
+.albergue-card h2 {
+  font-size: 1.2rem;
+  color: #333;
+  margin: 10px 0;
+}
+
+.albergue-card p {
+  font-size: 1rem;
+  color: #666;
+  margin-bottom: 15px;
+}
+
+.view-mascotas-btn {
+  background-color: #ff9800;
+  color: #ffffff;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.view-mascotas-btn:hover {
+  background-color: #e68a00;
+}
 
 /* Contenedor de los albergues */
 .albergues-grid {

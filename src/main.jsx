@@ -8,3 +8,5 @@ root.render(
     <App />
   </React.StrictMode>
 );
+
+// Desarrollado por Adrian Nunuvero Ochoa

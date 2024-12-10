@@ -1,0 +1,161 @@
+.manage-pets-container {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.add-pet-button {
+  background-color: #FFA629;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 50px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+  margin-bottom: 20px;
+}
+
+.add-pet-button:hover {
+  background-color: #e08a1e;
+}
+
+.pets-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
+}
+
+.pet-card {
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  padding: 20px;
+  transition: 0.3s;
+}
+
+.pet-card:hover {
+  transform: scale(1.05);
+}
+
+.pet-image {
+  width: 100%;
+  height: 150px;
+  border-radius: 10px;
+  object-fit: cover;
+}
+
+.pet-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 10px;
+}
+
+.edit-button, 
+.delete-button {
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.edit-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.delete-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.edit-button:hover {
+  background-color: #45a049;
+}
+
+.delete-button:hover {
+  background-color: #e53935;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  max-width: 400px;
+  width: 100%;
+  z-index: 10000;
+}
+
+input[type="text"], 
+input[type="number"], 
+select, 
+textarea {
+  width: 90%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+textarea {
+  resize: vertical;
+  height: 100px;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.save-pet-button, 
+.cancel-button {
+  padding: 10px 20px;
+  border-radius: 50px;
+  font-weight: bold;
+}
+
+.save-pet-button {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.cancel-button {
+  background-color: #f44336;
+  color: white;
+}
+
+.save-pet-button:hover {
+  background-color: #45a049;
+}
+
+.cancel-button:hover {
+  background-color: #e53935;
+}
+
+textarea {
+  width: 90%; /* Mantener el ancho consistente con otros campos */
+  padding: 10px; /* Espaciado interno */
+  margin-bottom: 15px; /* Espaciado con otros elementos */
+  border-radius: 8px; /* Bordes redondeados */
+  border: 1px solid #ccc; /* Borde suave */
+  font-size: 16px; /* Tamaño de fuente adecuado */
+  resize: vertical; /* Permitir redimensionar solo verticalmente */
+  overflow-y: auto; /* Mostrar barra de desplazamiento si el contenido excede */
+  box-sizing: border-box; /* Incluir padding y borde en el cálculo del ancho */
+}

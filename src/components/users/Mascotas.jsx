@@ -26,7 +26,18 @@ const Mascotas = () => {
           `http://localhost:8094/api/albergues/${state.albergueId}/mascotas`,
           { withCredentials: true }
         );
-        setMascotas(response.data);
+
+        // Validar la estructura de los datos obtenidos
+        const mascotasData = response.data.map((mascota) => ({
+          idPerro: mascota.id_perro || mascota.idPerro,
+          nombre: mascota.nombre,
+          edad: mascota.edad || "No especificada",
+          imagen: mascota.imagenes && mascota.imagenes.length > 0 
+                  ? mascota.imagenes[0].url 
+                  : "https://via.placeholder.com/150", // Imagen predeterminada
+        }));
+
+        setMascotas(mascotasData);
       } catch (error) {
         console.error("Error al obtener las mascotas:", error);
         alert("Hubo un problema al cargar las mascotas. Por favor, intenta nuevamente.");
@@ -54,13 +65,13 @@ const Mascotas = () => {
               onClick={() => handleNavigation(mascota)}
             >
               <img
-                src={mascota.imagen || "https://via.placeholder.com/150"}
+                src={mascota.imagen}
                 alt={mascota.nombre}
                 className="mascota-image"
               />
               <div className="mascota-info">
                 <h3 className="mascota-name">
-                  {mascota.nombre}, {mascota.edad || "Edad no especificada"}
+                  {mascota.nombre}, {mascota.edad}
                 </h3>
                 <button className="mascota-button">Ver Perfil</button>
               </div>
@@ -75,4 +86,3 @@ const Mascotas = () => {
 };
 
 export default Mascotas;
-
