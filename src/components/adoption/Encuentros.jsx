@@ -8,46 +8,42 @@ const Encuentros = () => {
   const [perfilActual, setPerfilActual] = useState(0); // Controla la mascota actual
   const [imagenActual, setImagenActual] = useState(0); // Controla la imagen actual del carrusel
   const [animando, setAnimando] = useState(false);
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
 
   // Llamar a la API para obtener la lista de mascotas
   useEffect(() => {
     const fetchMascotas = async () => {
       try {
-        const response = await axios.get('http://localhost:8094/api/mascotas', { withCredentials: true });
-        console.log(response.data); // Asegúrate de que ves la lista de mascotas aquí
+        const response = await axios.get("http://localhost:8094/api/mascotas", { withCredentials: true });
         setMascotas(response.data);
       } catch (error) {
-        console.error('Error al obtener las mascotas:', error);
+        console.error("Error al obtener las mascotas:", error);
       }
     };
     fetchMascotas();
   }, []);
-  
 
   const siguienteImagen = () => {
     setImagenActual((prev) => (prev + 1) % (mascotas[perfilActual]?.imagenes?.length || 1));
   };
 
   const anteriorImagen = () => {
-    setImagenActual((prev) => 
+    setImagenActual((prev) =>
       (prev - 1 + (mascotas[perfilActual]?.imagenes?.length || 1)) % (mascotas[perfilActual]?.imagenes?.length || 1)
     );
   };
 
   const aceptarMascota = () => {
     const mascotaActual = mascotas[perfilActual];
-  
+
     if (mascotaActual && mascotaActual.idPerro) {
-      console.log("ID de la mascota:", mascotaActual.idPerro); 
       navigate(`/confirmacion/${mascotaActual.idPerro}`);
     } else {
       console.error("El ID de la mascota es undefined o inválido");
       alert("No se pudo procesar esta mascota. Inténtalo de nuevo.");
     }
   };
-  
-  
+
   const rechazarMascota = () => {
     setAnimando(true);
     setTimeout(() => {
@@ -70,18 +66,27 @@ const Encuentros = () => {
           <button className="carrusel-boton" onClick={anteriorImagen}>
             ◀
           </button>
-          <img 
-            src={mascota.imagenes?.[imagenActual] || "https://via.placeholder.com/150"} 
-            alt={`Imagen de ${mascota.nombre}`} 
+          <img
+            src={
+              mascota.imagenes?.[imagenActual]?.url ||
+              "https://via.placeholder.com/150"
+            }
+            alt={`Imagen de ${mascota.nombre}`}
           />
           <button className="carrusel-boton" onClick={siguienteImagen}>
             ▶
           </button>
         </div>
         <div className="datos-container">
-          <h2>{mascota.nombre}, {mascota.edad}</h2>
-          <p><strong>Descripción:</strong> {mascota.descripcion}</p>
-          <p><strong>Albergue:</strong> {mascota.albergue?.nombre || "Sin albergue"}</p>
+          <h2>
+            {mascota.nombre}, {mascota.edad}
+          </h2>
+          <p>
+            <strong>Descripción:</strong> {mascota.descripcion}
+          </p>
+          <p>
+            <strong>Albergue:</strong> {mascota.albergue?.nombre || "Sin albergue"}
+          </p>
           <ul>
             {mascota.caracteristicas?.map((item, index) => (
               <li key={index}>{item}</li>
@@ -89,8 +94,12 @@ const Encuentros = () => {
           </ul>
         </div>
         <div className="acciones">
-          <button className="boton-verde" onClick={aceptarMascota}>✔</button>
-          <button className="boton-rojo" onClick={rechazarMascota}>✖</button>
+          <button className="boton-verde" onClick={aceptarMascota}>
+            ✔
+          </button>
+          <button className="boton-rojo" onClick={rechazarMascota}>
+            ✖
+          </button>
         </div>
       </div>
     </div>

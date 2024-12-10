@@ -1,18 +1,18 @@
 /* Contenedor principal del componente */
 .mascotas-container {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  margin-top: 80px; /* Deja espacio para el navbar */
+  margin-bottom: 80px; /* Deja espacio para el footer */
   background-color: #ffffff;
   padding: 30px;
   border-radius: 10px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
   width: 90%;
-  max-width: 800px;
-  z-index: 10;
+  max-width: 1200px; /* Ajusta el ancho máximo */
+  margin-left: auto;
+  margin-right: auto;
   overflow-y: auto;
   box-sizing: border-box;
+  flex: 1; /* Para que ocupe todo el espacio disponible entre navbar y footer */
 }
 
 /* Título dentro del contenedor */
@@ -25,9 +25,9 @@
 
 /* Cuadrícula de tarjetas */
 .mascotas-grid {
-  display: flex;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* Adaptable a diferentes pantallas */
   gap: 20px;
-  flex-wrap: wrap;
   justify-content: center;
 }
 
@@ -36,7 +36,6 @@
   background-color: #54736b;
   border-radius: 8px;
   padding: 15px;
-  width: 200px;
   color: white;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -99,11 +98,26 @@ footer {
   color: white;
   text-align: center;
   padding: 15px;
-  margin-top: auto;
+  margin-top: auto; /* Se pega al final del contenido */
   width: 100%;
+  position: fixed;
+  bottom: 0; /* Fijo al fondo */
+  z-index: 1000;
 }
 
-/* Estilo general para evitar colisiones */
+/* Navbar */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  background-color: #335353;
+  z-index: 1000;
+  padding: 10px 20px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustes generales */
 body {
   margin: 0;
   padding: 0;
@@ -113,5 +127,7 @@ body {
 }
 
 main {
+  display: flex;
+  flex-direction: column;
   flex: 1;
 }

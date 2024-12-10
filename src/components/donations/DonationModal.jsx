@@ -75,7 +75,7 @@ const DonationModal = ({ product, onClose, shelters }) => {
               <strong>Descripción:</strong> {product.descripcionProducto}
             </p>
             <p>
-              <strong>Precio unitario:</strong> ${product.precio.toFixed(2)}
+              <strong>Precio unitario:</strong>S/. {product.precio.toFixed(2)}
             </p>
             <p>
               <strong>Cantidad:</strong>
@@ -88,7 +88,7 @@ const DonationModal = ({ product, onClose, shelters }) => {
               ))}
             </select>
             <p>
-              <strong>Total:</strong> ${totalPrice.toFixed(2)}
+              <strong>Total:</strong> S/. {totalPrice.toFixed(2)}
             </p>
             <p>
               <strong>Seleccionar albergue:</strong>

@@ -32,11 +32,11 @@ const EncuentroConfirmacion = () => {
   }
 
   const siguienteImagen = () => {
-    setImagenActual((prev) => (prev + 1) % mascota.imagenes?.length);
+    setImagenActual((prev) => (prev + 1) % (mascota.imagenes?.length || 1));
   };
 
   const anteriorImagen = () => {
-    setImagenActual((prev) => (prev - 1 + mascota.imagenes?.length) % mascota.imagenes?.length);
+    setImagenActual((prev) => (prev - 1 + (mascota.imagenes?.length || 1)) % (mascota.imagenes?.length || 1));
   };
 
   const hablarConAlbergue = () => {
@@ -60,7 +60,6 @@ const EncuentroConfirmacion = () => {
   
     navigate(`/form-adopcion/${mascota.idPerro}`);
   };
-  
 
   return (
     <div className="confirmacion-container">
@@ -68,7 +67,10 @@ const EncuentroConfirmacion = () => {
         <div className="imagen-container">
           <button className="imagen-flecha" onClick={anteriorImagen}>{"<"}</button>
           <img
-            src={mascota.imagenes?.[imagenActual] || "https://via.placeholder.com/150"}
+            src={
+              mascota.imagenes?.[imagenActual]?.url ||
+              "https://via.placeholder.com/150"
+            }
             alt={`Imagen de ${mascota.nombre}`}
             className="imagen-principal"
           />

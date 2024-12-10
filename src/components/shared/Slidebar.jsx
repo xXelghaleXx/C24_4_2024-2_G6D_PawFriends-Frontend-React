@@ -52,7 +52,7 @@ const Slidebar = () => {
             </Link>
           </li>
           <li className="li_unico">
-            <Link className="a_unico" to="/mascotas" onClick={toggleSlidebar}>
+            <Link className="a_unico" to="/encuentros " onClick={toggleSlidebar}>
               Mascotas
             </Link>
           </li>

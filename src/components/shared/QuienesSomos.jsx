@@ -49,7 +49,7 @@ const QuienesSomos = () => {
           alt="Adopta a tu próxima mascota"
           className="section-image"
         />
-        <button className="cta-button">Ver Mascotas</button>
+        <button className="cta-button" >Ver Mascotas</button>
       </div>
     </div>
     <br /><br /><br /><br />

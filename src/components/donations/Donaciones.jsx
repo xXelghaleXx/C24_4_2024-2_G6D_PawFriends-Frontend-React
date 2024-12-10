@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../../styles/donations/Donaciones.css";
-import DonationModal from "./DonationModal"; // Componente del modal
-import { Elements } from "@stripe/react-stripe-js"; // Importar Elements
-import { loadStripe } from "@stripe/stripe-js"; // Importar Stripe
+import DonationModal from "./DonationModal";
+import { Elements } from "@stripe/react-stripe-js";
+import { loadStripe } from "@stripe/stripe-js";
+import DNImage1 from "../../assets/DN_01.webp";
+import DNImage2 from "../../assets/DN_02.webp";
+import DNImage3 from "../../assets/DN_03.webp";
 
-// Clave pública de Stripe (reemplázala con tu clave)
 const stripePromise = loadStripe("pk_test_51QTv3FRwW1GMSsQzfzmR7XmFNXOnaxdKDRccmLNdlDruKHcoviOZepAnRL1VrSMSV4jgKtoiRS1aKz3f0uNffp5d00qn09p42k");
 
 const Donaciones = () => {
@@ -22,9 +24,12 @@ const Donaciones = () => {
           axios.get("http://localhost:8094/api/donaciones/albergues"),
         ]);
 
-        console.log("Respuesta de shelters:", shelterResponse.data);
+        const productsWithImages = productResponse.data.map((product, index) => ({
+          ...product,
+          imagen: product.imagen || [DNImage1, DNImage2, DNImage3][index % 3], // Usa una imagen predeterminada
+        }));
 
-        setProducts(productResponse.data);
+        setProducts(productsWithImages);
         setShelters(shelterResponse.data);
       } catch (error) {
         console.error("Error loading products or shelters:", error);
@@ -52,12 +57,12 @@ const Donaciones = () => {
         {products.map((product) => (
           <div key={product.idProducto} className="donaciones-product-card">
             <img
-              src={product.imagen || "URL_DE_IMAGEN_POR_DEFECTO"}
+              src={product.imagen}
               alt={product.nombreProducto}
               className="donaciones-product-image"
             />
             <p className="product-name">{product.nombreProducto}</p>
-            <p className="product-price">Precio: ${product.precio.toFixed(2)}</p>
+            <p className="product-price">Precio: S/. {product.precio.toFixed(2)}</p>
             <button className="donar-button" onClick={() => openModal(product)}>
               Donar
             </button>
